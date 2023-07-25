@@ -1,0 +1,18 @@
+#!/usr/bin/env node
+
+require('dotenv').config();
+
+const network = require('../network/server');
+const application = require('../application');
+
+const app = application.manage_env(process.env.NODE_ENV);
+console.log('[Application]', app.settings.env);
+
+const port = network._http.normalizePort(process.env.PORT);
+
+app.set('port', port);
+
+const server = network._http.create_server(app);
+server.listen(port);
+server.on('error', network._http.onError);
+server.on('listening', network._http.onListening);

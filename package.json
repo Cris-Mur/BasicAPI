@@ -1,0 +1,36 @@
+{
+  "name": "ngbeapi",
+  "version": "0.0.0",
+  "description": "Node General Basic Express API",
+  "main": "./src/bin/init",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "run": "./src/bin/./init",
+    "develop": "npx nodemon ./src/bin/init",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cris-Mur/NGBEAPI.git"
+  },
+  "keywords": [
+    "Express",
+    "API"
+  ],
+  "author": "Cristian Murcia, Cris-Mur",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Cris-Mur/NGBEAPI/issues"
+  },
+  "homepage": "https://github.com/Cris-Mur/NGBEAPI#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "http": "^0.0.1-security",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.0"
+  }
+}
