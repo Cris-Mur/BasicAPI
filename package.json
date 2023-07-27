@@ -6,6 +6,11 @@
   "directories": {
     "doc": "docs"
   },
+  "nodemonConfig": {
+    "env": {
+      "NODE_ENV": "development"
+    }
+  },
   "scripts": {
     "run": "./src/bin/./init",
     "develop": "npx nodemon ./src/bin/init",
