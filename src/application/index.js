@@ -1,18 +1,15 @@
-const production = require('./app');
-const development = require('./development_app');
+const application = require('./app');
+const middlewares = require('./middlewares');
 
-function manage_env(env) {
+const configuration = require('./config');
+
+
+function startUp(env) {
     console.log('[Enviroment]', env);
-    switch (env) {
-        case 'production':
-            return production;
-        case 'development':
-            return development;
-        default:
-            return production;
-    }
+    application.use(middlewares.inspector);
+    return application;
 }
 
 module.exports = {
-    manage_env
+    startUp
 }

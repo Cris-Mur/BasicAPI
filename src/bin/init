@@ -1,14 +1,15 @@
 #!/usr/bin/env node
 
 require('dotenv').config();
+const { port_env } = require('./utils/port_enviroments');
 
 const network = require('../network/server');
 const application = require('../application');
 
-const app = application.manage_env(process.env.NODE_ENV);
-console.log('[Application]', app.settings.env);
+const app = application.startUp(process.env.NODE_ENV);
+console.log('[Application]', app.mountpath);
 
-const port = network._http.normalizePort(process.env.PORT);
+const port = network._http.normalizePort(port_env());
 
 app.set('port', port);
 
