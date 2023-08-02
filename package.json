@@ -12,8 +12,8 @@
     }
   },
   "scripts": {
-    "run": "./src/bin/./init",
-    "develop": "npx nodemon ./src/bin/init",
+    "start": "./src/bin/./init",
+    "dev": "npx nodemon ./src/bin/init",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
