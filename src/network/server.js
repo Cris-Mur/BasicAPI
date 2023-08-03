@@ -1,3 +1,3 @@
-const _http = require('./http');
+const _http = require('./_http');
 
 module.exports = { _http };
