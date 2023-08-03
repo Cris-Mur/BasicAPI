@@ -15,3 +15,12 @@ npm i
 
 setup the env file
 
+## Usage
+
+Use package scripts
+
+```bash
+npm run start
+npm run dev
+npm run test
+```

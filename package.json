@@ -1,5 +1,5 @@
 {
-  "name": "ngbeapi",
+  "name": "Basic API",
   "version": "0.0.0",
   "description": "Node General Basic Express API",
   "main": "./src/bin/init",
@@ -18,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Cris-Mur/NGBEAPI.git"
+    "url": "git+https://github.com/Cris-Mur/BasicApi.git"
   },
   "keywords": [
     "Express",
@@ -27,9 +27,9 @@
   "author": "Cristian Murcia, Cris-Mur",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Cris-Mur/NGBEAPI/issues"
+    "url": "https://github.com/Cris-Mur/BasicApi/issues"
   },
-  "homepage": "https://github.com/Cris-Mur/NGBEAPI#readme",
+  "homepage": "https://github.com/Cris-Mur/BasicApi#readme",
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
