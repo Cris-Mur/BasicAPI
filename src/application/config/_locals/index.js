@@ -2,7 +2,7 @@ console.log('[Loading locals]');
 
 let locals_ojb = {};
 
-Object.keys(process.env).filter(
+Object.keys(process.env).forEach(
     env_var => {
         const rex = /locals/i
         if (rex.test(env_var)) {
