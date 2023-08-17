@@ -18,12 +18,35 @@ Object.keys(process.env).forEach(
                 )
 
             } else {
-                let key_ = env_var.split('LOCALS_')[1];
-                locals_ojb[key_] = process.env[env_var].split('LOCALS_')[1];
+                handleLocalVar(env_var);
             }
         }
     }
 )
+
+function handleLocalVar(key) {
+    let result = {};
+    const rex = /locals/i
+    let split_name = key.split('LOCALS_')[1];
+    let raw_value = process.env[key];
+    if (rex.test(raw_value)) {
+        raw_value = raw_value.split('LOCALS_')[1];
+    }
+    result[split_name] = raw_value;
+    return result;
+}
+
+function splitLocals (locals) {
+    let local_ = {};
+    let splited_locals = locals.split(';');
+    for (let local of splited_locals) {
+        let [key, value] = local.split(':');
+        if (key.length > 1 && value.length > 1) {
+            local_[key] = value;
+        }
+    }
+    return local_;
+}
 
 console.log('[obj]', locals_ojb);
 
