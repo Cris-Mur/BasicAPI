@@ -1,6 +1,7 @@
 # Node Generally Basic Express API
 
 This is a Basic Http API, inside this repo you found a basic structure ready to implement into bussiness logic solution.
+For more Developer Info [Go To](./src/)
 
 ## Installation
 
@@ -24,3 +25,7 @@ npm run start
 npm run dev
 npm run test
 ```
+
+---
+
+## Author [Cristian Murcia - Cris-Mur](https:github.com/cris-mur)
