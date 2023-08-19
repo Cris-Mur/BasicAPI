@@ -1,6 +1,16 @@
-const { normalizePort } = require('./utils/norm_port')
+/**
+ * Module for handling server error events.
+ * @module ServerErrorHandling
+ */
 
-const port = normalizePort(process.env.PORT)
+const { port_env } = require('../../../bin/utils/port_enviroments');
+
+const port = port_env();
+
+/**
+ * Handles server error events and provides error-specific messages.
+ * @param {Error} error - The error object representing the server error.
+ */
 function onError(error) {
     if (error.syscall !== 'listen') {
         throw error;
@@ -10,7 +20,7 @@ function onError(error) {
         ? 'Pipe ' + port
         : 'Port ' + port;
 
-    // handle specific listen errors with friendly messages
+    // Handle specific listen errors with friendly messages
     switch (error.code) {
         case 'EACCES':
             console.error(bind + ' requires elevated privileges');
@@ -25,4 +35,8 @@ function onError(error) {
     }
 }
 
+/**
+ * Exports the function for handling server error events.
+ * @type {Object}
+ */
 module.exports = { onError };

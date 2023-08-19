@@ -1,19 +1,28 @@
 #!/usr/bin/env node
 
+/**
+ * Application startup script.
+ * @module StartupScript
+ */
+
 require('dotenv').config();
 const { port_env } = require('./utils/port_enviroments');
-
 const network = require('../network/server');
 const application = require('../application');
 
-const app = application.startUp(process.env.NODE_ENV);
+// Start the application
+const app = application.startUp();
+
 console.log('[Application]', app.mountpath);
 
+// Normalize the port and set it on the application
 const port = network._http.normalizePort(port_env());
-
 app.set('port', port);
 
+// Create and start the server
 const server = network._http.create_server(app);
 server.listen(port);
+
+// Handle server errors and listening events
 server.on('error', network._http.onError);
 server.on('listening', network._http.onListening);
