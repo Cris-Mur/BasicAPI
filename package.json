@@ -1,5 +1,5 @@
 {
-  "name": "Basic API",
+  "name": "basic_api",
   "version": "0.0.0",
   "description": "Node General Basic Express API",
   "main": "./src/bin/init",
@@ -22,6 +22,7 @@
   },
   "keywords": [
     "Express",
+    "HTTP",
     "API"
   ],
   "author": "Cristian Murcia, Cris-Mur",
