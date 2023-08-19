@@ -3,8 +3,6 @@
  * @module LocalVariables
  */
 
-const { process_params } = require("express/lib/router");
-
 /**
  * Represents the local variables object.
  * @typedef {Object} LocalsObject
@@ -14,25 +12,20 @@ const { process_params } = require("express/lib/router");
 console.log('[Loading locals]');
 
 /**
- * The object that stores local variables.
- * @type {LocalsObject}
- */
-let locals_ojb = {};
-
-/**
  * Handles a local variable and extracts its value from the environment settings.
  * @param {string} key - The key of the environment variable.
  * @returns {Object} An object containing the extracted local variable value.
  */
 function handleLocalVar(key) {
     let result = {};
-    const rex = /locals/i;
-    let split_name = key.split('LOCALS_')[1];
-    let raw_value = process.env[key];
-    if (rex.test(raw_value)) {
-        raw_value = raw_value.split('LOCALS_')[1];
+    const rex = /locals_/i;
+    let split_name, raw_value;
+    if (rex.test(key)) {
+        split_name = key.replace(rex, '');
+        raw_value = process.env[key];
+        raw_value = raw_value.replace(rex, '');
+        result[split_name] = raw_value;
     }
-    result[split_name] = raw_value;
     return result;
 }
 
@@ -56,23 +49,29 @@ function splitLocals(locals) {
     return local_;
 }
 
+/**
+ * The object that stores local variables.
+ * @type {LocalsObject}
+ */
+let LocalsObject = {
+    ...splitLocals(process.env['LOCALS']) // variables named with "locals" key word
+};
 // Populate locals object with environment variables
 Object.keys(process.env).forEach((env_var) => {
-    locals_ojb = { ...handleLocalVar(env_var) };
+    /**
+     * Filter environment variables for local variables and update the LocalsObject.
+     */
+    if (/locals/i.test(env_var)) {
+        let aux = handleLocalVar(env_var);
+        LocalsObject = { ...aux, ...LocalsObject };
+    }
 });
-
-// Populate locals object with additional parsed local variables
-locals_ojb = {
-    ...locals_ojb,
-    ...splitLocals(process.env['LOCALS'])
-};
-
-console.log('[obj]', locals_ojb);
+console.log('[ LOCAL parameters ]', LocalsObject);
 
 /**
  * Exports the locals object containing all local variables.
  * @type {LocalsObject}
  */
 module.exports = {
-    locals: locals_ojb
+    locals: LocalsObject
 };
