@@ -8,10 +8,10 @@
 require('dotenv').config();
 const { port_env } = require('./utils/port_enviroments');
 const network = require('../network/server');
-const application = require('../application');
+const { startUp } = require('../application');
 
 // Start the application
-const app = application.startUp();
+const app = startUp();
 
 console.log('[Application]', app.mountpath);
 

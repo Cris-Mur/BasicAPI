@@ -1,43 +1,57 @@
 /**
- * Module for exporting various utilities and options.
- * @module ExportUtilities
- */
+ * Module for configuring and setting middleware extensions for an Express application.
+ * @module MiddlewareConfiguration
+*/
 
 const logger = require('./utils/logger');
-const _json = require('./_json');
-const _raw = require('./_raw');
-const _static = require('./_static');
-const _text = require('./_text');
-const _urlencoded = require('./_urlencoded');
-
+const { parseBoolean } = require("./utils/parse_boolean");
+const express = require("express");
+const { handlePath } = require("./utils/handle_path");
+const { options } = require("./options");
+const { locals } = require('./_locals');
 /**
- * A collection of exported utility modules and options.
- * @typedef {Object} ExportedUtilities
- * @property {Object} logger - The logger utility module.
- * @property {Object} _json - The utility module for JSON-related options.
- * @property {Object} _raw - The utility module for raw data-related options.
- * @property {Object} _static - The utility module for serving static files-related options.
- * @property {Object} _text - The utility module for text data-related options.
- * @property {Object} _urlencoded - The utility module for URL-encoded data-related options.
+ * Sets middleware extensions based on configuration options.
+ * @param {Object} application - The Express application instance.
+ * @returns {Object} The modified Express application with middleware extensions.
  */
+function setup(application) {
+    const possibleOptions = {
+        json: parseBoolean(process.env.JSON)
+            ? express.json(options._json.handlerOptions())
+            : undefined,
+        raw: parseBoolean(process.env.RAW)
+            ? express.raw(options._raw.handlerOptions())
+            : undefined,
+        static: parseBoolean(process.env.STATIC)
+            ? express.static(
+                  handlePath(process.env.STATIC_DIR),
+                  options._static.handlerOptions()
+              )
+            : undefined,
+        text: parseBoolean(process.env.TEXT)
+            ? express.text(options._text.handlerOptions())
+            : undefined,
+        urlencoded: parseBoolean(process.env.URLENCODED)
+            ? express.urlencoded(options._urlencoded.handlerOptions())
+            : undefined,
+    };
 
-/**
- * A collection of utility modules and options.
- * @type {ExportedUtilities}
- */
-const options = {
-    _json,
-    _raw,
-    _static,
-    _text,
-    _urlencoded
-};
+    for (let setting in possibleOptions) {
+        if (possibleOptions[setting] !== undefined) {
+            console.log('[settings]', setting, possibleOptions[setting]);
+            application.use(possibleOptions[setting]);
+        }
+    }
 
-/**
- * Exports a collection of utility modules and options.
- * @type {Object}
- */
+
+    if (parseBoolean(process.env.LOCAL_VARS))
+        application.locals = locals
+
+    return application;
+}
+
+
 module.exports = {
     logger,
-    options
+    setup
 };

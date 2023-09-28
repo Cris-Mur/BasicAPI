@@ -2,10 +2,8 @@
  * Module for starting up and configuring the application.
  * @module ApplicationStartup
  */
-
 const application = require('./app');
 const middlewares = require('./middlewares');
-const configuration = require('./config');
 
 /**
  * Configures and starts up the application.
@@ -14,11 +12,12 @@ const configuration = require('./config');
  */
 function startUp(env=process.env.NODE_ENV) {
     console.log('[Environment]', env);
+    const app = application;
     
-    // Use the request inspector middleware
-    application.use(middlewares.inspector);
+    // Global Middlewares
+    app.use(middlewares.inspector);
     
-    return application;
+    return app;
 }
 
 /**

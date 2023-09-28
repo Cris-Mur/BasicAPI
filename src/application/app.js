@@ -4,21 +4,18 @@
  */
 
 const express = require('express');
-const { setExtensions } = require('./utils/set_extensions');
-const { setLocals } = require('./utils/set_locals');
+const { setup } = require('./config');
 
 /**
  * Creates and configures an Express application instance.
  * @type {Object} application - The configured Express application instance.
  */
-const application = setExtensions(express());
-
-// Disable 'x-powered-by' header for security best practices
+let application = express();
+application = setup(application);
+// Disable 'x-powered-by' header for security, if you know that is Express
+// you know that's machine
 application.disable('x-powered-by');
-
-// Set local variables on the application
-setLocals(application);
-
+console.log('[Locals]', application.locals);
 /**
  * Exports the configured Express application instance.
  * @type {Object}
