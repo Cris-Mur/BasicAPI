@@ -2,8 +2,9 @@
  * Module for handling options related to parsing text-based data.
  * @module TextParsingOptions
  */
-
+const express = require("express");
 const { parseBoolean } = require('../utils/parse_boolean');
+const { handlePath } = require("../utils/handle_path");
 
 /**
  * Represents the options for parsing text-based data.
@@ -42,6 +43,4 @@ function handlerOptions(verify = undefined) {
  * Exports the function to generate options for parsing text-based data.
  * @type {Object}
  */
-module.exports = {
-    handlerOptions
-};
+module.exports = express.text(handlerOptions());

@@ -2,7 +2,7 @@
  * Module for handling request handler options related to data parsing.
  * @module RequestHandlerOptions
  */
-
+const express = require("express");
 const { parseBoolean } = require('../utils/parse_boolean');
 
 /**
@@ -40,6 +40,4 @@ function handlerOptions(verify = undefined) {
  * Exports the function to generate request handling options.
  * @type {Object}
  */
-module.exports = {
-    handlerOptions
-};
+module.exports = express.raw(handlerOptions());

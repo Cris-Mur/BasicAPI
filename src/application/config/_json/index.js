@@ -1,3 +1,4 @@
+const express = require("express");
 const {parseBoolean} = require('../utils/parse_boolean');
 /**
  * Returns an options object for JSON parsing with configurable settings.
@@ -16,14 +17,14 @@ const {parseBoolean} = require('../utils/parse_boolean');
  * // Usage example:
  * const options = handlerOptions(myReviverFunction, myVerifyFunction);
  * console.log(options);
- * // Output: {
- * //   inflate: true,
- * //   limit: '100kb',
- * //   strict: true,
- * //   type: 'application/json',
- * //   reviver: myReviverFunction,
- * //   verify: myVerifyFunction
- * // }
+ *  Output: {
+ *    inflate: true,
+ *    limit: '100kb',
+ *    strict: true,
+ *    type: 'application/json',
+ *    reviver: myReviverFunction,
+ *    verify: myVerifyFunction
+ *  }
  */
 function handlerOptions(reviver=null, verify=undefined) {
     let options = {
@@ -38,6 +39,4 @@ function handlerOptions(reviver=null, verify=undefined) {
     return options;
 }
 
-module.exports = {
-    handlerOptions
-};
+module.exports = express.json(handlerOptions());

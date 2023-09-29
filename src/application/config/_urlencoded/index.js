@@ -2,7 +2,7 @@
  * Module for handling options related to parsing URL-encoded data.
  * @module UrlEncodedParsingOptions
  */
-
+const express = require("express");
 const { parseBoolean } = require("../utils/parse_boolean");
 
 /**
@@ -44,6 +44,4 @@ function handlerOptions(verify = undefined) {
  * Exports the function to generate options for parsing URL-encoded data.
  * @type {Object}
  */
-module.exports = {
-    handlerOptions
-};
+module.exports = express.urlencoded(handlerOptions());

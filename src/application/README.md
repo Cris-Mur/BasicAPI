@@ -1,26 +1,29 @@
 # [Application](./index.js)
 
-This Module exports a initialize application, after handling enviroment settings, and settup first chain of middlewares.
+This Module exports a function thats retrun a prefixed instance of Express application.
 
-## [Middlewares](./middlewares/)
+Well, this folder contain the space of the application, means contains all code that concern to application
 
-This folder contains all global middlewares that will use for application previous to handle any route.
+---
 
-## [utils](./utils/)
+### [config](./config/) 
+Module that exports a function to handle express parsers and other modules to implement in application.
 
-This folder contains helpers function to handle application, and this is a perfect space to implements functions that aren't important but by the way are util functions.
+### [Middlewares](./middlewares/)
+Module with global middlewares that affect all aplication.
 
-## [App](./app.js)
+### [App](./app.js)
+Module that exports a prefix Express application.
 
-This Module exports a basic Express application with enviroment settings.
-## [config](./config/) 
-This folder implements express parsers and create space to implement other setting related with application. 
+---
+
+## Express parsers
 
 ### [json](./config/_json/)
-Module that handle enviroments settings about handling request with body in json format
+This module fix application to use a JSON Body parser
 
 ### [raw](./config/_raw/)
-Module that handle enviroments settings about handling request with binary elements.
+This Module fix application to use a RAW Express parser
 
 ### [Static](./config/_static/)
 Module that handle enviroments settings about serve a static FileSystem.

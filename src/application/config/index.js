@@ -2,54 +2,48 @@
  * Module for configuring and setting middleware extensions for an Express application.
  * @module MiddlewareConfiguration
 */
-
 const logger = require('./utils/logger');
-const { parseBoolean } = require("./utils/parse_boolean");
-const express = require("express");
-const { handlePath } = require("./utils/handle_path");
-const { options } = require("./options");
+const options = require("./options");
 const { locals } = require('./_locals');
+const { parseBoolean } = require("./utils/parse_boolean");
 /**
- * Sets middleware extensions based on configuration options.
- * @param {Object} application - The Express application instance.
+ * @todo
+ * Keep uptated enviroment features
+ */
+const enviromentFeatures = [
+    "json",
+    "raw",
+    "static",
+    "text",
+    "urlencoded"
+];
+const cannonnicalFeatures = {};
+enviromentFeatures.forEach(feature => {
+    let underscore = "_" + feature.toString();
+    cannonnicalFeatures[feature] = options[underscore]
+});
+
+/**
+ *  Sets middleware extensions based on configuration options.
+ *  @param {Object} application - The Express application instance.
+ *  @param {Object} settings - Express middleware object collection as key
+ *      inner object
  * @returns {Object} The modified Express application with middleware extensions.
  */
-function setup(application) {
-    const possibleOptions = {
-        json: parseBoolean(process.env.JSON)
-            ? express.json(options._json.handlerOptions())
-            : undefined,
-        raw: parseBoolean(process.env.RAW)
-            ? express.raw(options._raw.handlerOptions())
-            : undefined,
-        static: parseBoolean(process.env.STATIC)
-            ? express.static(
-                  handlePath(process.env.STATIC_DIR),
-                  options._static.handlerOptions()
-              )
-            : undefined,
-        text: parseBoolean(process.env.TEXT)
-            ? express.text(options._text.handlerOptions())
-            : undefined,
-        urlencoded: parseBoolean(process.env.URLENCODED)
-            ? express.urlencoded(options._urlencoded.handlerOptions())
-            : undefined,
-    };
-
+function setup(application, settings=options) {
+    const possibleOptions = settings;
+    console.debug('[uwu]');
     for (let setting in possibleOptions) {
         if (possibleOptions[setting] !== undefined) {
             console.log('[settings]', setting, possibleOptions[setting]);
             application.use(possibleOptions[setting]);
         }
     }
-
-
     if (parseBoolean(process.env.LOCAL_VARS))
         application.locals = locals
 
     return application;
 }
-
 
 module.exports = {
     logger,

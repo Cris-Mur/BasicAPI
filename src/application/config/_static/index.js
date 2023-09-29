@@ -2,7 +2,7 @@
  * Module for handling options related to serving static files.
  * @module StaticFileOptions
  */
-
+const express = require("express");
 const { parseBoolean } = require('../utils/parse_boolean');
 const { splitCsv } = require('../utils/split_csv');
 const { handlePath } = require('../utils/handle_path');
@@ -54,6 +54,7 @@ function handlerOptions(setHeaders = undefined) {
  * Exports the function to generate options for serving static files.
  * @type {Object}
  */
-module.exports = {
-    handlerOptions
-};
+module.exports = express.static(
+    handlePath(process.env.STATIC_DIR),
+    handlerOptions()
+);

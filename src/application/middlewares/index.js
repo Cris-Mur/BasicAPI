@@ -1,5 +1,5 @@
 /**
- * Module for exporting the request inspection middleware.
+ * Module for exporting the gobal middlewares.
  * @module ExportInspector
  */
 
