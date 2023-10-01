@@ -13,7 +13,7 @@ const { startUp } = require('../application');
 // Start the application
 const app = startUp();
 
-console.log('[Application]', app.mountpath);
+console.debug('[Application]', app.mountpath);
 
 // Normalize the port and set it on the application
 const port = network._http.normalizePort(port_env());
