@@ -3,42 +3,16 @@
  * @module CustomConsole
  */
 const boolean = require('../parsers/boolean');
+const tag = require('./tag');
 const util = require('node:util');
 
-function env() {
-    let env = process.env.NODE_ENV;
-    return `[ ${env} ]`;
-}
-
-
-/**
- * @param {String} inputString - 
- * @param {number} size - 
- */
-function centerString(inputString, size=3) {
-    if (typeof inputString !== "string")
-        throw new Error("inputString must be a String");
-    if (size < 3)
-        return "...";
-    if (size <= inputString.length) {
-        return inputString.slice();
+function applyFormat(...args) {
+    let formatOptions = {
+        colors: true
     }
-    const padding = Math.round(size * 0.8);
-    if (padding < 1) 
-    let subStr = inputString.slice(0, padding - 3);
-
+    let result = util.formatWithOptions(formatOptions, ...args);
     return result;
-}
-
-const tag = `[ logger ]`;
-function loggerTag(level) {
-    level = `[\t${level}\t]\t`
-    let date = `[ ${new Date().toISOString()} ]`;
-    let result = tag;
-    result = result.concat(env(), date, level);
-    return result;
-}
-
+ }
 /**
  * Overrides the default `console.log`.
  * @param {...any} args - Arguments to be logged.
@@ -46,12 +20,8 @@ function loggerTag(level) {
 const raw_log = console.log;
 console.log = function logger(...args) {
     let level="log";
-    let prefix = loggerTag(level);
-    let formatOptions = {
-        colors: true
-    }
-    let formatInput = util.formatWithOptions(formatOptions, ...args);
-    let result = raw_log(prefix, formatInput);
+    let prefix = tag.newTag(level);
+    let result = raw_log(prefix, applyFormat(...args));
 }
 
 /**
@@ -61,38 +31,34 @@ console.log = function logger(...args) {
 const raw_error = console.error;
 console.error = function logger_error(...args) {
     let level="error";
-    let prefix = loggerTag(level);
-    let result = raw_error(prefix, ...args);
+    let prefix = tag.newTag(level);
+    let result = raw_error(prefix, applyFormat(...args));
 }
 
 /**
  * Overrides the default `console.debug`.
  * @param {...any} args - Arguments to be logged as errors.
  */
-console.time("debug");
 const raw_debug = console.debug;
 console.debug = async function logger_debug(...args) {
     if (!boolean.parse(process.env.VERBOSE))
         return;
     let level="debug";
-    let prefix = loggerTag(level);
-    let result = raw_debug(prefix, ...args);
-    console.timeLog("debug");
+    let prefix = tag.newTag(level);
+    let result = raw_debug(prefix, applyFormat(...args));
 }
 
 /**
  * Overrides the default `console.warn`.
  * @param {...any} args - Arguments to be logged as errors.
  */
-console.time("warn");
 const raw_warn = console.warn;
 console.warn = async function logger_warn(...args) {
     if (!boolean.parse(process.env.VERBOSE))
         return;
     let level="warning";
-    let prefix = loggerTag(level);
-    let result = raw_warn(prefix, ...args);
-    console.timeLog("warn");
+    let prefix = tag.newTag(level);
+    let result = raw_warn(prefix, applyFormat(...args));
 }
 
 /**
