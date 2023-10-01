@@ -6,7 +6,6 @@
 const express = require('express');
 require('./utils');
 const { setup } = require('./config');
-
 /**
  * Creates and configures an Express application instance.
  * @type {Object} application - The configured Express application instance.

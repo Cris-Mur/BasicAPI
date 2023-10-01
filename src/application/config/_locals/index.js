@@ -2,15 +2,11 @@
  * Module for handling local variables and environment settings.
  * @module LocalVariables
  */
-
 /**
  * Represents the local variables object.
  * @typedef {Object} LocalsObject
  * @property {Object} locals - A collection of local variables.
  */
-
-console.debug('[Loading locals]');
-
 /**
  * Handles a local variable and extracts its value from the environment settings.
  * @param {string} key - The key of the environment variable.
@@ -28,7 +24,6 @@ function handleLocalVar(key) {
     }
     return result;
 }
-
 /**
  * Splits a semicolon-separated list of local variable assignments into an object.
  * @param {string} locals - A string containing semicolon-separated local variable assignments.
@@ -66,8 +61,6 @@ Object.keys(process.env).forEach((env_var) => {
         LocalsObject = { ...aux, ...LocalsObject };
     }
 });
-console.debug('[ LOCAL parameters ]', LocalsObject);
-
 /**
  * Exports the locals object containing all local variables.
  * @type {LocalsObject}

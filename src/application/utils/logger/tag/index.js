@@ -1,3 +1,5 @@
+const os = require('node:os');
+
 /**
  * @function env
  * @description This function retunrn a application environment
@@ -35,7 +37,7 @@ function centerString(inputString, totalSpaces) {
     return ' '.repeat(leftPadding) + inputString + ' '.repeat(rightPadding);
 }
 
-const tag = `[ logger ]`;
+const tag = `[ ${centerString(os.hostname, os.hostname.length)} ]`;
 function newTag(level) {
     let date = `[ ${centerString(new Date().toISOString(), 24)} ]`;
     let result = tag;

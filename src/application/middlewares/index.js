@@ -4,11 +4,14 @@
  */
 
 const { inspector } = require('./inspector');
-
+const { cannotGet } = require('./cannot_get');
+const { errorHandler } = require('./error_handler');
 /**
  * Exports the request inspection middleware.
  * @type {Object}
  */
 module.exports = {
-    inspector
+    inspector,
+    cannotGet,
+    errorHandler
 };

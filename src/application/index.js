@@ -4,6 +4,7 @@
  */
 const application = require('./app');
 const middlewares = require('./middlewares');
+const router = require('../services/router');
 
 /**
  * Configures and starts up the application.
@@ -16,10 +17,11 @@ function startUp(env=process.env.NODE_ENV) {
     
     // Global Middlewares
     app.use(middlewares.inspector);
-    
+    app.use("/", router);
+    app.use(middlewares.cannotGet);
+    app.use(middlewares.errorHandler);
     return app;
 }
-
 /**
  * Exports the function for configuring and starting up the application.
  * @type {Object}
