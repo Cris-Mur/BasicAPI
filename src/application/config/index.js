@@ -2,10 +2,10 @@
  * Module for configuring and setting middleware extensions for an Express application.
  * @module MiddlewareConfiguration
 */
-const logger = require('./utils/logger');
 const options = require("./options");
 const { locals } = require('./_locals');
-const { parseBoolean } = require("./utils/parse_boolean");
+const boolean = require("../utils/parsers/boolean");
+
 /**
  * @todo
  * Keep uptated enviroment features
@@ -39,13 +39,12 @@ function setup(application, settings=options) {
             application.use(possibleOptions[setting]);
         }
     }
-    if (parseBoolean(process.env.LOCAL_VARS))
+    if (boolean.parse(process.env.LOCAL_VARS))
         application.locals = locals
 
     return application;
 }
 
 module.exports = {
-    logger,
     setup
 };

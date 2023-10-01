@@ -42,18 +42,28 @@ console.error = function logger_error(...args) {
         case 'production':
             prefix += ``;
             raw_error(prefix, ...args);
-            return;
+            break;
         case 'development':
             prefix += `[${env}]`;
             raw_error(prefix, ...args);
-            return;
+            break;
         case 'debug':
             prefix += `[${env}]`;
             raw_error(prefix, ...args);
-            return;
+            break;
         default:
             raw_error(prefix, ...args);
     }
+    if (true) {
+        error_file = process.env.ERROR_FOLDER + `${"error_nodeapp.log"}`;
+        strToFile(prefix + args.toString() + '\n', debug_file);
+    }
+ 
+    if (true) {
+        debug_file = process.env.DEBUG_FOLDER + `${"nodeapp.log"}`;
+        strToFile(prefix + args.toString() + '\n', debug_file);
+    }
+ 
 };
 /**
  * Overrides the default `console.error` behavior based on the environment.

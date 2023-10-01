@@ -3,9 +3,11 @@
  * @module StaticFileOptions
  */
 const express = require("express");
-const { parseBoolean } = require('../utils/parse_boolean');
-const { splitCsv } = require('../utils/split_csv');
-const { handlePath } = require('../utils/handle_path');
+const path = require('node:path');
+
+
+const csv = require('../../utils/parsers/string/csv');
+const boolean = require('../../utils/parsers/boolean');
 
 /**
  * Represents the options for serving static files.
@@ -34,14 +36,14 @@ function handlerOptions(setHeaders = undefined) {
      */
     let options = {
         dotfiles: process.env.STATIC_DOTFILES || 'ignore', // allow, deny, ignore
-        etag: parseBoolean(process.env.STATIC_ETAG) || true,
-        extensions: splitCsv(process.env.STATIC_EXTENSIONS) || false,
-        fallthrough: parseBoolean(process.env.STATIC_FALLTHROUGH) || true,
-        immutable: parseBoolean(process.env.STATIC_IMMUTABLE) || false,
-        index: handlePath(process.env.STATIC_INDEX) || undefined,
-        lastModified: parseBoolean(process.env.STATIC_LASTMODIFIED) || true,
+        etag: boolean.parse(process.env.STATIC_ETAG) || true,
+        extensions: csv.parse(process.env.STATIC_EXTENSIONS) || false,
+        fallthrough: boolean.parse(process.env.STATIC_FALLTHROUGH) || true,
+        immutable: boolean.parse(process.env.STATIC_IMMUTABLE) || false,
+        index: path.normalize(process.env.STATIC_INDEX) || undefined,
+        lastModified: boolean.parse(process.env.STATIC_LASTMODIFIED) || true,
         maxAge: parseInt(process.env.STATIC_MAXAGE) || 0,
-        redirect: parseBoolean(process.env.STATIC_REDIRECT) || true,
+        redirect: boolean.parse(process.env.STATIC_REDIRECT) || true,
         setHeaders
     };
 
@@ -55,6 +57,6 @@ function handlerOptions(setHeaders = undefined) {
  * @type {Object}
  */
 module.exports = express.static(
-    handlePath(process.env.STATIC_DIR),
+    path.normalize(process.env.STATIC_DIR),
     handlerOptions()
 );

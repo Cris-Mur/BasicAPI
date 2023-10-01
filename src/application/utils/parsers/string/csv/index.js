@@ -10,7 +10,7 @@
  * @param {boolean} [verbose=false] - Whether to display verbose error messages.
  * @returns {Array|string|undefined} An array containing the split elements, or an error message in verbose mode, or undefined if an error occurs.
  */
-function splitCsv(input, separator = ',', verbose = false) {
+function parse(input, separator = ',', verbose = false) {
     try {
         if (typeof input !== 'string')
             throw new Error('Input must be a string');
@@ -34,5 +34,5 @@ function splitCsv(input, separator = ',', verbose = false) {
  * @type {Object}
  */
 module.exports = {
-    splitCsv
+   parse
 };

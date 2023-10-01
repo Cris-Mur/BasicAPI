@@ -3,7 +3,7 @@
  * @module UrlEncodedParsingOptions
  */
 const express = require("express");
-const { parseBoolean } = require("../utils/parse_boolean");
+const boolean = require("../../utils/parsers/boolean");
 
 /**
  * Represents the options for parsing URL-encoded data.
@@ -27,8 +27,8 @@ function handlerOptions(verify = undefined) {
      * @type {UrlEncodedParsingOptions}
      */
     let options = {
-        extended: parseBoolean(process.env.URLENCODED_EXTENDED) || true,
-        inflate: parseBoolean(process.env.URLENCODED_INFLATE) || true,
+        extended: boolean.parse(process.env.URLENCODED_EXTENDED) || true,
+        inflate: boolean.parse(process.env.URLENCODED_INFLATE) || true,
         limit: process.env.URLENCODED_LIMIT || '100kb',
         parameterLimit: parseInt(process.env.URLENCODED_PARAM_LIMIT) || 100,
         type: process.env.URLENCODED_TYPE || "application/x-www-form-urlencoded",

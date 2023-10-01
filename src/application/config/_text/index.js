@@ -3,8 +3,9 @@
  * @module TextParsingOptions
  */
 const express = require("express");
-const { parseBoolean } = require('../utils/parse_boolean');
-const { handlePath } = require("../utils/handle_path");
+
+const boolean = require('../../utils/parsers/boolean');
+const { handlePath } = require("../../utils/build_in/path/normalizer");
 
 /**
  * Represents the options for parsing text-based data.
@@ -28,7 +29,7 @@ function handlerOptions(verify = undefined) {
      */
     let options = {
         defaultCharset: process.env.TEXT_CHARSET || "utf-8",
-        inflate: parseBoolean(process.env.JSON_INFLATE) || true,
+        inflate: boolean.parse(process.env.JSON_INFLATE) || true,
         limit: process.env.TEXT_LIMIT || '100kb',
         type: process.env.TEXT_TYPE || "text/plain",
         verify

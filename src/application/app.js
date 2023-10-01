@@ -4,6 +4,7 @@
  */
 
 const express = require('express');
+require('./utils');
 const { setup } = require('./config');
 
 /**

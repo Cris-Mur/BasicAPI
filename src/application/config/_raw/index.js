@@ -3,7 +3,7 @@
  * @module RequestHandlerOptions
  */
 const express = require("express");
-const { parseBoolean } = require('../utils/parse_boolean');
+const boolean = require('../../utils/parsers/boolean');
 
 /**
  * Represents the options for request handling.
@@ -25,7 +25,7 @@ function handlerOptions(verify = undefined) {
      * @type {RequestHandlingOptions}
      */
     let options = {
-        inflate: parseBoolean(process.env.RAW_INFLATE) || true,
+        inflate: boolean.parse(process.env.RAW_INFLATE) || true,
         limit: process.env.RAW_LIMIT || '100kb',
         type: process.env.RAW_TYPE || "application/octet-stream",
         verify

@@ -1,5 +1,5 @@
 const express = require("express");
-const {parseBoolean} = require('../utils/parse_boolean');
+const boolean = require('../../utils/parsers/boolean');
 /**
  * Returns an options object for JSON parsing with configurable settings.
  *
@@ -28,9 +28,9 @@ const {parseBoolean} = require('../utils/parse_boolean');
  */
 function handlerOptions(reviver=null, verify=undefined) {
     let options = {
-        inflate: parseBoolean(process.env.JSON_INFLATE) || true,
+        inflate: boolean.parse(process.env.JSON_INFLATE) || true,
         limit: process.env.JSON_LIMIT || '100kb',
-        strict: parseBoolean(process.env.JSON_STRICT) || true,
+        strict: boolean.parse(process.env.JSON_STRICT) || true,
         type: process.env.JSON_TYPE || "application/json",
         reviver,
         verify

@@ -8,8 +8,9 @@
  * @param {string} input - The string value to be parsed.
  * @returns {boolean} The parsed boolean value.
  */
-function parseBoolean(input) {
-    return input === 'true' || input === 'True';
+function parse(input) {
+    const rex = new RegExp("true", "i");
+    return rex.test(input);
 }
 
 /**
@@ -17,5 +18,5 @@ function parseBoolean(input) {
  * @type {Object}
  */
 module.exports = {
-    parseBoolean
+    parse
 };
