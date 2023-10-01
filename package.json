@@ -1,7 +1,7 @@
 {
   "name": "basic_api",
-  "version": "0.0.0",
-  "description": "Node General Basic Express API",
+  "version": "0.1.0",
+  "description": "WEB API",
   "main": "./src/bin/init",
   "directories": {
     "doc": "docs"
