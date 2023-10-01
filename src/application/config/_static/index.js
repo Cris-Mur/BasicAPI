@@ -47,7 +47,7 @@ function handlerOptions(setHeaders = undefined) {
         setHeaders
     };
 
-    console.log('[ STATIC OPTIONS ]', JSON.stringify(options));
+    console.debug('[ STATIC OPTIONS ]', JSON.stringify(options));
 
     return options;
 }

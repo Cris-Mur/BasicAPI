@@ -32,10 +32,9 @@ enviromentFeatures.forEach(feature => {
  */
 function setup(application, settings=options) {
     const possibleOptions = settings;
-    console.debug('[uwu]');
     for (let setting in possibleOptions) {
         if (possibleOptions[setting] !== undefined) {
-            console.log('[settings]', setting, possibleOptions[setting]);
+            console.debug('[settings]', setting, possibleOptions[setting]);
             application.use(possibleOptions[setting]);
         }
     }

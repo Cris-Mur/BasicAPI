@@ -11,7 +11,7 @@ const middlewares = require('./middlewares');
  * @returns {Object} The configured Express application instance.
  */
 function startUp(env=process.env.NODE_ENV) {
-    console.log('[Environment]', env);
+    console.debug('[Environment]', env);
     const app = application;
     
     // Global Middlewares

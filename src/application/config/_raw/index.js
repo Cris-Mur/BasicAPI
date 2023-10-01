@@ -31,7 +31,7 @@ function handlerOptions(verify = undefined) {
         verify
     };
 
-    console.log('[ RAW OPTIONS ]', JSON.stringify(options));
+    console.debug('[ RAW OPTIONS ]', JSON.stringify(options));
 
     return options;
 }

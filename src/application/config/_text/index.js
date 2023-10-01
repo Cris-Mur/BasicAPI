@@ -5,7 +5,6 @@
 const express = require("express");
 
 const boolean = require('../../utils/parsers/boolean');
-const { handlePath } = require("../../utils/build_in/path/normalizer");
 
 /**
  * Represents the options for parsing text-based data.
@@ -35,7 +34,7 @@ function handlerOptions(verify = undefined) {
         verify
     };
 
-    console.log('[ TEXT OPTIONS ]', JSON.stringify(options));
+    console.debug('[ TEXT OPTIONS ]', JSON.stringify(options));
 
     return options;
 }

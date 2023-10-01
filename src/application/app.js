@@ -16,7 +16,7 @@ application = setup(application);
 // Disable 'x-powered-by' header for security, if you know that is Express
 // you know that's machine
 application.disable('x-powered-by');
-console.log('[Locals]', application.locals);
+console.debug('[Locals]', application.locals);
 /**
  * Exports the configured Express application instance.
  * @type {Object}

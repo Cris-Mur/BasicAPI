@@ -35,7 +35,7 @@ function handlerOptions(verify = undefined) {
         verify
     };
 
-    console.log('[ URLENCODED OPTIONS ]', JSON.stringify(options));
+    console.debug('[ URLENCODED OPTIONS ]', JSON.stringify(options));
 
     return options;
 }

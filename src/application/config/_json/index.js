@@ -35,7 +35,7 @@ function handlerOptions(reviver=null, verify=undefined) {
         reviver,
         verify
     }
-    console.log('[ JSON OPTIONS ]', JSON.stringify(options));
+    console.debug('[ JSON OPTIONS ]', JSON.stringify(options));
     return options;
 }
 

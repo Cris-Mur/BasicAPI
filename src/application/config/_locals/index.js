@@ -9,7 +9,7 @@
  * @property {Object} locals - A collection of local variables.
  */
 
-console.log('[Loading locals]');
+console.debug('[Loading locals]');
 
 /**
  * Handles a local variable and extracts its value from the environment settings.
@@ -66,7 +66,7 @@ Object.keys(process.env).forEach((env_var) => {
         LocalsObject = { ...aux, ...LocalsObject };
     }
 });
-console.log('[ LOCAL parameters ]', LocalsObject);
+console.debug('[ LOCAL parameters ]', LocalsObject);
 
 /**
  * Exports the locals object containing all local variables.
