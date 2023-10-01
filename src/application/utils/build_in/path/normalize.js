@@ -11,7 +11,7 @@ const path = require('node:path');
  * @param {boolean} [verbose=false] - Whether to display verbose error messages.
  * @returns {string} The normalized path or a fallback path in case of error.
  */
-function handlePath(input, verbose = false) {
+function _normalize(input, verbose = false) {
     try {
         console.log('[normalize path]', input.length > 1 ? input : '<void>');
         return path.normalize(input);
@@ -30,5 +30,5 @@ function handlePath(input, verbose = false) {
  * @type {Object}
  */
 module.exports = {
-    handlePath
+    _normalize
 };
