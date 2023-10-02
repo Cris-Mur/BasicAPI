@@ -21,7 +21,10 @@ const boolean = require("../../utils/parsers/boolean");
  * @param {Function} [verify=undefined] - An optional verification function.
  * @returns {UrlEncodedParsingOptions} Options for parsing URL-encoded data.
  */
-function handlerOptions(verify = undefined) {
+function factoryUrlencoded(verify = undefined) {
+    if (!boolean.parse(process.env.URLENCODED)) {
+        return undefined;
+    }
     /**
      * The options for parsing URL-encoded data.
      * @type {UrlEncodedParsingOptions}
@@ -37,11 +40,11 @@ function handlerOptions(verify = undefined) {
 
     console.debug('[ URLENCODED OPTIONS ]', JSON.stringify(options));
 
-    return options;
+    return express.urlencoded(options);
 }
 
 /**
  * Exports the function to generate options for parsing URL-encoded data.
  * @type {Object}
  */
-module.exports = express.urlencoded(handlerOptions());
+module.exports = factoryUrlencoded();

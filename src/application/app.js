@@ -1,23 +1,27 @@
 /**
- * Module for creating and configuring an Express application instance.
- * @module ApplicationConfiguration
+ * Module class application to make a new instance.
+ * @module app
  */
-
-const express = require('express');
 require('./utils');
-const { setup } = require('./config');
-/**
- * Creates and configures an Express application instance.
- * @type {Object} application - The configured Express application instance.
- */
-let application = express();
-application = setup(application);
-// Disable 'x-powered-by' header for security, if you know that is Express
-// you know that's machine
-application.disable('x-powered-by');
-console.debug('[Locals]', application.locals);
+const express = require('express');
+const config = require('./config');
+
+class Application {
+    app=undefined;
+    constructor() {
+        this.app = express();
+        //this.app.use(settings)
+        // to over write express base middlewares 
+        // let otherOptionMiddlewares = {};
+        // config.setup(this.app, otherOptionMiddlewares);
+        config.setup(this.app);
+        // Disable 'x-powered-by' header for security, if you know that is 
+        // Express you know that's machine.
+        this.app.disable('x-powered-by');
+    }
+}
 /**
  * Exports the configured Express application instance.
  * @type {Object}
  */
-module.exports = application;
+module.exports = new Application().app;

@@ -3,6 +3,7 @@ const _raw = require('./_raw');
 const _static = require('./_static');
 const _text = require('./_text');
 const _urlencoded = require('./_urlencoded');
+const _cors = require('./_cors');
 
 /**
  * A collection of exported utility modules and options.
@@ -18,5 +19,6 @@ module.exports = {
     _raw,
     _static,
     _text,
-    _urlencoded
+    _urlencoded,
+    _cors
 };

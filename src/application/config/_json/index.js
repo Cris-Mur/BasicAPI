@@ -5,28 +5,17 @@ const boolean = require('../../utils/parsers/boolean');
  *
  * @param {Function|null} [reviver=null] - A function that transforms the results. (Optional)
  * @param {function} [verify=undefined] - An optional parameter for verification purposes. (Optional)
- * @returns {Object} - The options object with the following properties:
- *   - `inflate` {boolean} - Whether to inflate JSON objects or not. Defaults to `true`.
- *   - `limit` {string} - The maximum size of JSON data to be parsed. Defaults to `'100kb'`.
- *   - `strict` {boolean} - Whether to use strict JSON parsing or not. Defaults to `true`.
- *   - `type` {string} - The Content-Type for the JSON data. Defaults to `"application/json"`.
- *   - `reviver` {Function|null} - A function that transforms the results during parsing. (Optional)
- *   - `verify` {function|undefined} - An optional parameter for verification purposes. (Optional)
- *
+ * @returns {Object} | undefined
  * @example
  * // Usage example:
- * const options = handlerOptions(myReviverFunction, myVerifyFunction);
- * console.log(options);
- *  Output: {
- *    inflate: true,
- *    limit: '100kb',
- *    strict: true,
- *    type: 'application/json',
- *    reviver: myReviverFunction,
- *    verify: myVerifyFunction
- *  }
+ * const json = factoryJson(myReviverFunction, myVerifyFunction);
+ * console.log(json);
+ *  Output: [Function: jsonParser]
  */
-function handlerOptions(reviver=null, verify=undefined) {
+function factoryJson(reviver=null, verify=undefined) {
+    if (!boolean.parse(process.env.JSON)) {
+        return undefined;
+    }
     let options = {
         inflate: boolean.parse(process.env.JSON_INFLATE) || true,
         limit: process.env.JSON_LIMIT || '100kb',
@@ -36,7 +25,7 @@ function handlerOptions(reviver=null, verify=undefined) {
         verify
     }
     console.debug('[ JSON OPTIONS ]', JSON.stringify(options));
-    return options;
+    return express.json(options);
 }
 
-module.exports = express.json(handlerOptions());
+module.exports = factoryJson();

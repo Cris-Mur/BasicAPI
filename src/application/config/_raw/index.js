@@ -19,7 +19,10 @@ const boolean = require('../../utils/parsers/boolean');
  * @param {Function} [verify=undefined] - An optional verification function.
  * @returns {RequestHandlingOptions} Options for handling incoming requests.
  */
-function handlerOptions(verify = undefined) {
+function factoryRaw(verify = undefined) {
+    if (!boolean.parse(process.env.RAW)) {
+        return undefined;
+    }
     /**
      * The options for request handling.
      * @type {RequestHandlingOptions}
@@ -33,11 +36,11 @@ function handlerOptions(verify = undefined) {
 
     console.debug('[ RAW OPTIONS ]', JSON.stringify(options));
 
-    return options;
+    return express.raw(options);
 }
 
 /**
  * Exports the function to generate request handling options.
  * @type {Object}
  */
-module.exports = express.raw(handlerOptions());
+module.exports = factoryRaw();

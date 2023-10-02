@@ -21,7 +21,10 @@ const boolean = require('../../utils/parsers/boolean');
  * @param {Function} [verify=undefined] - An optional verification function.
  * @returns {TextParsingOptions} Options for parsing text-based data.
  */
-function handlerOptions(verify = undefined) {
+function factoryText(verify = undefined) {
+    if (!boolean.parse(process.env.TEXT)) {
+        return undefined;
+    }
     /**
      * The options for parsing text-based data.
      * @type {TextParsingOptions}
@@ -36,11 +39,11 @@ function handlerOptions(verify = undefined) {
 
     console.debug('[ TEXT OPTIONS ]', JSON.stringify(options));
 
-    return options;
+    return express.text(options);
 }
 
 /**
  * Exports the function to generate options for parsing text-based data.
  * @type {Object}
  */
-module.exports = express.text(handlerOptions());
+module.exports = factoryText();

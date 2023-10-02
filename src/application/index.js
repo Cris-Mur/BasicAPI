@@ -1,13 +1,13 @@
 /**
- * Module for starting up and configuring the application.
- * @module ApplicationStartup
+ * Module the application.
+ * @module Application
  */
 const application = require('./app');
 const middlewares = require('./middlewares');
 const router = require('../services/router');
 
 /**
- * Configures and starts up the application.
+ * Fabric patter to creates a new instance for application.
  * @param {string} env - The environment in which the application is running.
  * @returns {Object} The configured Express application instance.
  */

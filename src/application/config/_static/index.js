@@ -29,7 +29,10 @@ const boolean = require('../../utils/parsers/boolean');
  * @param {Function} [setHeaders=undefined] - An optional function to set custom headers for responses.
  * @returns {StaticFileOptions} Options for serving static files.
  */
-function handlerOptions(setHeaders = undefined) {
+function factoryStatic(setHeaders = undefined) {
+    if (!boolean.parse(process.env.STATIC)) {
+        return undefined;
+    }
     /**
      * The options for serving static files.
      * @type {StaticFileOptions}
@@ -49,14 +52,14 @@ function handlerOptions(setHeaders = undefined) {
 
     console.debug('[ STATIC OPTIONS ]', JSON.stringify(options));
 
-    return options;
+    return express.static(
+        path.normalize(process.env.STATIC_DIR),
+        options
+    );
 }
 
 /**
  * Exports the function to generate options for serving static files.
  * @type {Object}
  */
-module.exports = express.static(
-    path.normalize(process.env.STATIC_DIR),
-    handlerOptions()
-);
+module.exports = factoryStatic();

@@ -2,26 +2,9 @@
  * Module for configuring and setting middleware extensions for an Express application.
  * @module MiddlewareConfiguration
 */
+const boolean = require("../utils/parsers/boolean");
 const options = require("./options");
 const { locals } = require('./_locals');
-const boolean = require("../utils/parsers/boolean");
-
-/**
- * @todo
- * Keep uptated enviroment features
- */
-const enviromentFeatures = [
-    "json",
-    "raw",
-    "static",
-    "text",
-    "urlencoded"
-];
-const cannonnicalFeatures = {};
-enviromentFeatures.forEach(feature => {
-    let underscore = "_" + feature.toString();
-    cannonnicalFeatures[feature] = options[underscore]
-});
 
 /**
  *  Sets middleware extensions based on configuration options.

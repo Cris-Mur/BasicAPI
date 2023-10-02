@@ -1,14 +1,21 @@
-# NodeJS HTTP Server using Express
+# Fully ExpressJS Setable Application
 
-This is a NodeJS Application thats run a Http server under Express Framework.
+ExpressJS is a Framework to handle http request in a node server App.
+This application porpouse a architecture, structure and tool kit developed for 
+this project.
 
-the architecture of [src](./) directory suguest isolated spaces for required features, the aplication startup begins in [bin](./bin/) directory, here exist startup script.
-
-This application are developed based on node LTS at 2023, also thinking on a latest features on Engine.
+The main idea is resolve all general needs of "WEB API", for example parse JSON
+request, or generate usable way to traking behaivor, in many projects i made
+identical things to do same thing, this already do and my idea is maintain
+secure, ligth, simple, and forkable.
 
 ## Conventions
 
-All code are writed in CommonJS, and implement a Module pattern, also is mandatory that all code follow this structure for modules and functions.
+All code are writed in CommonJS for the convenience modular architecture and I
+think that good code is easyly become ESModule, if in a future NodeJS improove
+ESLANG features, i will change the modules to ESLang.
+
+All code, function, modules and scirpts will be respeat below code structure.
 
 for Example:
 
@@ -33,9 +40,17 @@ async function nameOfFunction (name_of_param) {
     }
 }
 ```
+
+I think that types are important but TS, in my opinion is more than only hard
+types.
+
+JSDocs is a good helper with ESLint, also allows keep all documented code.
+
 ---
 
 ## [Home](../)
+Explore Application
 ### [Application](./application)
 ### [Bin](./bin)
 ### [Network](./network)
+
