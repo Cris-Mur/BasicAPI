@@ -1,0 +1,12 @@
+To contribute in this project use a git to make a pull request of your changes,
+and explain in your commit if is possible,  what you do and why.
+
+Please make your request in to new Branch to make your change more mergeable
+into current work.
+
+Make your changes into tiny commits, don't worry if your work have many commits
+if your work contribute to this project your changes are receive.
+
+    - folder and files named using Snake_Case
+    - Functions variables names using cammelCase
+    - Use JSDocs to make more easy ESLINT life.

@@ -8,7 +8,8 @@
   },
   "nodemonConfig": {
     "env": {
-      "NODE_ENV": "development"
+      "NODE_ENV": "development",
+      "VERBOSE": "true"
     }
   },
   "scripts": {
