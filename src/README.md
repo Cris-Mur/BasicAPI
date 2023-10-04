@@ -1,21 +1,14 @@
 # Fully ExpressJS Setable Application
 
-ExpressJS is a Framework to handle http request in a node server App.
-This application porpouse a architecture, structure and tool kit developed for 
-this project.
+ExpressJS is a framework for handling HTTP requests in a Node.js server app. This application proposes an architecture, structure, and toolkit developed specifically for this project.
 
-The main idea is resolve all general needs of "WEB API", for example parse JSON
-request, or generate usable way to traking behaivor, in many projects i made
-identical things to do same thing, this already do and my idea is maintain
-secure, ligth, simple, and forkable.
+The main idea is to address all the general needs of a "WEB API". For example, parsing JSON requests or providing a usable way to track behavior. In many projects, I've found myself doing the same tasks repeatedly. ExpressJS already handles these tasks, and my goal is to maintain a secure, lightweight, simple, and easily customization solution.
 
 ## Conventions
 
-All code are writed in CommonJS for the convenience modular architecture and I
-think that good code is easyly become ESModule, if in a future NodeJS improove
-ESLANG features, i will change the modules to ESLang.
+All code is written in CommonJS for the convenience of modular architecture, and I believe that good code can easily transition to ESModule. If NodeJS improves ESLANG features in the future, I will consider changing the modules to ESLang.
 
-All code, function, modules and scirpts will be respeat below code structure.
+All code, functions, modules, and scripts will adhere to the following code structure.
 
 for Example:
 
@@ -49,8 +42,7 @@ JSDocs is a good helper with ESLint, also allows keep all documented code.
 ---
 
 ## [Home](../)
-Explore Application
-### [Application](./application)
-### [Bin](./bin)
-### [Network](./network)
+Explore!!
+### [Bin](../bin/README.md)
+### [Application](./application/README.md)
 

@@ -8,8 +8,8 @@
  * @param {string|number} val - The port value to be normalized.
  * @returns {number|boolean|string} The normalized port value, or false if invalid.
  */
-function normalizePort(val) {
-    let port = parseInt(val, 10);
+function normalize(value) {
+    let port = parseInt(value, 10);
 
     if (isNaN(port)) {
         // Named pipe
@@ -29,6 +29,4 @@ function normalizePort(val) {
  * Exports the function for normalizing port values.
  * @type {Object}
  */
-module.exports = {
-    normalizePort
-};
+module.exports = normalize;

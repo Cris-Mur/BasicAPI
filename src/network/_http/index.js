@@ -4,7 +4,6 @@
  */
 
 const http = require('node:http');
-const { normalizePort } = require('./events/utils/norm_port');
 const { onListening } = require('./events/on_listening');
 const { onError } = require('./events/on_error');
 
@@ -20,13 +19,6 @@ module.exports = {
      * @returns {http.Server} The created HTTP server instance.
      */
     create_server: http.createServer,
-    /**
-     * Normalizes a port value.
-     * @function
-     * @param {string|number} val - The port value to be normalized.
-     * @returns {number|boolean|string} The normalized port value, or false if invalid.
-     */
-    normalizePort,
     /**
      * Handles server listening events and logs the listening address.
      * @function

@@ -1,21 +1,18 @@
 # Basic Express Server
 
-"Basic API", is a fully managed expressJS implementation, thats become in a 
-NodeJS Application Server, ready to start development in other projects, Please
-see a [env example](./env.example) before of run this Application and if you 
-looking for development information [Go To](./src/).
+---
 
-How [contribute](./CONTRIBUTE), please if you see any space to contribute to 
-this application doesn't resist to make a pull request of you proposal change 
-in a separate branch.
+"Basic API" is a fully managed implementation of ExpressJS that transforms into a NodeJS Application Server, ready to kickstart development in other projects. Please refer to the [environment example](./env.example) before running this application. For development information, [go here](./src/).
+
+For information on how to [contribute](./CONTRIBUTE), please don't hesitate to submit a pull request with your proposed changes in a separate branch if you see any opportunities to enhance this application.
+
+---
 
 ## Installation
 
 ### Requirements
 
-This app was thinked on X86 Machine, using preferred a GNU/Linux OS Machine, 
-Also this is a NodeJS Application, Please install Latest LTS NodeJS Version, 
-and latest NPM installation, in machine.
+This app was designed for an X86 machine, preferably using a GNU/Linux OS machine. Additionally, it is a NodeJS application. Please ensure you have the latest LTS version of NodeJS and the latest NPM installed on your machine.
 
 ```bash
 cd BasicAPI
@@ -28,8 +25,7 @@ cat .env
 npm run start
 ```
 ### Environment
-Mainly this app are setable usin env file, the behavior of logger, or Server
-settings, e.j: JSON parser are setable using the environment.
+Primarily, this app can be configured using an environment file to adjust settings such as the behavior of the logger or server settings. For example, the JSON parser can be configured using environment variables.
 
 ```Env
 ### NODE SPACE
@@ -57,8 +53,7 @@ RAW=true
 .
 ```
 
-My purpose is made "Shell" code base for other projects, and I need no made
-wheel again, this app help me made software more easyly, and more secure.
+My purpose is to create a 'Shell' code base for other projects. I don't want to reinvent the wheel. This app helps me develop software more easily and securely.
 
 ```bash
 npm run start

@@ -3,9 +3,8 @@
  * @module ServerErrorHandling
  */
 
-const { port_env } = require('../../../bin/utils/port_enviroments');
-
-const port = port_env();
+let { port } = require('../../utils');
+const boolean = require('../../../utils/parsers/boolean');
 
 /**
  * Handles server error events and provides error-specific messages.
@@ -27,8 +26,17 @@ function onError(error) {
             process.exit(1);
             break;
         case 'EADDRINUSE':
-            console.error(bind + ' is already in use');
-            process.exit(1);
+            if (boolean.parse(process.env.RESILIENT_PORT)) {
+                port = parseInt(port) + 1;
+                console.warn(
+                "[ Normal Startup Interrupted PORT IN USE ERROR trying with new port]",
+                    port
+                );
+                this.listen(port);
+            } else {
+                console.error(bind + ' is already in use');
+                process.exit(1);
+            }
             break;
         default:
             throw error;

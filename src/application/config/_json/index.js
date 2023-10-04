@@ -1,5 +1,5 @@
 const express = require("express");
-const boolean = require('../../utils/parsers/boolean');
+const boolean = require('../../../utils/parsers/boolean');
 /**
  * Returns an options object for JSON parsing with configurable settings.
  *

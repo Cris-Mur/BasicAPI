@@ -2,7 +2,7 @@
  * Module for configuring and setting middleware extensions for an Express application.
  * @module MiddlewareConfiguration
 */
-const boolean = require("../utils/parsers/boolean");
+const boolean = require("../../utils/parsers/boolean");
 const options = require("./options");
 const { locals } = require('./_locals');
 

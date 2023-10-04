@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
-const boolean = require('../../utils/parsers/boolean');
-const port = require('../../../bin/utils/port_enviroments');
+const boolean = require('../../../utils/parsers/boolean');
+const { port } = require('../../../network/utils');
 /**
  * Returns an options object for JSON parsing with configurable settings.
  *
@@ -15,12 +15,13 @@ const port = require('../../../bin/utils/port_enviroments');
  *  Output: [Function: jsonParser]
  */
 let whitelist = [
-`http://localhost:${port.port_env()}`
+`http://localhost:${port}`
 ];
 console.debug("[CORS Whitelist]", whitelist);
     
 let options = function (req, callback) {
     let corsOptions;
+    console.warn("whitelist", whitelist);
     console.debug('origin', req.header('Origin'))
     if (whitelist.indexOf(req.header('Origin')) !== -1) {
         corsOptions = { origin: true } // reflect (enable) the requested origin in the CORS response

@@ -3,7 +3,7 @@
  * @module RequestInspector
  */
 
-const performance = require('./utils/performance');
+const performance = require('../../../utils/performance');
 const crypto = require('node:crypto');
 
 /**

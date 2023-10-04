@@ -6,8 +6,8 @@ const express = require("express");
 const path = require('node:path');
 
 
-const csv = require('../../utils/parsers/string/csv');
-const boolean = require('../../utils/parsers/boolean');
+const csv = require('../../../utils/parsers/string/csv');
+const boolean = require('../../../utils/parsers/boolean');
 
 /**
  * Represents the options for serving static files.

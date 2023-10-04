@@ -2,7 +2,7 @@
   "name": "basic_api",
   "version": "0.1.0",
   "description": "WEB API",
-  "main": "./src/bin/init",
+  "main": "./bin/init",
   "directories": {
     "doc": "docs"
   },
@@ -13,8 +13,8 @@
     }
   },
   "scripts": {
-    "start": "./src/bin/./init",
-    "dev": "npx nodemon ./src/bin/init",
+    "start": "./bin/./init",
+    "dev": "npx nodemon ./bin/init",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

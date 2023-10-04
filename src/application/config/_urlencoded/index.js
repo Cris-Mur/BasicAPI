@@ -3,7 +3,7 @@
  * @module UrlEncodedParsingOptions
  */
 const express = require("express");
-const boolean = require("../../utils/parsers/boolean");
+const boolean = require("../../../utils/parsers/boolean");
 
 /**
  * Represents the options for parsing URL-encoded data.

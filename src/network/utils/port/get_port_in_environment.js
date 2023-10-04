@@ -1,13 +1,13 @@
 /**
  * Module for determining the port based on the environment.
- * @module PortEnvironment
+ * @module getPortInEnvironment
  */
 
 /**
  * Determines the appropriate port based on the environment.
  * @returns {number} The determined port value.
  */
-function port_env() {
+function getPortInEnvironment() {
     let port;
     let env = process.env.NODE_ENV;
 
@@ -30,6 +30,4 @@ function port_env() {
  * Exports the function for determining the port based on the environment.
  * @type {Object}
  */
-module.exports = {
-    port_env
-};
+module.exports = getPortInEnvironment;
