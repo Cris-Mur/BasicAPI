@@ -1,4 +1,4 @@
-const fs = require('node:fs/promises');
+//const fs = require('node:fs/promises');
 
 /**
  * Handles errors that occur during request processing.
@@ -10,11 +10,12 @@ const fs = require('node:fs/promises');
  * @returns {Promise<void>} - A Promise that resolves once the error is handled.
  */
 async function errorHandler(err, req, res, next) {
+    next = undefined;
     // Construct the URL from the request details
     let url = req.protocol + '://' + req.get('host') + req.originalUrl;
 
     // Log the error along with the request details
-    console.error(`[URL] ${url} [Method] ${req.method}`  + '\n', err);
+    console.error(`[URL] ${url} [Method] ${req.method}` + '\n', err);
 
     try {
         // Attempt to handle application-specific errors

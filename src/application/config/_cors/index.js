@@ -1,4 +1,3 @@
-const express = require("express");
 const cors = require("cors");
 const boolean = require('../../../utils/parsers/boolean');
 const {port} = require('../../../network/utils');

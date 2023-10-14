@@ -12,17 +12,6 @@ function env() {
 }
 
 /**
- * @function isPrime
- * @description This function evaluate if input number is prime.
- * @returns {Boolean}
- */
-function isPrime(num) {
-    for (let i = 2, s = Math.sqrt(num); i <= s; i++) {
-        if (num % i === 0) return false;
-    }
-    return num > 1;
-}
-/**
  * @param {String} inputString - 
  * @param {number} size - 
  */
@@ -38,16 +27,16 @@ function centerString(inputString, totalSpaces) {
     return ' '.repeat(leftPadding) + inputString + ' '.repeat(rightPadding);
 }
 
-const GREEN_TEXT = '\x1b[32m';
+//const GREEN_TEXT = '\x1b[32m';
 const GREEN_BG = '\x1b[42m';
-const YELLOW_TEXT = '\x1b[33m';
+//const YELLOW_TEXT = '\x1b[33m';
 const YELLOW_BG = '\x1b[43m';
-const RED_TEXT = '\x1b[31m';
+//const RED_TEXT = '\x1b[31m';
 const RED_BG = '\x1b[41m';
-const BLUE_TEXT = '\x1b[94m';
+//const BLUE_TEXT = '\x1b[94m';
 const BLUE_BG = '\x1b[104m';
-const WHITE_TEXT = '\x1b[37m';
-const WHITE_BG = '\x1b[47m';
+//const WHITE_TEXT = '\x1b[37m';
+//const WHITE_BG = '\x1b[47m';
 const BLACK_TEXT = '\x1b[30m';
 const BLACK_BG = '\x1b[40m';
 const RESET = '\x1b[0m';
