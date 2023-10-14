@@ -12,7 +12,7 @@ function onListening() {
         ? 'pipe ' + addr
         : 'port ' + addr.port;
     console.log(`Application process id: ${process.pid}`);
-    console.log('Listening on ' + bind, `http://localhost:${addr.port}`);
+    console.log('Listening on ' + bind, `http://localhost:${addr.port}\n`);
 }
 
 /**

@@ -1,4 +1,5 @@
 const os = require('node:os');
+const boolean = require('../../parsers/boolean');
 
 /**
  * @function env
@@ -15,9 +16,9 @@ function env() {
  * @description This function evaluate if input number is prime.
  * @returns {Boolean}
  */
-function isPrime (num) {
-    for(let i = 2, s = Math.sqrt(num); i <= s; i++) {
-        if(num % i === 0) return false;
+function isPrime(num) {
+    for (let i = 2, s = Math.sqrt(num); i <= s; i++) {
+        if (num % i === 0) return false;
     }
     return num > 1;
 }
@@ -52,6 +53,9 @@ const BLACK_BG = '\x1b[40m';
 const RESET = '\x1b[0m';
 
 function levelColor(level, input) {
+    if (!boolean.parse(process.env.COLORED)) {
+        return input
+    }
     const color = {
         log: {
             start: `${BLUE_BG}${BLACK_TEXT}`,
