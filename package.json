@@ -9,12 +9,14 @@
   "nodemonConfig": {
     "env": {
       "NODE_ENV": "development",
-      "VERBOSE": "true"
+      "VERBOSE": "true",
+      "COLORED": "true"
     }
   },
   "scripts": {
     "start": "./bin/./init",
     "dev": "npx nodemon ./bin/init",
+    "debug": "VERBOSE=true COLORED=true ./bin/init 1>/var/tmp/node_express_api.log 2>/var/tmp/node_express_api.err.log",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

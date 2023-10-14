@@ -11,35 +11,40 @@ this startup file measure waiting time to ready, also load a application util lo
 this is default method to start up application other methods are used to test or abstract application.
 
 ```JavaScript
-const logger = require('../src/utils/logger');
-console.time("Startup")
-console.debug("StartUp Application");
-require('dotenv').config();
-
-const network = require('../src/network');
-const application = require('../src/application');
-
-// Start the application
-const app = application;
-
-console.debug('[Application]', app.mountpath);
-
-// Normalize the port and set it on the application
-const port = network.utils.port;
-app.set('port', port);
-
-// Create and start the server
-const server = network._http.create_server(app);
-server.listen(port);
-
-// Handle server errors and listening events
-server.on('error', network._http.onError);
-server.on('listening', network._http.onListening);
-
-console.debug(`[End of StartUp application ready]`)
+/**  
+* startup script.  
+* @Script  
+*/  
+const logger = require('../src/utils/logger');  
+console.time("Startup")  
+console.debug("StartUp Application");  
+require('dotenv').config();  
+  
+const network = require('../src/network');  
+const application = require('../src/application');  
+  
+// Start the application  
+const app = application;  
+  
+console.debug('[Application]', app.mountpath);  
+  
+// Normalize the port and set it on the application  
+const port = network.utils.port;  
+app.set('port', port);  
+  
+// Create and start the server  
+const server = network._http.create_server(app);  
+server.listen(port);  
+  
+// Handle server errors and listening events  
+server.on('error', network._http.onError);  
+server.on('listening', network._http.onListening);  
+  
+console.debug(`[End of StartUp application ready]`)  
 console.timeEnd("Startup")
 ```
 
 ---
-### [Home](../)
-#### [src](../src/)
+### [Home](../README.md)
+#### [src](../src/README.md)
+#### [Application](../src/application/README.md)

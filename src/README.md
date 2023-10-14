@@ -6,7 +6,7 @@ The main idea is to address all the general needs of a "WEB API". For example, p
 
 ## Conventions
 
-All code is written in CommonJS for the convenience of modular architecture, and I believe that good code can easily transition to ESModule. If NodeJS improves ESLANG features in the future, I will consider changing the modules to ESLang.
+All code is written in CommonJS for the convenience of modular architecture, and I believe that good code can easily transition to ESModule. If NodeJS improves ESLANG features in the future, I will consider changing the modules to ECMASCRIPT.
 
 All code, functions, modules, and scripts will adhere to the following code structure.
 

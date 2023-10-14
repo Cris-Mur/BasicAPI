@@ -28,23 +28,25 @@ npm run start
 Primarily, this app can be configured using an environment file to adjust settings such as the behavior of the logger or server settings. For example, the JSON parser can be configured using environment variables.
 
 ```Env
-### NODE SPACE
-NODE_ENV="production" # "development"
-#############################################################
-### NETWORK SETTINGS
-PORT=2700
-PORT_DEV=2701
-#############################################################
-### LOGGER OPTIONS
-#VERBOSE=true
-#############################################################
-##################### EXPRESS FEATURES ######################
-### JSON PARSER OPTIONS
-JSON=true
-JSON_INFLATE=true
-JSON_LIMIT=100kb
-JSON_STRICT=true
-JSON_TYPE=application/json
+### NODE SPACE  
+NODE_ENV="production" # "development"  
+#############################################################  
+### NETWORK SETTINGS  
+RESILIENT_PORT=true  
+PORT=2700  
+PORT_DEV=2701  
+#############################################################  
+### LOGGER OPTIONS  
+#VERBOSE=true  
+#COLORED=true  
+#############################################################  
+##################### EXPRESS FEATURES ######################  
+### JSON PARSER OPTIONS  
+JSON=true  
+JSON_INFLATE=true  
+JSON_LIMIT=100kb  
+JSON_STRICT=true  
+JSON_TYPE=application/json  
 #############################################################
 ### RAW PARSER OPTIONS
 RAW=true
@@ -74,21 +76,31 @@ npm run dev
 [nodemon] watching path(s): *.*
 [nodemon] watching extensions: js,mjs,cjs,json
 [nodemon] starting `node ./src/bin/init`
-[ white ][ development ][ 2023-10-02T16:42:44.075Z ][  debug  ]  [ JSON OPTIONS ] {"inflate":true,"limit":"100kb","strict":true,"type":"application/json","reviver":null}
-[ white ][ development ][ 2023-10-02T16:42:44.081Z ][  debug  ]  [ RAW OPTIONS ] {"inflate":true,"limit":"100kb","type":"application/octet-stream"}
-[ white ][ development ][ 2023-10-02T16:42:44.082Z ][  debug  ]  [ STATIC OPTIONS ] {"dotfiles":"ignore","etag":true,"extensions":[],"fallthrough":true,"immutable":false,"index":"index.html","lastModified":true,"maxAge":0,"redirect":true}
-[ white ][ development ][ 2023-10-02T16:42:44.084Z ][  debug  ]  [ TEXT OPTIONS ] {"defaultCharset":"utf-8","inflate":true,"limit":"100kb","type":"text/plain"}
-[ white ][ development ][ 2023-10-02T16:42:44.085Z ][  debug  ]  [ URLENCODED OPTIONS ] {"extended":true,"inflate":true,"limit":"100kb","parameterLimit":100,"type":"application/x-www-form-urlencoded"}
-[ white ][ development ][ 2023-10-02T16:42:44.088Z ][  debug  ]  [settings] _json [Function: jsonParser]
-[ white ][ development ][ 2023-10-02T16:42:44.091Z ][  debug  ]  [settings] _raw [Function: rawParser]
-[ white ][ development ][ 2023-10-02T16:42:44.091Z ][  debug  ]  [settings] _static [Function: serveStatic]
-[ white ][ development ][ 2023-10-02T16:42:44.091Z ][  debug  ]  [settings] _text [Function: textParser]
-[ white ][ development ][ 2023-10-02T16:42:44.092Z ][  debug  ]  [settings] _urlencoded [Function: urlencodedParser]
-[ white ][ development ][ 2023-10-02T16:42:44.092Z ][  debug  ]  [Locals] { KEY: 'VALUE', LOCAL_KEY_STR: 'LOCAL_VALUE_STR' }
-[ white ][ development ][ 2023-10-02T16:42:44.097Z ][  debug  ]  [Environment] development
-[ white ][ development ][ 2023-10-02T16:42:44.098Z ][  debug  ]  [Application] /
-[ white ][ development ][ 2023-10-02T16:42:44.103Z ][   log   ]  Application process id: 16435
-[ white ][ development ][ 2023-10-02T16:42:44.103Z ][   log   ]  Listening on port 2701 http://localhost:2701
+[ white ][ development ][ 2023-10-04T21:17:13.322Z ][  debug  ]  StartUp Application  
+[ white ][ development ][ 2023-10-04T21:17:13.457Z ][  debug  ]  [ JSON OPTIONS ] {"inflate":true,"limit":"100kb","strict":true,"type":"application/json","reviver":null}  
+[ white ][ development ][ 2023-10-04T21:17:13.459Z ][  debug  ]  [ RAW OPTIONS ] {"inflate":true,"limit":"100kb","type":"application/octet-stream"}  
+[ white ][ development ][ 2023-10-04T21:17:13.461Z ][  debug  ]  [ STATIC OPTIONS ] {"dotfiles":"ignore","etag":true,"extensions":[],"fallthrough":true,"immutable":false,"index":"index.html","lastModified":true,"maxAge":0,"redirect":tru  
+e}  
+[ white ][ development ][ 2023-10-04T21:17:13.463Z ][  debug  ]  [ TEXT OPTIONS ] {"defaultCharset":"utf-8","inflate":true,"limit":"100kb","type":"text/plain"}  
+[ white ][ development ][ 2023-10-04T21:17:13.464Z ][  debug  ]  [ URLENCODED OPTIONS ] {"extended":true,"inflate":true,"limit":"100kb","parameterLimit":100,"type":"application/x-www-form-urlencoded"}  
+[ white ][ development ][ 2023-10-04T21:17:13.467Z ][  debug  ]  [CORS Whitelist] [  
+ 'http://localhost:2700',  
+ 'http://localhost:2701',  
+ 'http://localhost:2701'  
+]  
+[ white ][ development ][ 2023-10-04T21:17:13.477Z ][  debug  ]  [Environment] development  
+[ white ][ development ][ 2023-10-04T21:17:13.479Z ][  debug  ]  [settings] _json [Function: jsonParser]  
+[ white ][ development ][ 2023-10-04T21:17:13.480Z ][  debug  ]  [settings] _raw [Function: rawParser]  
+[ white ][ development ][ 2023-10-04T21:17:13.480Z ][  debug  ]  [settings] _static [Function: serveStatic]  
+[ white ][ development ][ 2023-10-04T21:17:13.481Z ][  debug  ]  [settings] _text [Function: textParser]  
+[ white ][ development ][ 2023-10-04T21:17:13.481Z ][  debug  ]  [settings] _urlencoded [Function: urlencodedParser]  
+[ white ][ development ][ 2023-10-04T21:17:13.481Z ][  debug  ]  [settings] _cors [Function: corsMiddleware]  
+[ white ][ development ][ 2023-10-04T21:17:13.482Z ][  debug  ]  [Application instance]  
+[ white ][ development ][ 2023-10-04T21:17:13.482Z ][  debug  ]  [Application] /  
+[ white ][ development ][ 2023-10-04T21:17:13.484Z ][  debug  ]  [End of StartUp application ready]  
+[ white ][ development ][ 2023-10-04T21:17:13.485Z ][   log   ]  Startup: 163.107ms  
+[ white ][ development ][ 2023-10-04T21:17:13.486Z ][   log   ]  Application process id: 31544  
+[ white ][ development ][ 2023-10-04T21:17:13.486Z ][   log   ]  Listening on port 2701 http://localhost:2701
 
 npm run test
 ## Not implemented now.
@@ -96,4 +108,8 @@ npm run test
 
 ---
 
-## Author [Cristian Murcia - Cris-Mur](https:github.com/cris-mur)
+<div align="center">
+<p>Author <a src=https:github.com/cris-mur>Cristian Murcia</a></p>
+<img src="https://avatars.githubusercontent.com/u/28773000" alt="Avatar de GitHub" style="border-radius: 50%;" width="75" height="75"/>
+</div>
+
