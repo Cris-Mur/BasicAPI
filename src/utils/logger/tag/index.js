@@ -38,7 +38,7 @@ const BLUE_BG = '\x1b[104m';
 //const WHITE_TEXT = '\x1b[37m';
 //const WHITE_BG = '\x1b[47m';
 const BLACK_TEXT = '\x1b[30m';
-const BLACK_BG = '\x1b[40m';
+//const BLACK_BG = '\x1b[40m';
 const RESET = '\x1b[0m';
 
 function levelColor(level, input) {

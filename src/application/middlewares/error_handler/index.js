@@ -10,7 +10,9 @@
  * @returns {Promise<void>} - A Promise that resolves once the error is handled.
  */
 async function errorHandler(err, req, res, next) {
-    next = undefined;
+    if (res.headersSent) {
+        return next(err);
+    }
     // Construct the URL from the request details
     let url = req.protocol + '://' + req.get('host') + req.originalUrl;
 
