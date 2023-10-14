@@ -3,20 +3,20 @@
  * @module Application
  */
 const Application = require('./app');
-const middlewares = require('./middlewares');
+const middlewares = require("./middlewares");
 const router = require('../services/router');
 
 /**
- * Fabric patter to creates a new instance for application.
+ * Fabric pattern to creates a new instance for application.
  * @param {string} env - The environment in which the application is running.
  * @returns {Object} The configured Express application instance.
  */
-function factory(env=process.env.NODE_ENV) {
-    console.debug('[Environment]', env);
-    const application = new Application().express;
+function factory() {
+    global.API = new Application();
+    let application = API.express;
     // Global Middlewares
     application.use(middlewares.inspector);
-    application.use("/", router);
+    application.use("/", router); // Default Router
     application.use(middlewares.cannotGet);
     application.use(middlewares.errorHandler);
     return application;

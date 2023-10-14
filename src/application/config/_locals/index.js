@@ -58,7 +58,7 @@ Object.keys(process.env).forEach((env_var) => {
      */
     if (/locals/i.test(env_var)) {
         let aux = handleLocalVar(env_var);
-        LocalsObject = { ...aux, ...LocalsObject };
+        LocalsObject = {...aux, ...LocalsObject};
     }
 });
 /**

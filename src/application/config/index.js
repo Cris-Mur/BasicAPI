@@ -4,7 +4,7 @@
 */
 const boolean = require("../../utils/parsers/boolean");
 const options = require("./options");
-const { locals } = require('./_locals');
+const {locals} = require('./_locals');
 
 /**
  *  Sets middleware extensions based on configuration options.
@@ -13,7 +13,7 @@ const { locals } = require('./_locals');
  *      inner object
  * @returns {Object} The modified Express application with middleware extensions.
  */
-function setup(application, settings=options) {
+function setup(application, settings = options) {
     const possibleOptions = settings;
     for (let setting in possibleOptions) {
         if (possibleOptions[setting] !== undefined) {

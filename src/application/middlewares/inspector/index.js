@@ -13,8 +13,8 @@ const crypto = require('node:crypto');
  * @param {Function} next - The next middleware function in the chain.
  */
 async function inspector(req, res, next) {
-    console.log(`[${req.method}][${req.hostname}][${req.baseUrl}][${req.path}]`);
-    req.id = crypto.randomBytes(16).toString('hex');
+    req.id = crypto.randomBytes(16).toString('hex').toUpperCase();
+    console.log(`[req ID ${req.id}][${req.method}][${req.hostname}][${req.path}]`);
     console.log('[URL]', req.protocol + '://' + req.get('host') + req.originalUrl);
     req.performance = new performance();
     next();

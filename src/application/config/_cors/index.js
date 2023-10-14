@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const boolean = require('../../../utils/parsers/boolean');
-const { port } = require('../../../network/utils');
+const {port} = require('../../../network/utils');
 /**
  * Returns an options object for JSON parsing with configurable settings.
  *
@@ -15,20 +15,39 @@ const { port } = require('../../../network/utils');
  *  Output: [Function: jsonParser]
  */
 let whitelist = [
-`http://localhost:${port}`
+    `http://localhost:${2700}`,
+    `http://localhost:${2701}`,
+    `http://localhost:${port}`
 ];
 console.debug("[CORS Whitelist]", whitelist);
-    
-let options = function (req, callback) {
-    let corsOptions;
-    console.warn("whitelist", whitelist);
-    console.debug('origin', req.header('Origin'))
-    if (whitelist.indexOf(req.header('Origin')) !== -1) {
-        corsOptions = { origin: true } // reflect (enable) the requested origin in the CORS response
-    } else {
-        corsOptions = { origin: false } // disable CORS for this request
+var options = {
+    origin: function (origin, callback) {
+        //console.debug("[Whitelist]", whitelist);
+        console.debug("[Origin]", origin);
+        // Server to Server Policy
+        // origin = undefined
+        if (serverToServerPolicy(origin)) {
+            console.warn("[Server to Server Request]")
+            const srv2srvError = new Error("Server to Server Policy Error");
+            srv2srvError.applicationTypeError = "serverToServerPolicy"
+            callback(srv2srvError);
+        } else if (whitelist.indexOf(origin) !== -1 || !origin) {
+            callback(null, true)
+        } else {
+            callback(new Error('Not allowed by CORS'))
+        }
     }
-    callback(null, corsOptions) // callback expects two parameters: error and options
 }
-
+/**
+ * @function evaluate origin in request without origin header policy
+ * return true if origin are undefined or fallse if origin exist or policy are
+ * dissabled
+ */
+function serverToServerPolicy(origin) {
+    console.debug("[ srv2srv ]", origin, boolean.parse(process.env.SRVTOSRV))
+    if (origin == undefined && !boolean.parse(process.env.SRVTOSRV)) {
+        return true;
+    }
+    return false;
+}
 module.exports = cors(options);

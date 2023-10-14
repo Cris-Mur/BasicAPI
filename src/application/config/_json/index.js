@@ -12,7 +12,7 @@ const boolean = require('../../../utils/parsers/boolean');
  * console.log(json);
  *  Output: [Function: jsonParser]
  */
-function factoryJson(reviver=null, verify=undefined) {
+function factoryJson(reviver = null, verify = undefined) {
     if (!boolean.parse(process.env.JSON)) {
         return undefined;
     }
