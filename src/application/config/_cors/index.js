@@ -44,7 +44,7 @@ function factoryCors() {
      * @returns {Object} | undefined
      */
     const options = {
-        origin: function (origin, callback) {
+        origin(origin, callback) {
             console.debug("[Origin]", origin);
             try {
                 return callback(null, serverToServerPolicy(origin));

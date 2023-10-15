@@ -9,10 +9,10 @@
 function onListening() {
     const addr = this.address();
     const bind = typeof addr === 'string'
-        ? 'pipe ' + addr
-        : 'port ' + addr.port;
+        ? `pipe ${addr}`
+        : `port ${addr.port}`;
     console.log(`Application process id: ${process.pid}`);
-    console.log('Listening on ' + bind, `http://localhost:${addr.port}\n`);
+    console.log(`Listening on ${bind} http://localhost:${addr.port}\n`);
 }
 
 /**
