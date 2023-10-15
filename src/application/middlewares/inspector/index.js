@@ -15,7 +15,7 @@ const crypto = require('node:crypto');
 function inspector(req, res, next) {
     req.id = crypto.randomBytes(16).toString('hex').toUpperCase();
     console.log(`[req ID ${req.id}][${req.method}][${req.hostname}][${req.path}]`);
-    console.log('[URL]', req.protocol + '://' + req.get('host') + req.originalUrl);
+    console.log('[URL]', `${req.protocol}://${req.get('host')}${req.originalUrl}`);
     req.performance = new performance();
     next();
 }

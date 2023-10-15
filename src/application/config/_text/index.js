@@ -29,7 +29,7 @@ function factoryText(verify = undefined) {
      * The options for parsing text-based data.
      * @type {TextParsingOptions}
      */
-    let options = {
+    const options = {
         defaultCharset: process.env.TEXT_CHARSET ?? "utf-8",
         inflate: boolean.parse(process.env.JSON_INFLATE) ?? true,
         limit: process.env.TEXT_LIMIT ?? '100kb',

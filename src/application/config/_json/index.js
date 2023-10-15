@@ -16,7 +16,7 @@ function factoryJson(reviver = null, verify = undefined) {
     if (!boolean.parse(process.env.JSON)) {
         return undefined;
     }
-    let options = {
+    const options = {
         inflate: boolean.parse(process.env.JSON_INFLATE) ?? true,
         limit: process.env.JSON_LIMIT ?? '100kb',
         strict: boolean.parse(process.env.JSON_STRICT) ?? true,
