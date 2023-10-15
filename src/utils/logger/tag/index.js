@@ -41,6 +41,13 @@ const BLACK_TEXT = '\x1b[30m';
 //const BLACK_BG = '\x1b[40m';
 const RESET = '\x1b[0m';
 
+
+/**
+ * @function levelColor - This function adds color into string using level tag.
+ * @param {String} level 
+ * @param {String} input 
+ * @returns 
+ */
 function levelColor(level, input) {
     if (!boolean.parse(process.env.COLORED)) {
         return input
@@ -68,6 +75,12 @@ function levelColor(level, input) {
 }
 
 const tag = `[ ${centerString(os.hostname, os.hostname.length)} ]`;
+
+/**
+ * @function newTag - generates a pretty tag to prints in screen
+ * @param {String} level 
+ * @returns {String}
+ */
 function newTag(level) {
     const date = `[ ${centerString(new Date().toISOString(), 24)} ]`;
     let result = tag;

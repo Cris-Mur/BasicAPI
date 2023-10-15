@@ -5,7 +5,11 @@
 const boolean = require('../parsers/boolean');
 const tag = require('./tag');
 const util = require('node:util');
-
+/**
+ * @function applyFormat - Function to manage format of input using core fn.
+ * @param  {...any} args - Input of console
+ * @returns {util.formatWithOptions}
+ */
 function applyFormat(...args) {
     const formatOptions = {
         colors: true

@@ -1,5 +1,7 @@
 # Basic Express Server
 
+[![DeepSource](https://app.deepsource.com/gh/Cris-Mur/BasicAPI.svg/?label=active+issues&show_trend=true&token=zS-SGTUGprpijwyk0MQ_TA_G)](https://app.deepsource.com/gh/Cris-Mur/BasicAPI/)
+
 ---
 
 "Basic API" is a fully managed implementation of ExpressJS that transforms into a NodeJS Application Server, ready to kickstart development in other projects. Please refer to the [environment example](./env.example) before running this application. For development information, [go here](./src/).
