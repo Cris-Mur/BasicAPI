@@ -1,5 +1,3 @@
-//const fs = require('node:fs/promises');
-
 /**
  * Handles errors that occur during request processing.
  *
@@ -9,7 +7,7 @@
  * @param {function} next - The next middleware function.
  * @returns {Promise<void>} - A Promise that resolves once the error is handled.
  */
-async function errorHandler(err, req, res, next) {
+function errorHandler(err, req, res, next) {
     if (res.headersSent) {
         return next(err);
     }

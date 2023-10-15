@@ -40,7 +40,7 @@ console.error = function logger_error(...args) {
  * @param {...any} args - Arguments to be logged as errors.
  */
 const raw_debug = console.debug;
-console.debug = async function logger_debug(...args) {
+console.debug = function logger_debug(...args) {
     if (!boolean.parse(process.env.VERBOSE))
         return;
     let level = "debug";
@@ -53,7 +53,7 @@ console.debug = async function logger_debug(...args) {
  * @param {...any} args - Arguments to be logged as errors.
  */
 const raw_warn = console.warn;
-console.warn = async function logger_warn(...args) {
+console.warn = function logger_warn(...args) {
     if (!boolean.parse(process.env.VERBOSE))
         return;
     let level = "warning";
