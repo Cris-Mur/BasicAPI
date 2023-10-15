@@ -17,7 +17,7 @@ function env() {
  */
 function centerString(inputString, totalSpaces) {
     if (inputString.length > totalSpaces) {
-        inputString = inputString.substring(0, totalSpaces - 3) + '...';
+        inputString = `${inputString.substring(0, totalSpaces - 3)}...`;
     }
 
     const padding = Math.max(0, totalSpaces - inputString.length);

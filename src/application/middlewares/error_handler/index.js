@@ -12,7 +12,7 @@ function errorHandler(err, req, res, next) {
         return next(err);
     }
     // Construct the URL from the request details
-    const url = req.protocol + '://' + req.get('host') + req.originalUrl;
+    const url = `${req.protocol}://${req.get('host')}${req.originalUrl}`;
 
     // Log the error along with the request details
     console.error(`[URL] ${url} [Method] ${req.method}` + '\n', err);

@@ -22,9 +22,8 @@ function onError(error) {
     // Handle specific listen errors with friendly messages
     switch (error.code) {
         case 'EACCES':
-            console.error(bind + ' requires elevated privileges');
-            process.exit(1);
-            break;
+            const privilegesError =new Error(bind + ' requires elevated privileges');
+            throw privilegesError;
         case 'EADDRINUSE':
             if (boolean.parse(process.env.RESILIENT_PORT)) {
                 port = parseInt(port) + 1;
@@ -34,8 +33,8 @@ function onError(error) {
                 );
                 this.listen(port);
             } else {
-                console.error(bind + ' is already in use');
-                process.exit(1);
+                const port_in_use = new Error(bind + ' is already in use');
+                throw port_in_use;
             }
             break;
         default:
