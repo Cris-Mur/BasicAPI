@@ -5,6 +5,10 @@
 const express = require('express');
 const config = require('./config');
 
+/**
+ * @class Application
+ * This Class encapsulate Express implementation.
+ */
 class Application {
     constructor() {
         this.express = express();
@@ -17,6 +21,9 @@ class Application {
         // Express you know that's machine.
         this.express.disable('x-powered-by');
         console.debug("[Application instance]");
+    }
+    get express() {
+        return this.express;
     }
 }
 /**
