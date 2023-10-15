@@ -38,15 +38,15 @@ function factoryStatic(setHeaders = undefined) {
      * @type {StaticFileOptions}
      */
     let options = {
-        dotfiles: process.env.STATIC_DOTFILES || 'ignore', // allow, deny, ignore
-        etag: boolean.parse(process.env.STATIC_ETAG) || true,
-        extensions: csv.parse(process.env.STATIC_EXTENSIONS) || false,
-        fallthrough: boolean.parse(process.env.STATIC_FALLTHROUGH) || true,
-        immutable: boolean.parse(process.env.STATIC_IMMUTABLE) || false,
-        index: path.normalize(process.env.STATIC_INDEX) || undefined,
-        lastModified: boolean.parse(process.env.STATIC_LASTMODIFIED) || true,
-        maxAge: parseInt(process.env.STATIC_MAXAGE) || 0,
-        redirect: boolean.parse(process.env.STATIC_REDIRECT) || true,
+        dotfiles: process.env.STATIC_DOTFILES ?? 'ignore', // allow, deny, ignore
+        etag: boolean.parse(process.env.STATIC_ETAG) ?? true,
+        extensions: csv.parse(process.env.STATIC_EXTENSIONS) ?? false,
+        fallthrough: boolean.parse(process.env.STATIC_FALLTHROUGH) ?? true,
+        immutable: boolean.parse(process.env.STATIC_IMMUTABLE) ?? false,
+        index: path.normalize(process.env.STATIC_INDEX) ?? undefined,
+        lastModified: boolean.parse(process.env.STATIC_LASTMODIFIED) ?? true,
+        maxAge: parseInt(process.env.STATIC_MAXAGE) ?? 0,
+        redirect: boolean.parse(process.env.STATIC_REDIRECT) ?? true,
         setHeaders
     };
 

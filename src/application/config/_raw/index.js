@@ -1,7 +1,3 @@
-/**
- * Module for handling request handler options related to data parsing.
- * @module RequestHandlerOptions
- */
 const express = require("express");
 const boolean = require('../../../utils/parsers/boolean');
 
@@ -28,9 +24,9 @@ function factoryRaw(verify = undefined) {
      * @type {RequestHandlingOptions}
      */
     let options = {
-        inflate: boolean.parse(process.env.RAW_INFLATE) || true,
-        limit: process.env.RAW_LIMIT || '100kb',
-        type: process.env.RAW_TYPE || "application/octet-stream",
+        inflate: boolean.parse(process.env.RAW_INFLATE) ?? true,
+        limit: process.env.RAW_LIMIT ?? '100kb',
+        type: process.env.RAW_TYPE ?? "application/octet-stream",
         verify
     };
 

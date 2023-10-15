@@ -17,10 +17,10 @@ function factoryJson(reviver = null, verify = undefined) {
         return undefined;
     }
     let options = {
-        inflate: boolean.parse(process.env.JSON_INFLATE) || true,
-        limit: process.env.JSON_LIMIT || '100kb',
-        strict: boolean.parse(process.env.JSON_STRICT) || true,
-        type: process.env.JSON_TYPE || "application/json",
+        inflate: boolean.parse(process.env.JSON_INFLATE) ?? true,
+        limit: process.env.JSON_LIMIT ?? '100kb',
+        strict: boolean.parse(process.env.JSON_STRICT) ?? true,
+        type: process.env.JSON_TYPE ?? "application/json",
         reviver,
         verify
     }

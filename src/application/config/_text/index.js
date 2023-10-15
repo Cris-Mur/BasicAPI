@@ -30,10 +30,10 @@ function factoryText(verify = undefined) {
      * @type {TextParsingOptions}
      */
     let options = {
-        defaultCharset: process.env.TEXT_CHARSET || "utf-8",
-        inflate: boolean.parse(process.env.JSON_INFLATE) || true,
-        limit: process.env.TEXT_LIMIT || '100kb',
-        type: process.env.TEXT_TYPE || "text/plain",
+        defaultCharset: process.env.TEXT_CHARSET ?? "utf-8",
+        inflate: boolean.parse(process.env.JSON_INFLATE) ?? true,
+        limit: process.env.TEXT_LIMIT ?? '100kb',
+        type: process.env.TEXT_TYPE ?? "text/plain",
         verify
     };
 
