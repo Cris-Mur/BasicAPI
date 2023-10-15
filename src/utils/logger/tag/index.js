@@ -7,8 +7,8 @@ const boolean = require('../../parsers/boolean');
  * @returns {String} formated string to print in a logger tag.
  */
 function env() {
-    const env = process.env.NODE_ENV;
-    return `[ ${centerString(env, 11)} ]`;
+    const environment = process.env.NODE_ENV;
+    return `[ ${centerString(environment, 11)} ]`;
 }
 
 /**

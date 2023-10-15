@@ -12,7 +12,7 @@ const router = require('../services/router');
  * @returns {Object} The configured Express application instance.
  */
 function factory() {
-    global.API = new Application();
+    const API = new Application();
     const application = API.express;
     // Global Middlewares
     application.use(middlewares.inspector);
