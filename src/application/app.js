@@ -16,16 +16,20 @@ class Application {
         // to over write express base middlewares 
         // let otherOptionMiddlewares = {};
         // config.setup(this.app, otherOptionMiddlewares);
-        this.express = this.setup(this.express);
+        this.express = Application.setup(this.express);
         // Disable 'x-powered-by' header for security, if you know that is 
         // Express you know that's machine.
         this.express.disable('x-powered-by');
         console.debug("[Application instance]");
     }
-    setup (input) {
+    /**
+     * @function setup - configuration application feature
+     * @param {Express.Application} input 
+     * @returns 
+     */
+    static setup (input) {
         return config.setup(input);
     }
-    
 }
 /**
  * Exports the configured Express application instance.
