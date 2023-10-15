@@ -9,7 +9,7 @@
  * @returns {boolean} The parsed boolean value.
  */
 function parse(input) {
-    const rex = new RegExp("true", "i");
+    const rex = /true/i;
     return rex.test(input);
 }
 

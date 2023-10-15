@@ -48,7 +48,7 @@ function splitLocals(locals) {
  * @type {LocalsObject}
  */
 let LocalsObject = {
-    ...splitLocals(process.env['LOCALS']) // variables named with "locals" key word
+    ...splitLocals(process.env.LOCALS) // variables named with "locals" key word
 };
 // Populate locals object with environment variables
 Object.keys(process.env).forEach((env_var) => {

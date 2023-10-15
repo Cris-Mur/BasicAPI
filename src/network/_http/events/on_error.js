@@ -16,24 +16,24 @@ function onError(error) {
     }
 
     const bind = typeof port === 'string'
-        ? 'Pipe ' + port
-        : 'Port ' + port;
+        ? `Pipe ${port}`
+        : `Port ${port}`;
 
     // Handle specific listen errors with friendly messages
     switch (error.code) {
         case 'EACCES':
-            const privilegesError =new Error(bind + ' requires elevated privileges');
+            const privilegesError = new Error(`${bind} requires elevated privileges`);
             throw privilegesError;
         case 'EADDRINUSE':
             if (boolean.parse(process.env.RESILIENT_PORT)) {
                 port = parseInt(port) + 1;
                 console.warn(
-                "[ Normal Startup Interrupted PORT IN USE ERROR trying with new port]",
+                    "[ Normal Startup Interrupted PORT IN USE ERROR trying with new port]",
                     port
                 );
                 this.listen(port);
             } else {
-                const port_in_use = new Error(bind + ' is already in use');
+                const port_in_use = new Error(`${bind} is already in use`);
                 throw port_in_use;
             }
             break;
