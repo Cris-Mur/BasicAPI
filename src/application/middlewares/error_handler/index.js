@@ -29,7 +29,7 @@ function applicationErrors(error_, res) {
  */
 function errorHandler(err, req, res, next) {
     if (res.headersSent) {
-        return next(err);
+        next(err);
     }
     // Construct the URL from the request details
     const url = `${req.protocol}://${req.get('host')}${req.originalUrl}`;

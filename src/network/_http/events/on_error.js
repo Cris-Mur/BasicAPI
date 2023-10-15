@@ -22,8 +22,7 @@ function onError(error) {
     // Handle specific listen errors with friendly messages
     switch (error.code) {
         case 'EACCES':
-            const privilegesError = new Error(`${bind} requires elevated privileges`);
-            throw privilegesError;
+            throw new Error(`${bind} requires elevated privileges`);
         case 'EADDRINUSE':
             if (boolean.parse(process.env.RESILIENT_PORT)) {
                 port = parseInt(port) + 1;

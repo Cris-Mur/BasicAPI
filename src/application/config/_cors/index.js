@@ -1,36 +1,6 @@
 const cors = require("cors");
 const boolean = require('../../../utils/parsers/boolean');
-const {port} = require('../../../network/utils');
-
-/**
- * @function factoryCors - Funtion to managge cors
- * @returns cors middleware | undefined
-*/
-function factoryCors() {
-    console.debug("[CORS Whitelist]", whitelist);
-    if (!boolean.parse(process.env.CORS)) {
-        return undefined;
-    }
-    return cors(options);
-}
-/**
- * Returns an options object for JSON parsing with configurable settings.
- *
- * @param {Function|null} [reviver=null] - A function that transforms the results. (Optional)
- * @param {function} [verify=undefined] - An optional parameter for verification purposes. (Optional)
- * @returns {Object} | undefined
- */
-const options = {
-    origin: function (origin, callback) {
-        console.debug("[Origin]", origin);
-        try {
-            return callback(null, serverToServerPolicy(origin)); 
-        } catch (error_) {
-            console.warn("[CORS Policy]", error_);
-            return callback(error_);
-        }
-    }
-}
+const { port } = require('../../../network/utils');
 
 const whitelist = [
     `http://localhost:${2700}`,
@@ -61,5 +31,33 @@ function serverToServerPolicy(origin) {
         throw srv2srvError;
     }
 }
-
+/**
+ * @function factoryCors - Funtion to managge cors
+ * @returns cors middleware | undefined
+*/
+function factoryCors() {
+    /**
+     * Returns an options object for JSON parsing with configurable settings.
+     *
+     * @param {Function|null} [reviver=null] - A function that transforms the results. (Optional)
+     * @param {function} [verify=undefined] - An optional parameter for verification purposes. (Optional)
+     * @returns {Object} | undefined
+     */
+    const options = {
+        origin: function (origin, callback) {
+            console.debug("[Origin]", origin);
+            try {
+                return callback(null, serverToServerPolicy(origin));
+            } catch (error_) {
+                console.warn("[CORS Policy]", error_);
+                return callback(error_);
+            }
+        }
+    }
+    console.debug("[CORS Whitelist]", whitelist);
+    if (!boolean.parse(process.env.CORS)) {
+        return undefined;
+    }
+    return cors(options);
+}
 module.exports = factoryCors();
