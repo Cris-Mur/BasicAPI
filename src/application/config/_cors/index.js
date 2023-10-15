@@ -20,7 +20,7 @@ function factoryCors() {
  * @param {function} [verify=undefined] - An optional parameter for verification purposes. (Optional)
  * @returns {Object} | undefined
  */
-let options = {
+const options = {
     origin: function (origin, callback) {
         console.debug("[Origin]", origin);
         try {
@@ -32,7 +32,7 @@ let options = {
     }
 }
 
-let whitelist = [
+const whitelist = [
     `http://localhost:${2700}`,
     `http://localhost:${2701}`,
     `http://localhost:${port}`

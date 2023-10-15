@@ -29,7 +29,7 @@ function factoryUrlencoded(verify = undefined) {
      * The options for parsing URL-encoded data.
      * @type {UrlEncodedParsingOptions}
      */
-    let options = {
+    const options = {
         extended: boolean.parse(process.env.URLENCODED_EXTENDED) ?? true,
         inflate: boolean.parse(process.env.URLENCODED_INFLATE) ?? true,
         limit: process.env.URLENCODED_LIMIT ?? '100kb',

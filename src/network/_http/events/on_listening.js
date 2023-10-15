@@ -7,8 +7,8 @@
  * Handles server listening events and logs the listening address.
  */
 function onListening() {
-    let addr = this.address();
-    let bind = typeof addr === 'string'
+    const addr = this.address();
+    const bind = typeof addr === 'string'
         ? 'pipe ' + addr
         : 'port ' + addr.port;
     console.log(`Application process id: ${process.pid}`);

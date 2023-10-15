@@ -13,7 +13,7 @@ const router = require('../services/router');
  */
 function factory() {
     global.API = new Application();
-    let application = API.express;
+    const application = API.express;
     // Global Middlewares
     application.use(middlewares.inspector);
     application.use("/", router); // Default Router

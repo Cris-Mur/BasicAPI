@@ -37,7 +37,7 @@ function factoryStatic(setHeaders = undefined) {
      * The options for serving static files.
      * @type {StaticFileOptions}
      */
-    let options = {
+    const options = {
         dotfiles: process.env.STATIC_DOTFILES ?? 'ignore', // allow, deny, ignore
         etag: boolean.parse(process.env.STATIC_ETAG) ?? true,
         extensions: csv.parse(process.env.STATIC_EXTENSIONS) ?? false,

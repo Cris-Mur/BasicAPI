@@ -9,11 +9,11 @@
  * @returns {number|boolean|string} The normalized port value, or false if invalid.
  */
 function normalize(value) {
-    let port = parseInt(value, 10);
+    const port = parseInt(value, 10);
 
     if (isNaN(port)) {
         // Named pipe
-        return val;
+        return value;
     }
 
     if (port >= 0) {

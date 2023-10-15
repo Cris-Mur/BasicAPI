@@ -7,7 +7,7 @@ const boolean = require('../../parsers/boolean');
  * @returns {String} formated string to print in a logger tag.
  */
 function env() {
-    let env = process.env.NODE_ENV;
+    const env = process.env.NODE_ENV;
     return `[ ${centerString(env, 11)} ]`;
 }
 
@@ -63,16 +63,15 @@ function levelColor(level, input) {
             end: `${RESET}`
         },
     }
-    let output = color[level].start + input + color[level].end;
 
-    return output;
+    return color[level].start + input + color[level].end;
 }
 
 const tag = `[ ${centerString(os.hostname, os.hostname.length)} ]`;
 function newTag(level) {
-    let date = `[ ${centerString(new Date().toISOString(), 24)} ]`;
+    const date = `[ ${centerString(new Date().toISOString(), 24)} ]`;
     let result = tag;
-    let level_tag = level;
+    const level_tag = level;
     level = centerString(level, 9)
     level = `[${levelColor(level_tag, level)}] `
     result = result.concat(env(), date, level);

@@ -15,7 +15,7 @@ const {locals} = require('./_locals');
  */
 function setup(application, settings = options) {
     const possibleOptions = settings;
-    for (let setting in possibleOptions) {
+    for (const setting in possibleOptions) {
         if (possibleOptions[setting] !== undefined) {
             console.debug('[settings]', setting, possibleOptions[setting]);
             application.use(possibleOptions[setting]);

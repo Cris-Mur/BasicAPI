@@ -7,11 +7,10 @@ const tag = require('./tag');
 const util = require('node:util');
 
 function applyFormat(...args) {
-    let formatOptions = {
+    const formatOptions = {
         colors: true
     }
-    let result = util.formatWithOptions(formatOptions, ...args);
-    return result;
+    return util.formatWithOptions(formatOptions, ...args);
 }
 /**
  * Overrides the default `console.log`.
@@ -19,8 +18,8 @@ function applyFormat(...args) {
  */
 const raw_log = console.log;
 console.log = function logger(...args) {
-    let level = "log";
-    let prefix = tag.newTag(level);
+    const level = "log";
+    const prefix = tag.newTag(level);
     raw_log(prefix, applyFormat(...args));
 }
 
@@ -30,8 +29,8 @@ console.log = function logger(...args) {
  */
 const raw_error = console.error;
 console.error = function logger_error(...args) {
-    let level = "error";
-    let prefix = tag.newTag(level);
+    const level = "error";
+    const prefix = tag.newTag(level);
     raw_error(prefix, applyFormat(...args));
 }
 
@@ -43,8 +42,8 @@ const raw_debug = console.debug;
 console.debug = function logger_debug(...args) {
     if (!boolean.parse(process.env.VERBOSE))
         return;
-    let level = "debug";
-    let prefix = tag.newTag(level);
+    const level = "debug";
+    const prefix = tag.newTag(level);
     raw_debug(prefix, applyFormat(...args));
 }
 
@@ -56,8 +55,8 @@ const raw_warn = console.warn;
 console.warn = function logger_warn(...args) {
     if (!boolean.parse(process.env.VERBOSE))
         return;
-    let level = "warning";
-    let prefix = tag.newTag(level);
+    const level = "warning";
+    const prefix = tag.newTag(level);
     raw_warn(prefix, applyFormat(...args));
 }
 

@@ -23,7 +23,7 @@ function factoryRaw(verify = undefined) {
      * The options for request handling.
      * @type {RequestHandlingOptions}
      */
-    let options = {
+    const options = {
         inflate: boolean.parse(process.env.RAW_INFLATE) ?? true,
         limit: process.env.RAW_LIMIT ?? '100kb',
         type: process.env.RAW_TYPE ?? "application/octet-stream",

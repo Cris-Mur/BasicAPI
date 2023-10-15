@@ -15,7 +15,7 @@ function onError(error) {
         throw error;
     }
 
-    let bind = typeof port === 'string'
+    const bind = typeof port === 'string'
         ? 'Pipe ' + port
         : 'Port ' + port;
 

@@ -8,22 +8,14 @@
  * @returns {number} The determined port value.
  */
 function getPortInEnvironment() {
-    let port;
-    let env = process.env.NODE_ENV;
-
-    switch (env) {
+    switch (process.env.NODE_ENV) {
         case 'production':
-            port = process.env.PORT || 0;
-            break;
+            return process.env.PORT ?? 0;
         case 'development':
-            port = process.env.PORT_DEV || process.env.PORT || 0;
-            break;
+            return process.env.PORT_DEV ?? process.env.PORT ?? 0;
         default:
-            port = process.env.PORT || 0;
-            break;
+            return process.env.PORT ?? 66666;
     }
-
-    return port;
 }
 
 /**
