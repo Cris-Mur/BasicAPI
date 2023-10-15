@@ -10,11 +10,13 @@ function applicationErrors(error_, res) {
         throw error_;
     }
 
-    const applicationErrors = {
+    const applicationErrors_ = {
         serverToServerPolicy: 503
     }
 
-    res.status(applicationErrors[error_.applicationTypeError]).send(error_.message);
+    res.status(
+        applicationErrors_[error_.applicationTypeError]
+    ).send(error_.message);
 }
 /**
  * Handles errors that occur during request processing.
