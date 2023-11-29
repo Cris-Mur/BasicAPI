@@ -14,7 +14,7 @@ function getPortInEnvironment() {
         case 'development':
             return process.env.PORT_DEV ?? process.env.PORT ?? 0;
         default:
-            return process.env.PORT ?? 66666;
+            return process.env.PORT ?? 6666;
     }
 }
 
