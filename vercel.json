@@ -1,6 +1,4 @@
 {
-  "installCommand": "npm install"
-},
-{
+  "installCommand": "npm install",
   "buildCommand": "npm start"
 }
