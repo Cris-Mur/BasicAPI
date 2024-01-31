@@ -11,3 +11,9 @@
 **/node_modules
 **/package-lock.json
 .vercel
+
+# Obsidian Editor
+**/.obsidian
+
+# Sonar Scanner
+**/.scannerwork
