@@ -87,7 +87,7 @@ function newTag(level) {
     const level_tag = level;
     level = centerString(level, 9)
     level = `[${levelColor(level_tag, level)}] `
-    result = result.concat(env(), date, level);
+    result = result.concat(env(), date, level, "\n");
     return result;
 }
 
