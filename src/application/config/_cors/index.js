@@ -2,17 +2,18 @@ const cors = require("cors");
 const boolean = require('../../../utils/parsers/boolean');
 const { port } = require('../../../network/utils');
 
-const whitelist = [
-    `http://localhost:${2700}`,
-    `http://localhost:${2701}`,
-    `http://localhost:${port}`
-];
+
 /**
  * @function serverToServerPolicy - evaluate origin in request without origin 
  * header policy return true if origin are undefined or fallse if origin 
  * exist or policy are dissabled.
 */
 function serverToServerPolicy(origin) {
+    const whitelist = [
+        `http://localhost:${2700}`,
+        `http://localhost:${2701}`,
+        `http://localhost:${port}`
+    ];
     // Server to Server Policy
     // origin = undefined
     console.debug("[ srv2srv ]", origin, boolean.parse(process.env.SRVTOSRV))
@@ -54,7 +55,6 @@ function factoryCors() {
             }
         }
     }
-    console.debug("[CORS Whitelist]", whitelist);
     if (!boolean.parse(process.env.CORS)) {
         return undefined;
     }
