@@ -14,9 +14,9 @@
     }
   },
   "scripts": {
-    "start": "./bin/./init &",
-    "dev": "npx nodemon ./bin/init",
-    "debug": "VERBOSE=true COLORED=true ./bin/init 1>/var/tmp/node_express_api.log 2>/var/tmp/node_express_api.err.log",
+    "start": "./bin/./init 1>/var/log/node_express_api.log 2>/var/log/node_express_api.error.log &",
+    "dev": "npx nodemon ./src/bin/init",
+    "debug": "VERBOSE=true COLORED=true ./bin/init 1>/var/tmp/node_express_api.log 2>/var/tmp/node_express_api.error.log",
     "test": "node --test"
   },
   "repository": {
