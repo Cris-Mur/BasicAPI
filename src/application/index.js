@@ -9,6 +9,9 @@ const builder = require('./builder');
 const network = require('./network');
 
 
+const boolean = require("./utils/parsers/boolean");
+
+
 /**
  * @class Application
  * This Class encapsulate Express implementation.
@@ -34,20 +37,21 @@ class Application {
      * @param {Express instance} application 
      */
     setupNetwork(application) {
-    console.debug('[Application]', application.mountpath);
+        if (boolean.parse(process.env.SERVERLESS)) {
+            return;
+        }
+        // Normalize the port and set it on the application
+        const port = network.utils.port;
+        application.set('port', port);
 
-    // Normalize the port and set it on the application
-    const port = network.utils.port;
-    application.set('port', port);
+        // Create and start the server
+        const server = network._http.create_server(application);
+        server.listen(port);
 
-    // Create and start the server
-    const server = network._http.create_server(application);
-    server.listen(port);
-
-    // Handle server errors and listening events
-    server.on('error', network._http.onError);
-    server.on('listening', network._http.onListening);
-    this.server = server;
+        // Handle server errors and listening events
+        server.on('error', network._http.onError);
+        server.on('listening', network._http.onListening);
+        this.server = server;
     }
 }
 /**
