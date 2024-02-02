@@ -1,5 +1,5 @@
-const application = require('../application');
-const logger = require('../application/utils/logger');
+const application = require('../src/application');
+const logger = require('../src/application/utils/logger');
 console.time("Startup")
 console.debug("StartUp Application");
 
