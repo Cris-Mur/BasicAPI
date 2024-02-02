@@ -1,4 +1,4 @@
 {
   "installCommand": "npm install",
-  "buildCommand": "npm start"
+  "buildCommand": "npm run vercel_start"
 }
