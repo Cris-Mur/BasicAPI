@@ -18,7 +18,7 @@
     "dev": "npx nodemon ./src/bin/init",
     "debug": "VERBOSE=true COLORED=true ./bin/init 1>/var/tmp/node_express_api.log 2>/var/tmp/node_express_api.error.log",
     "test": "node --test",
-    "vercel_start": "SERVERLESS=true ./src/bin/./init"
+    "vercel_start": "SERVERLESS=true node ./src/bin/vercel_init.js"
   },
   "repository": {
     "type": "git",
