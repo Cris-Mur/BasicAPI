@@ -2,8 +2,10 @@
  * Module class application to make a new instance.
  * @module app
  */
+
+require('dotenv').config();
 const express = require('express');
-const config = require('./builder');
+const builder = require('./builder');
 const network = require('./network');
 
 
@@ -22,7 +24,7 @@ class Application {
         // to over write express base middlewares 
         // let otherOptionMiddlewares = {};
         // config.setup(this.app, otherOptionMiddlewares);
-        this.express = Application.setup(this.express);
+        this.express = builder.setup(this.express);
         this.setupNetwork(this.express);
         console.debug("[Application instance]");
     }
@@ -47,17 +49,9 @@ class Application {
     server.on('listening', network._http.onListening);
     this.server = server;
     }
-    /**
-     * @function setup - configuration application feature
-     * @param {Express.Application} input 
-     * @returns 
-     */
-    static setup (input) {
-        return config.setup(input);
-    }
 }
 /**
  * Exports the configured Express application instance.
  * @type {Object}
  */
-module.exports = new Application();
+module.exports = Application;

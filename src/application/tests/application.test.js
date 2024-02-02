@@ -1,7 +1,7 @@
 const test = require('node:test');
 const assert = require('node:assert');
 
-const application = require("../app");
+const application = require("../index");
 
 test("Class test", (inner_test) => {
     let test_application = new application();
