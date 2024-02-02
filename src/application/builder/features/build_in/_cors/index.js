@@ -1,6 +1,6 @@
 const cors = require("cors");
-const boolean = require('../../../utils/parsers/boolean');
-const { port } = require('../../../network/utils');
+const boolean = require('../../../../utils/parsers/boolean');
+const { port } = require('../../../../network/utils');
 
 
 /**

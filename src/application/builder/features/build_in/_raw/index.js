@@ -1,5 +1,5 @@
 const express = require("express");
-const boolean = require('../../../utils/parsers/boolean');
+const boolean = require('../../../../utils/parsers/boolean');
 
 /**
  * Represents the options for request handling.
