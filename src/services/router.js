@@ -2,9 +2,9 @@ const router = require('express').Router();
 /**
  * here start a root router of Application
  */
-const tester = require('./test');
+const home = require('./API/home');
 
 
-router.use("/", tester);
+router.use("/", home);
 
 module.exports = router;
