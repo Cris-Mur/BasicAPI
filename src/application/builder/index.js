@@ -5,7 +5,7 @@
 const boolean = require("../utils/parsers/boolean");
 const build_in = require("./features/build_in");
 // The locals, arent a middleware
-const {locals} = require('./features/build_in/_locals');
+const { locals } = require('./features/build_in/_locals');
 const homebrew = require('./features/homebrew');
 const router = require('../../services/router');
 
@@ -14,15 +14,23 @@ const router = require('../../services/router');
  * Sets middleware extensions based on configuration options.
  * @param {Express instance} application 
  */
-function setupPosibleExpressMiddlewares (application, middlewares = build_in) {
+function setupPosibleExpressMiddlewares(application, middlewares = build_in) {
     if (boolean.parse(process.env.BUILD_IN_FEATURES)) {
-        middlewares = {...build_in, ...middlewares};
+        middlewares = { ...build_in, ...middlewares };
     }
     console.debug("[result middlewares]", middlewares);
     for (const setting in middlewares) {
         if (middlewares[setting] !== undefined) {
             console.debug('[settings]', setting, middlewares[setting]);
-            application.use(middlewares[setting]);
+            switch (setting) {
+                case "_static":
+                    console.debug("[_static middleware path]", process.env?.STATIC_PATH || "/");
+                    application.use(process.env?.STATIC_PATH || "/", middlewares[setting]);
+                    break;
+                default:
+                    application.use(middlewares[setting]);
+                    break;
+            }
         }
     }
     return application;
@@ -80,13 +88,13 @@ function setupErrorHanding(application) {
         application.use(homebrew.middlewares.cannotGet);
         application.use(homebrew.middlewares.errorHandler);
     }
-    return application;
 }
 
 
 
 /**
- *  
+ * @function setup
+ * @description Builder of all settings to make express app
  * @param {Express instance} application
  * @param {Object} settings - Express middleware object collection as value
  * @returns {Object} The modified Express application with middleware extensions.
@@ -104,5 +112,3 @@ function setup(application) {
 module.exports = {
     setup
 };
-
-

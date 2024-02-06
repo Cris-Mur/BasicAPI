@@ -10,6 +10,9 @@ const { port } = require('../../../../network/utils');
 */
 function serverToServerPolicy(origin) {
     const whitelist = [
+        `http://127.0.0.1:${2700}`,
+        `http://127.0.0.1:${2701}`,
+        `http://127.0.0.1:${port}`,
         `http://localhost:${2700}`,
         `http://localhost:${2701}`,
         `http://localhost:${port}`

@@ -14,7 +14,7 @@ const boolean = require("./utils/parsers/boolean");
 
 /**
  * @class Application
- * This Class encapsulate Express implementation.
+ * This Class encapsulate Express & Http sever implementation.
  */
 class Application {
     constructor() {
@@ -37,9 +37,8 @@ class Application {
      * @param {Express instance} application 
      */
     setupNetwork(application) {
-        if (boolean.parse(process.env.SERVERLESS)) {
+        if (boolean.parse(process.env.SERVERLESS))
             return;
-        }
         // Normalize the port and set it on the application
         const port = network.utils.port;
         application.set('port', port);
@@ -56,6 +55,6 @@ class Application {
 }
 /**
  * Exports the configured Express application instance.
- * @type {Object}
+ * @type {@class<Application>}
  */
 module.exports = Application;

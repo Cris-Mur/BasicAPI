@@ -4,15 +4,15 @@
  * startup script.
  * @Script
  */
-const application = require('../application');
 const logger = require('../application/utils/logger');
+const application = require('../application');
 console.time("Startup")
 console.debug("StartUp Application");
 
 /// #############################################################
 
 const mainApplication = new application();
-console.debug(mainApplication);
+//console.debug(mainApplication);
 
 /// #############################################################
 
