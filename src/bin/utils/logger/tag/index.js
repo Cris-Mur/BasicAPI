@@ -1,15 +1,109 @@
 const os = require('node:os');
-const boolean = require('../../../../application/utils/parsers/boolean');
+const { boolean } = require('../utils/parse');
+
+// Available terminal Colors
+const GREEN_TEXT = '\x1b[32m';
+const GREEN_BG = '\x1b[42m';
+const YELLOW_TEXT = '\x1b[33m';
+const YELLOW_BG = '\x1b[43m';
+const RED_TEXT = '\x1b[31m';
+const RED_BG = '\x1b[41m';
+const BLUE_TEXT = '\x1b[94m';
+const BLUE_BG = '\x1b[104m';
+const WHITE_TEXT = '\x1b[37m';
+const WHITE_BG = '\x1b[47m';
+const BLACK_TEXT = '\x1b[30m';
+const BLACK_BG = '\x1b[40m';
+const RESET = '\x1b[0m';
+
+
+// ## Getter functions
 
 /**
- * @function env
- * @description This function retunrn a application environment
- * @returns {String} formated string to print in a logger tag.
+ * @function getNodeEnvironment
+ * @description This function retunrn a node environment setted in NODE_ENV
+ * @returns {String} environment.
  */
-function env() {
-    const environment = process.env.NODE_ENV || "production";
-    return `[ ${centerString(environment, 11)} ]`;
+function getNodeEnvironment() {
+    return process.env.NODE_ENV || "development";
 }
+
+/**
+ * @function getEnvTag
+ * this function returns a string tag of environment
+ * @returns {String} `[ ${env} ]`
+ */
+function getEnvTag() {
+    return `[ ${centerString(getNodeEnvironment(), 11)} ]`;
+}
+
+/**
+ * get Machine hostname
+ * @returns {String}
+ */
+function getHost() {
+    return os.hostname;
+}
+
+/**
+ * get formated hostname tag
+ * @returns {String}
+ */
+function getHostTag() {
+    return `[ ${centerString(getHost(), getHost().length)} ]`;
+}
+
+/**
+ * Get Date in isoformat
+ * @returns {String}
+ */
+function getDate() {
+    return new Date().toISOString();
+}
+
+/**
+ * Get formated date tag
+ * @returns {String}
+ */
+function getDateTag() {
+    let date = getDate();
+    return `[ ${centerString(date, date.length)} ]`;
+}
+
+/**
+ * Get formated level tag
+ * @param {String} level 
+ * @returns {String}
+ */
+function getLevelTag(level) {
+    if (!level)
+        return '';
+    const level_tag = level;
+    let levelPadding = 9;
+    let tag = centerString(level, levelPadding)
+    tag = `[${colorizeLevel(level_tag, tag)}] `
+    return tag;
+}
+
+/**
+ * @function newTag - generates a pretty tag to prints in console
+ * @param {String} level 
+ * @returns {String}
+ */
+function getTag(level) {
+    if (!boolean(process.env.LOGGER))
+        return '';
+    return ''.concat(
+        getHostTag(),
+        getEnvTag(),
+        getDateTag(),
+        getLevelTag(level),
+        "\n"
+    );
+}
+
+
+// ## Format functions
 
 /**
  * @param {String} inputString - 
@@ -27,29 +121,14 @@ function centerString(inputString, totalSpaces) {
     return ' '.repeat(leftPadding) + inputString + ' '.repeat(rightPadding);
 }
 
-//const GREEN_TEXT = '\x1b[32m';
-const GREEN_BG = '\x1b[42m';
-//const YELLOW_TEXT = '\x1b[33m';
-const YELLOW_BG = '\x1b[43m';
-//const RED_TEXT = '\x1b[31m';
-const RED_BG = '\x1b[41m';
-//const BLUE_TEXT = '\x1b[94m';
-const BLUE_BG = '\x1b[104m';
-//const WHITE_TEXT = '\x1b[37m';
-//const WHITE_BG = '\x1b[47m';
-const BLACK_TEXT = '\x1b[30m';
-//const BLACK_BG = '\x1b[40m';
-const RESET = '\x1b[0m';
-
-
 /**
  * @function levelColor - This function adds color into string using level tag.
  * @param {String} level 
  * @param {String} input 
  * @returns 
  */
-function levelColor(level, input) {
-    if (!boolean.parse(process.env.COLORED)) {
+function colorizeLevel(level, input) {
+    if (!boolean(process.env.COLORED) || !level) {
         return input
     }
     const color = {
@@ -68,29 +147,10 @@ function levelColor(level, input) {
         debug: {
             start: `${GREEN_BG}${BLACK_TEXT}`,
             end: `${RESET}`
-        },
+        }
     }
 
     return color[level].start + input + color[level].end;
 }
 
-const tag = `[ ${centerString(os.hostname, os.hostname.length)} ]`;
-
-/**
- * @function newTag - generates a pretty tag to prints in screen
- * @param {String} level 
- * @returns {String}
- */
-function newTag(level) {
-    const date = `[ ${centerString(new Date().toISOString(), 24)} ]`;
-    let result = tag;
-    const level_tag = level;
-    level = centerString(level, 9)
-    level = `[${levelColor(level_tag, level)}] `
-    result = result.concat(env(), date, level, "\n");
-    return result;
-}
-
-module.exports = {
-    newTag
-};
+module.exports = getTag;
