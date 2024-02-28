@@ -2,7 +2,7 @@
  * Module for customizing console logging and error handling based on the environment.
  * @module CustomConsole
  */
-const boolean = require('../parsers/boolean');
+const boolean = require('../../../application/utils/parsers/boolean');
 const tag = require('./tag');
 const util = require('node:util');
 /**

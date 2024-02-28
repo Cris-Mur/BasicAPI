@@ -1,5 +1,5 @@
 const os = require('node:os');
-const boolean = require('../../parsers/boolean');
+const boolean = require('../../../../application/utils/parsers/boolean');
 
 /**
  * @function env

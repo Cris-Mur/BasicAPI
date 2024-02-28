@@ -3,9 +3,21 @@
   "version": "0.1.0",
   "description": "WEB API",
   "main": "./src/bin/init",
-  "directories": {
-    "doc": "docs"
+  "author": "Cristian Murcia, Cris-Mur",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Cris-Mur/BasicApi/issues"
   },
+  "homepage": "https://github.com/Cris-Mur/BasicApi#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cris-Mur/BasicApi.git"
+  },
+  "keywords": [
+    "Express",
+    "HTTP",
+    "API"
+  ],
   "nodemonConfig": {
     "env": {
       "NODE_ENV": "development",
@@ -21,21 +33,6 @@
     "start_server": "./src/bin/./init 1>/var/log/node_express_api.log 2>/var/log/node_express_api.error.log &",
     "vercel_start": "SERVERLESS=true node ./src/bin/vercel_init.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Cris-Mur/BasicApi.git"
-  },
-  "keywords": [
-    "Express",
-    "HTTP",
-    "API"
-  ],
-  "author": "Cristian Murcia, Cris-Mur",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Cris-Mur/BasicApi/issues"
-  },
-  "homepage": "https://github.com/Cris-Mur/BasicApi#readme",
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
