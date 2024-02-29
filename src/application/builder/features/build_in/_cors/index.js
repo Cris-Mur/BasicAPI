@@ -14,19 +14,24 @@ function serverToServerPolicy(origin) {
     ];
     // Server to Server Policy
     // origin = undefined
-    console.debug(
-        "[ CORS Policy ][ Origin on header ]", origin, "\n",
-        "[Server to Server policy enabled ? ]", boolean(process.env.SRVTOSRV))
     if (boolean(process.env.SRVTOSRV) && origin === undefined) {
         return true;
     }
     if (origin) {
         if (!whitelist.includes(origin)) {
+            console.debug(
+                "[ CORS Policy ][ Origin on header ]", origin, "\n",
+                "[Server to Server policy enabled ? ]",
+                boolean(process.env.SRVTOSRV)
+            )
             const CORS_Error = new Error('Not allowed by CORS');
             throw CORS_Error;
         }
         return true;
     } else {
+        console.debug(
+            "[ CORS Policy ][ Origin on header ]", origin, "\n",
+            "[Server to Server policy enabled ? ]", boolean(process.env.SRVTOSRV))
         const srv2srvError = new Error("Origin Header are Required");
         srv2srvError.applicationTypeError = "serverToServerPolicy"
         throw srv2srvError;
