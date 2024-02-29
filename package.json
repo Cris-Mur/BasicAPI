@@ -1,6 +1,6 @@
 {
   "name": "basic_api",
-  "version": "0.1.21",
+  "version": "0.1.31",
   "description": "WEB API",
   "main": "./src/bin/init",
   "author": "Cristian Murcia, Cris-Mur",

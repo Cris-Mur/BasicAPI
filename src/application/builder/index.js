@@ -39,20 +39,23 @@ function setupPosibleExpressMiddlewares(application, middlewares = build_in) {
     return application;
 }
 
-
+/**
+ * Function that runs policy to start static srv feature
+ * @param {Express instance} application
+ */
 function setupStaticFeature(application) {
     if (!build_in._static)
         return;
     // policy at load _static feature
     // Custom path:
-    let defaultPath = '/static/';
-    let customPath = process.env?.STATIC_PATH ?? defaultPath;
+    const defaultPath = '/static/';
+    const customPath = process.env?.STATIC_PATH ?? defaultPath;
     console.debug("[_static middleware path]", customPath);
     application.use(customPath, build_in._static);
 }
 
 /**
- * Function thats set locals variables in express application
+ * Function that set locals variables in express application
  * @param {Express instance} application
  */
 function setupExpressLocals(application) {
@@ -62,20 +65,21 @@ function setupExpressLocals(application) {
 }
 
 /**
- * Function thats dissable x-powered-by header
+ * Function that dissable x-powered-by header
  * @param {Express instance} application
- * @returns 
  */
 function setupExpressPoweredby(application) {
     // Disable 'x-powered-by' header for security, if you know that is 
     // Express you know that's machine.
-    if (boolean(process.env.DISSABLE_POWERED_BY)) {
-        application.disable('x-powered-by');
-        return application;
-    }
-
+    if (!boolean(process.env.DISSABLE_POWERED_BY))
+        return;
+    application.disable('x-powered-by');
 }
 
+/**
+ * Function that build swagger settings and set swagger in express
+ * @param {Express instance} application
+ */
 function setupSwagger(application) {
     if (!boolean(process.env.SWAGGER))
         return;
@@ -112,17 +116,17 @@ function setupSwagger(application) {
 }
 
 /**
- * Fuction thats set inspector middleware
+ * Fuction that set inspector middleware
  * @param {Express instance} application
  */
 function setupInspector(application) {
-    if (boolean(process.env.INSPECTOR))
-        application.use(homebrew.middlewares.inspector);
-    return application;
+    if (!boolean(process.env.INSPECTOR))
+        return;
+    application.use(homebrew.middlewares.inspector);
 }
 
 /**
- * Function thats setup Service Router into application
+ * Function that setup Service Router into application
  * @param {Express instance} application
  */
 function setupRouter(application) {
@@ -131,14 +135,14 @@ function setupRouter(application) {
 }
 
 /**
- * Function thats setup Http Error handling
+ * Function that setup Http Error handling
  * @param {Express instance} application
  */
 function setupErrorHanding(application) {
-    if (boolean(process.env.ERRORS_HANDLERS)) {
-        application.use(homebrew.middlewares.cannotGet);
-        application.use(homebrew.middlewares.errorHandler);
-    }
+    if (!boolean(process.env.ERRORS_HANDLERS))
+        return;
+    application.use(homebrew.middlewares.cannotGet);
+    application.use(homebrew.middlewares.errorHandler);
 }
 
 

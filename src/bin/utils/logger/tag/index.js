@@ -70,7 +70,7 @@ function getDate() {
  * @returns {String}
  */
 function getDateTag() {
-    let date = getDate();
+    const date = getDate();
     return `[ ${centerString(date, date.length)} ]`;
 }
 
@@ -83,7 +83,7 @@ function getLevelTag(level) {
     if (!level)
         return '';
     const level_tag = level;
-    let levelPadding = 9;
+    const levelPadding = 9;
     let tag = centerString(level, levelPadding)
     tag = `[${colorizeLevel(level_tag, tag)}] `
     return tag;

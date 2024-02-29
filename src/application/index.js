@@ -21,6 +21,9 @@ class Application {
         this.init();
     }
 
+    /**
+     * Function to start a new application instance
+     */
     init() {
         this.express = express();
         // use a

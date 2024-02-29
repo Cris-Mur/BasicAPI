@@ -10,7 +10,7 @@ module.exports = {
         "summary": "A API specification.",
         "description": "This is a sample server.",
         "termsOfService": "https://example.com/terms/",
-        "version": "0.1.21",
+        "version": "0.1.31",
         "contact": {
             "name": "API Support",
             "url": "https://www.example.com/support",

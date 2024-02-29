@@ -27,12 +27,11 @@ const boolean = require('../../../../utils/parse/boolean');
 /**
  * Generates options for serving static files with customizable settings.
  * @param {Function} [setHeaders=undefined] - An optional function to set custom headers for responses.
- * @returns {StaticFileOptions} Options for serving static files.
+ * @returns {StaticFileOptions | undefined} Options for serving static files.
  */
 function factoryStatic(setHeaders = undefined) {
-    if (!boolean(process.env.STATIC)) {
-        return undefined;
-    }
+    if (!boolean(process.env.STATIC))
+        return;
     /**
      * The options for serving static files.
      * @type {StaticFileOptions}
