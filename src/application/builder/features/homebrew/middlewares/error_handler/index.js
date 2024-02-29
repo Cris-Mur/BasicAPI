@@ -16,7 +16,7 @@ function applicationErrors(error_, res) {
 
     res.status(
         applicationErrors_[error_.applicationTypeError]
-    ).send(error_.message);
+    ).json(error_.message);
 }
 /**
  * Handles errors that occur during request processing.
@@ -35,7 +35,8 @@ function errorHandler(err, req, res, next) {
     const url = `${req.protocol}://${req.get('host')}${req.originalUrl}`;
 
     // Log the error along with the request details
-    console.error(`[URL] ${url} [Method] ${req.method}\n`, err);
+    console.error(`[ Error on ][URL] ${url} [Method] ${req.method}`);
+    console.warn("[ Error catched ]", err)
 
     try {
         // Attempt to handle application-specific errors

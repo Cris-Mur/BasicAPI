@@ -1,12 +1,15 @@
 /**
- * Module for configuring and setting middleware extensions for an Express application.
+ * Module to push middlewares extensions to an Express application.
  * @module MiddlewareConfiguration
 */
-const boolean = require("../utils/parsers/boolean");
+
+const boolean = require("../utils/parse/boolean");
 const build_in = require("./features/build_in");
 // The locals, arent a middleware
 const { locals } = require('./features/build_in/_locals');
 const homebrew = require('./features/homebrew');
+
+
 const router = require('../../services/router');
 
 
@@ -15,25 +18,33 @@ const router = require('../../services/router');
  * @param {Express instance} application 
  */
 function setupPosibleExpressMiddlewares(application, middlewares = build_in) {
-    if (boolean.parse(process.env.BUILD_IN_FEATURES)) {
+    // Incase that you need pass a specific middlewares additional by default
+    if (boolean(process.env.BUILD_IN_FEATURES))
         middlewares = { ...build_in, ...middlewares };
-    }
-    console.debug("[result middlewares]", middlewares);
+
+    console.debug("[middlewares to load]", middlewares);
     for (const setting in middlewares) {
-        if (middlewares[setting] !== undefined) {
-            console.debug('[settings]', setting, middlewares[setting]);
-            switch (setting) {
-                case "_static":
-                    console.debug("[_static middleware path]", process.env?.STATIC_PATH || "/");
-                    application.use(process.env?.STATIC_PATH || "/", middlewares[setting]);
-                    break;
-                default:
-                    application.use(middlewares[setting]);
-                    break;
-            }
+        if (middlewares[setting] == undefined)
+            continue;
+        console.debug('[loading middleware]', setting, middlewares[setting]);
+        if (setting == "_static") {
+            setupStaticFeature(application);
         }
+        application.use(middlewares[setting]);
     }
     return application;
+}
+
+
+function setupStaticFeature(application) {
+    if (!build_in._static)
+        return;
+    // policy at load _static feature
+    // Custom path:
+    let defaultPath = '/static/';
+    let customPath = process.env?.STATIC_PATH || defaultPath;
+    console.debug("[_static middleware path]", customPath);
+    application.use(customPath, build_in._static);
 }
 
 /**
@@ -41,7 +52,7 @@ function setupPosibleExpressMiddlewares(application, middlewares = build_in) {
  * @param {Express instance} application
  */
 function setupExpressLocals(application) {
-    if (boolean.parse(process.env.LOCAL_VARS))
+    if (boolean(process.env.LOCAL_VARS))
         application.locals = locals;
 }
 
@@ -53,7 +64,7 @@ function setupExpressLocals(application) {
 function setupExpressPoweredby(application) {
     // Disable 'x-powered-by' header for security, if you know that is 
     // Express you know that's machine.
-    if (boolean.parse(process.env.DISSABLE_POWERED_BY)) {
+    if (boolean(process.env.DISSABLE_POWERED_BY)) {
         application.disable('x-powered-by');
         return application;
     }
@@ -65,7 +76,7 @@ function setupExpressPoweredby(application) {
  * @param {Express instance} application
  */
 function setupInspector(application) {
-    if (boolean.parse(process.env.INSPECTOR))
+    if (boolean(process.env.INSPECTOR))
         application.use(homebrew.middlewares.inspector);
     return application;
 }
@@ -84,7 +95,7 @@ function setupRouter(application) {
  * @param {Express instance} application
  */
 function setupErrorHanding(application) {
-    if (boolean.parse(process.env.ERRORS_HANDLERS)) {
+    if (boolean(process.env.ERRORS_HANDLERS)) {
         application.use(homebrew.middlewares.cannotGet);
         application.use(homebrew.middlewares.errorHandler);
     }
@@ -109,6 +120,4 @@ function setup(application) {
     return application;
 }
 
-module.exports = {
-    setup
-};
+module.exports = setup;

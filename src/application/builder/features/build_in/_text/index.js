@@ -4,7 +4,7 @@
  */
 const express = require("express");
 
-const boolean = require('../../../../utils/parsers/boolean');
+const boolean = require('../../../../utils/parse/boolean');
 
 /**
  * Represents the options for parsing text-based data.
@@ -22,7 +22,7 @@ const boolean = require('../../../../utils/parsers/boolean');
  * @returns {TextParsingOptions} Options for parsing text-based data.
  */
 function factoryText(verify = undefined) {
-    if (!boolean.parse(process.env.TEXT)) {
+    if (!boolean(process.env.TEXT)) {
         return undefined;
     }
     /**
@@ -31,7 +31,7 @@ function factoryText(verify = undefined) {
      */
     const options = {
         defaultCharset: process.env.TEXT_CHARSET ?? "utf-8",
-        inflate: boolean.parse(process.env.JSON_INFLATE) ?? true,
+        inflate: boolean(process.env.JSON_INFLATE) ?? true,
         limit: process.env.TEXT_LIMIT ?? '100kb',
         type: process.env.TEXT_TYPE ?? "text/plain",
         verify

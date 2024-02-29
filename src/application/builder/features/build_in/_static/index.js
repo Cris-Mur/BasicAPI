@@ -6,8 +6,8 @@ const express = require("express");
 const path = require('node:path');
 
 
-const csv = require('../../../../utils/parsers/string/csv');
-const boolean = require('../../../../utils/parsers/boolean');
+const csv = require('../../../../utils/parse/string/csv');
+const boolean = require('../../../../utils/parse/boolean');
 
 /**
  * Represents the options for serving static files.
@@ -30,32 +30,39 @@ const boolean = require('../../../../utils/parsers/boolean');
  * @returns {StaticFileOptions} Options for serving static files.
  */
 function factoryStatic(setHeaders = undefined) {
-    if (!boolean.parse(process.env.STATIC)) {
+    if (!boolean(process.env.STATIC)) {
         return undefined;
     }
     /**
      * The options for serving static files.
      * @type {StaticFileOptions}
      */
-    const options = {
-        dotfiles: process.env.STATIC_DOTFILES ?? 'ignore', // allow, deny, ignore
-        etag: boolean.parse(process.env.STATIC_ETAG) ?? true,
-        extensions: csv.parse(process.env.STATIC_EXTENSIONS) ?? false,
-        fallthrough: boolean.parse(process.env.STATIC_FALLTHROUGH) ?? true,
-        immutable: boolean.parse(process.env.STATIC_IMMUTABLE) ?? false,
-        index: path.normalize(process.env.STATIC_INDEX) ?? undefined,
-        lastModified: boolean.parse(process.env.STATIC_LASTMODIFIED) ?? true,
-        maxAge: parseInt(process.env.STATIC_MAXAGE) ?? 0,
-        redirect: boolean.parse(process.env.STATIC_REDIRECT) ?? true,
-        setHeaders
-    };
+    try {
+        const options = {
+            dotfiles: process.env.STATIC_DOTFILES ?? 'ignore', // allow, deny, ignore
+            etag: boolean(process.env.STATIC_ETAG) ?? true,
+            extensions: csv.parse(process.env.STATIC_EXTENSIONS) ?? false,
+            fallthrough: boolean(process.env.STATIC_FALLTHROUGH) ?? true,
+            immutable: boolean(process.env.STATIC_IMMUTABLE) ?? false,
+            index: path.normalize(process.env.STATIC_INDEX) ?? undefined,
+            lastModified: boolean(process.env.STATIC_LASTMODIFIED) ?? true,
+            maxAge: parseInt(process.env.STATIC_MAXAGE) ?? 0,
+            redirect: boolean(process.env.STATIC_REDIRECT) ?? true,
+            setHeaders
+        };
 
-    console.debug('[ STATIC OPTIONS ]', JSON.stringify(options));
+        console.debug('[ STATIC OPTIONS ]', JSON.stringify(options));
 
-    return express.static(
-        path.normalize(process.env.STATIC_DIR),
-        options
-    );
+        return express.static(
+            path.normalize(process.env.STATIC_DIR),
+            options
+        );
+    } catch (_error) {
+        console.error('[Catched error]', _error.code);
+        console.debug(`[Error on build Static feature]`, _error);
+        if (!process.env.STATIC_DIR)
+            console.error('The STATIC_DIR environment are required.')
+    }
 }
 
 /**

@@ -3,7 +3,7 @@
  * @module UrlEncodedParsingOptions
  */
 const express = require("express");
-const boolean = require("../../../../utils/parsers/boolean");
+const boolean = require("../../../../utils/parse/boolean");
 
 /**
  * Represents the options for parsing URL-encoded data.
@@ -22,7 +22,7 @@ const boolean = require("../../../../utils/parsers/boolean");
  * @returns {UrlEncodedParsingOptions} Options for parsing URL-encoded data.
  */
 function factoryUrlencoded(verify = undefined) {
-    if (!boolean.parse(process.env.URLENCODED)) {
+    if (!boolean(process.env.URLENCODED)) {
         return undefined;
     }
     /**
@@ -30,10 +30,10 @@ function factoryUrlencoded(verify = undefined) {
      * @type {UrlEncodedParsingOptions}
      */
     const options = {
-        extended: boolean.parse(process.env.URLENCODED_EXTENDED) ?? true,
-        inflate: boolean.parse(process.env.URLENCODED_INFLATE) ?? true,
+        extended: boolean(process.env.URLENCODED_EXTENDED) ?? true,
+        inflate: boolean(process.env.URLENCODED_INFLATE) ?? true,
         limit: process.env.URLENCODED_LIMIT ?? '100kb',
-        parameterLimit: parseInt(process.env.URLENCODED_PARAM_LIMIT) ?? 100,
+        parameterLimit: parseInt(process.env.URLENCODED_PARAM_LIMIT ?? 100),
         type: process.env.URLENCODED_TYPE ?? "application/x-www-form-urlencoded",
         verify
     };

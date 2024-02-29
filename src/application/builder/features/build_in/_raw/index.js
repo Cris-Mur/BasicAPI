@@ -1,5 +1,5 @@
 const express = require("express");
-const boolean = require('../../../../utils/parsers/boolean');
+const boolean = require('../../../../utils/parse/boolean');
 
 /**
  * Represents the options for request handling.
@@ -16,7 +16,7 @@ const boolean = require('../../../../utils/parsers/boolean');
  * @returns {RequestHandlingOptions} Options for handling incoming requests.
  */
 function factoryRaw(verify = undefined) {
-    if (!boolean.parse(process.env.RAW)) {
+    if (!boolean(process.env.RAW)) {
         return undefined;
     }
     /**
@@ -24,7 +24,7 @@ function factoryRaw(verify = undefined) {
      * @type {RequestHandlingOptions}
      */
     const options = {
-        inflate: boolean.parse(process.env.RAW_INFLATE) ?? true,
+        inflate: boolean(process.env.RAW_INFLATE) ?? true,
         limit: process.env.RAW_LIMIT ?? '100kb',
         type: process.env.RAW_TYPE ?? "application/octet-stream",
         verify

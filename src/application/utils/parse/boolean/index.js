@@ -17,6 +17,4 @@ function parse(input) {
  * Exports the function for parsing string values to boolean.
  * @type {Object}
  */
-module.exports = {
-    parse
-};
+module.exports = parse;

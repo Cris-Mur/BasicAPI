@@ -1,5 +1,5 @@
 const express = require("express");
-const boolean = require('../../../../utils/parsers/boolean');
+const boolean = require('../../../../utils/parse/boolean');
 /**
  * Returns an options object for JSON parsing with configurable settings.
  *
@@ -13,13 +13,12 @@ const boolean = require('../../../../utils/parsers/boolean');
  *  Output: [Function: jsonParser]
  */
 function factoryJson(reviver = null, verify = undefined) {
-    if (!boolean.parse(process.env.JSON)) {
+    if (!boolean(process.env.JSON))
         return undefined;
-    }
     const options = {
-        inflate: boolean.parse(process.env.JSON_INFLATE) ?? true,
+        inflate: boolean(process.env.JSON_INFLATE) ?? true,
         limit: process.env.JSON_LIMIT ?? '100kb',
-        strict: boolean.parse(process.env.JSON_STRICT) ?? true,
+        strict: boolean(process.env.JSON_STRICT) ?? true,
         type: process.env.JSON_TYPE ?? "application/json",
         reviver,
         verify
