@@ -91,6 +91,7 @@ function getLevelTag(level) {
  * @returns {String}
  */
 function getTag(level) {
+    //logger enable?
     if (!boolean(process.env.LOGGER))
         return '';
     return ''.concat(
@@ -106,11 +107,17 @@ function getTag(level) {
 // ## Format functions
 
 /**
- * @param {String} inputString - 
- * @param {number} size - 
+ * this function centered a string in a space.
+ * @param {String} inputString 
+ * @param {Number} totalSpaces 
+ * @returns {String} centered spaced string
  */
 function centerString(inputString, totalSpaces) {
-    if (inputString.length > totalSpaces) {
+
+    if (!inputString)
+        return '';
+
+    if (totalSpaces < inputString.length) {
         inputString = `${inputString.substring(0, totalSpaces - 3)}...`;
     }
 

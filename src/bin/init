@@ -25,9 +25,11 @@ console.debug("StartUp Application");
 /// #############################################################
 
 const mainApplication = new application();
-//console.debug(mainApplication);
 
 /// #############################################################
 
 console.debug(`[End of StartUp application ready]`)
 console.timeEnd("Startup")
+if (process.env.SERVERLESS) {
+    console.error('you enable serverless feature but you start the server')
+}

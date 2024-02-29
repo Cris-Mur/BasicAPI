@@ -45,5 +45,6 @@ JSDocs is a good helper with ESLint, also allows keep all documented code.
 
 ## [Home](../)
 Explore!!
+### [Bin](./bin/README.md)
 ### [Application](./application/README.md)
 

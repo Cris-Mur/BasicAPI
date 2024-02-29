@@ -138,6 +138,5 @@ npm run test
 
 <div align="center">
 <p>Author <a src=https:github.com/cris-mur>Cristian Murcia</a></p>
-<img src="https://avatars.githubusercontent.com/u/28773000" alt="Avatar de GitHub" style="border-radius: 50%;" width="75" height="75"/>
+<img src="https://avatars.githubusercontent.com/u/28773000" alt="Avatar de GitHub" style="border-radius: 15%;" width="100" height="75"/>
 </div>
-

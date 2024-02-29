@@ -1,6 +1,6 @@
 # Logger - A usefull customization on console.log()
 
-Adding more context to Buil-in console feature
+You dont need use a other function to make logs in the app, only you use a build in function.
 
 
 ```Bash
@@ -10,32 +10,40 @@ Adding more context to Buil-in console feature
 Startup: 7.552ms
 ```
 
+---
 
-all functions are based on this pattern 
+All functions are modified like bellow, we adds little bit logic before use a build in function.
 
 ```js
+/**
+ * Overrides the default `console.log`.
+ * @param {...any} args - Arguments to be logged.
+ */
 const raw_log = console.log;
-
 console.log = function logger(...args) {
-
-const level = "log";
-
-const prefix = tag.newTag(level);
-
-raw_log(prefix, applyFormat(...args));
-
+    const level = "log";
+    const prefix = tag(level);
+    raw_log(prefix, applyFormat(...args));
 }
 ```
 
+## Environment Variables
 
-## Enviroment Variables
+The environment is important to use this library, the application loads a environment variables and change logger behavior in base of this functions. 
 
 ```
 ### LOGGER OPTIONS
-NODE_ENV="production"
-VERBOSE=true
-COLORED=true
+#NODE_ENV="production"
+#LOGGER=true # enable logger
+#VERBOSE=true # enable debug logs
+#COLORED=true # enable colors on level tag
 ```
 
 
-This moddule adds a template String 
+This module adds a template String before console output content like a sign to useful logs manager.
+
+---
+
+### [Home](../../../README.md)
+#### [Bin](../../README.md)
+##### [Application](../../../application/README.md)

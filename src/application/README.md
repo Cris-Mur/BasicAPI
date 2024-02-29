@@ -1,6 +1,6 @@
 # [Application](./index.js)
 
-The "Application" is a class module abstraction responsible for Express and Http server. please review [index](./index.js)
+The "Application" is a class module abstraction responsible for initialize Express and HTTP server. please review [index](./index.js)
 
 ---
 
