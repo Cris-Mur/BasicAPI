@@ -9,7 +9,7 @@ const builder = require('./builder');
 const network = require('./network');
 
 
-const boolean = require("./utils/parsers/boolean");
+const boolean = require("./utils/parse/boolean");
 
 
 /**
@@ -23,13 +23,11 @@ class Application {
 
     init() {
         this.express = express();
-        //this.app.use(settings)
-        // to over write express base middlewares 
-        // let otherOptionMiddlewares = {};
-        // config.setup(this.app, otherOptionMiddlewares);
-        this.express = builder.setup(this.express);
+        // use a
+        // builder.setup(this.app, otherOptionMiddlewares);
+        this.express = builder(this.express);
         this.setupNetwork(this.express);
-        console.debug("[Application instance]");
+        console.debug("[one instance of application ready]");
     }
 
     /**
@@ -37,7 +35,7 @@ class Application {
      * @param {Express instance} application 
      */
     setupNetwork(application) {
-        if (boolean.parse(process.env.SERVERLESS))
+        if (boolean(process.env.SERVERLESS))
             return;
         // Normalize the port and set it on the application
         const port = network.utils.port;
