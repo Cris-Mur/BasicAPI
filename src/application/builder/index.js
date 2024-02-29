@@ -5,11 +5,15 @@
 
 const boolean = require("../utils/parse/boolean");
 const build_in = require("./features/build_in");
+const homebrew = require('./features/homebrew');
 // The locals, arent a middleware
 const { locals } = require('./features/build_in/_locals');
-const homebrew = require('./features/homebrew');
-
-
+// Swagger Spec
+const swaggerJsdoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
+const { SwaggerTheme } = require('swagger-themes');
+const swaggerDocument = require('./features/openapi');
+// General Router
 const router = require('../../services/router');
 
 
@@ -54,6 +58,7 @@ function setupStaticFeature(application) {
 function setupExpressLocals(application) {
     if (boolean(process.env.LOCAL_VARS))
         application.locals = locals;
+    console.debug('[locals vars]', locals);
 }
 
 /**
@@ -69,6 +74,41 @@ function setupExpressPoweredby(application) {
         return application;
     }
 
+}
+
+function setupSwagger(application) {
+    if (!boolean(process.env.SWAGGER))
+        return;
+    const spec = {
+        definition: swaggerDocument,
+        apis: ['./src/**/*.js'], // files containing annotations as openapi
+    };
+    const theme = new SwaggerTheme();
+    const options = {
+        explorer: true,
+        customCss: theme.getBuffer(process.env?.SWAGGER_THEME || 'classic')
+    };
+    const swaggerPath = process.env?.SWAGGER_PATH || '/api';
+    application.use(
+        swaggerPath,
+        swaggerUi.serve,
+        swaggerUi.setup(
+            swaggerJsdoc(spec),
+            options
+        )
+    );
+    /**
+     * @swagger
+     *  /openapi:
+     *      get:
+     *          description: get openapi json
+     *          responses:
+     *              200:
+     *                  description: Returns a mysterious string.
+     */
+    application.get("/openapi", (req, res) => {
+        res.status(200).json(swaggerJsdoc(spec));
+    })
 }
 
 /**
@@ -114,6 +154,7 @@ function setup(application) {
     setupPosibleExpressMiddlewares(application);
     setupExpressLocals(application);
     setupExpressPoweredby(application);
+    setupSwagger(application);
     setupInspector(application);
     setupRouter(application);
     setupErrorHanding(application);
