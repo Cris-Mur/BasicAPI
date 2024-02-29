@@ -6,6 +6,7 @@
 const boolean = require("../utils/parse/boolean");
 const build_in = require("./features/build_in");
 const homebrew = require('./features/homebrew');
+const path = require('node:path');
 // The locals, arent a middleware
 const { locals } = require('./features/build_in/_locals');
 // Swagger Spec
@@ -48,7 +49,7 @@ function setupStaticFeature(application) {
         return;
     // policy at load _static feature
     // Custom path:
-    const defaultPath = '/static/';
+    const defaultPath = '/';
     const customPath = process.env?.STATIC_PATH ?? defaultPath;
     console.debug("[_static middleware path]", customPath);
     application.use(customPath, build_in._static);
@@ -74,6 +75,17 @@ function setupExpressPoweredby(application) {
     if (!boolean(process.env.DISSABLE_POWERED_BY))
         return;
     application.disable('x-powered-by');
+}
+
+/**
+ * Function that set favicon route
+ * @param {Express instance} application
+ */
+function setupFavicon(application) {
+    application.get('/favicon.ico', (req, res) => {
+        const favicon = '/public/favicon.ico';
+        res.sendFile(path.join(process.cwd(),favicon));
+    })
 }
 
 /**
@@ -158,6 +170,7 @@ function setup(application) {
     setupPosibleExpressMiddlewares(application);
     setupExpressLocals(application);
     setupExpressPoweredby(application);
+    setupFavicon(application);
     setupSwagger(application);
     setupInspector(application);
     setupRouter(application);
