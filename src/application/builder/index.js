@@ -28,10 +28,10 @@ function setupPosibleExpressMiddlewares(application, middlewares = build_in) {
 
     console.debug("[middlewares to load]", middlewares);
     for (const setting in middlewares) {
-        if (middlewares[setting] == undefined)
+        if (!middlewares[setting])
             continue;
         console.debug('[loading middleware]', setting, middlewares[setting]);
-        if (setting == "_static") {
+        if (setting === "_static") {
             setupStaticFeature(application);
         }
         application.use(middlewares[setting]);
@@ -46,7 +46,7 @@ function setupStaticFeature(application) {
     // policy at load _static feature
     // Custom path:
     let defaultPath = '/static/';
-    let customPath = process.env?.STATIC_PATH || defaultPath;
+    let customPath = process.env?.STATIC_PATH ?? defaultPath;
     console.debug("[_static middleware path]", customPath);
     application.use(customPath, build_in._static);
 }
@@ -86,9 +86,9 @@ function setupSwagger(application) {
     const theme = new SwaggerTheme();
     const options = {
         explorer: true,
-        customCss: theme.getBuffer(process.env?.SWAGGER_THEME || 'classic')
+        customCss: theme.getBuffer(process.env?.SWAGGER_THEME ?? 'classic')
     };
-    const swaggerPath = process.env?.SWAGGER_PATH || '/api';
+    const swaggerPath = process.env?.SWAGGER_PATH ?? '/api';
     application.use(
         swaggerPath,
         swaggerUi.serve,

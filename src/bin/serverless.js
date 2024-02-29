@@ -20,7 +20,7 @@ const mainApplication = new application();
 
 /// #############################################################
 
-console.debug(`[End of StartUp application ready]`)
+console.debug('[End of StartUp application ready]')
 console.timeEnd("Startup")
 
 module.exports = mainApplication.express;

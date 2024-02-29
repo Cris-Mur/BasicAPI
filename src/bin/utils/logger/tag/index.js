@@ -2,18 +2,22 @@ const os = require('node:os');
 const { boolean } = require('../utils/parse');
 
 // Available terminal Colors
-const GREEN_TEXT = '\x1b[32m';
+/**
+ * Unused Escape colors
+ * const GREEN_TEXT = '\x1b[32m';
+ * const YELLOW_TEXT = '\x1b[33m';
+ * const RED_TEXT = '\x1b[31m';
+ * const BLUE_TEXT = '\x1b[94m';
+ * const WHITE_TEXT = '\x1b[37m';
+ * const WHITE_BG = '\x1b[47m';
+ * const BLACK_BG = '\x1b[40m';
+ */
+
 const GREEN_BG = '\x1b[42m';
-const YELLOW_TEXT = '\x1b[33m';
 const YELLOW_BG = '\x1b[43m';
-const RED_TEXT = '\x1b[31m';
 const RED_BG = '\x1b[41m';
-const BLUE_TEXT = '\x1b[94m';
 const BLUE_BG = '\x1b[104m';
-const WHITE_TEXT = '\x1b[37m';
-const WHITE_BG = '\x1b[47m';
 const BLACK_TEXT = '\x1b[30m';
-const BLACK_BG = '\x1b[40m';
 const RESET = '\x1b[0m';
 
 
@@ -25,7 +29,7 @@ const RESET = '\x1b[0m';
  * @returns {String} environment.
  */
 function getNodeEnvironment() {
-    return process.env.NODE_ENV || "development";
+    return process.env.NODE_ENV ?? "development";
 }
 
 /**

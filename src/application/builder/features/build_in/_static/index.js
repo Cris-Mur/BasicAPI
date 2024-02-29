@@ -59,7 +59,7 @@ function factoryStatic(setHeaders = undefined) {
         );
     } catch (_error) {
         console.error('[Catched error]', _error.code);
-        console.debug(`[Error on build Static feature]`, _error);
+        console.debug('[Error on build Static feature]', _error);
         if (!process.env.STATIC_DIR)
             console.error('The STATIC_DIR environment are required.')
     }

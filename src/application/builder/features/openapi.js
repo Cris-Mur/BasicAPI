@@ -10,6 +10,7 @@ module.exports = {
         "summary": "A API specification.",
         "description": "This is a sample server.",
         "termsOfService": "https://example.com/terms/",
+        "version": "0.1.21",
         "contact": {
             "name": "API Support",
             "url": "https://www.example.com/support",
@@ -18,8 +19,7 @@ module.exports = {
         "license": {
             "name": "MIT",
             "url": "https://opensource.org/license/mit"
-        },
-        "version": "0.1.6"
+        }
     },
     "servers": [
         {
