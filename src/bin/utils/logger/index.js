@@ -16,7 +16,7 @@ const raw_log = console.log;
 console.log = function logger(...args) {
     const level = "log";
     const prefix = tag(level);
-    raw_log(prefix, applyFormat(...args));
+    raw_log(prefix + applyFormat(...args));
 }
 
 /**
@@ -27,7 +27,7 @@ const raw_error = console.error;
 console.error = function logger_error(...args) {
     const level = "error";
     const prefix = tag(level);
-    raw_error(prefix, applyFormat(...args));
+    raw_error(prefix + applyFormat(...args));
 }
 
 /**
@@ -40,7 +40,7 @@ console.debug = function logger_debug(...args) {
         return;
     const level = "debug";
     const prefix = tag(level);
-    raw_debug(prefix, applyFormat(...args));
+    raw_debug(prefix + applyFormat(...args));
 }
 
 /**
@@ -53,7 +53,7 @@ console.warn = function logger_warn(...args) {
         return;
     const level = "warning";
     const prefix = tag(level);
-    raw_warn(prefix, applyFormat(...args));
+    raw_warn(prefix + applyFormat(...args));
 }
 
 /**

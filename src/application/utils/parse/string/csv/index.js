@@ -10,21 +10,18 @@
  * @param {boolean} [verbose=false] - Whether to display verbose error messages.
  * @returns {Array|string|undefined} An array containing the split elements, or an error message in verbose mode, or undefined if an error occurs.
  */
-function parse(input, separator = ',', verbose = false) {
+function parse(input, separator = ',') {
     try {
         if (typeof input !== 'string')
-            throw new Error('Input must be a string');
+            return [];
 
         if (input.length < 1)
             return [];
 
         return input.split(separator);
     } catch (_error) {
-        if (verbose) {
-            console.error('[Error at splitting string]', _error);
-        } else {
-            console.error('[Error at splitting string]', _error.message);
-        }
+        console.error('[Error on CSV parser][ at splitting string]', _error.message);
+        console.debug('[Error on CSV parser]', _error);
         return undefined;
     }
 }
