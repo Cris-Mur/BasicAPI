@@ -4,7 +4,7 @@
  */
 
 let { port } = require('../../utils');
-const boolean = require('../../../utils/parsers/boolean');
+const boolean = require('../../../utils/parse/boolean');
 
 /**
  * Handles server error events and provides error-specific messages.
@@ -24,7 +24,7 @@ function onError(error) {
         case 'EACCES':
             throw new Error(`${bind} requires elevated privileges`);
         case 'EADDRINUSE':
-            if (boolean.parse(process.env.RESILIENT_PORT)) {
+            if (boolean(process.env.RESILIENT_PORT)) {
                 port = parseInt(port) + 1;
                 console.warn(
                     "[ Normal Startup Interrupted PORT IN USE ERROR trying with new port]",

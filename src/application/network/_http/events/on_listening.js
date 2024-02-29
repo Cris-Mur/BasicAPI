@@ -3,6 +3,8 @@
  * @module ServerListeningHandling
  */
 
+const os = require('node:os');
+
 /**
  * Handles server listening events and logs the listening address.
  */
@@ -12,7 +14,12 @@ function onListening() {
         ? `pipe ${addr}`
         : `port ${addr.port}`;
     console.log(`Application process id: ${process.pid}`);
-    console.log(`Listening on ${bind} http://localhost:${addr.port}\n`);
+    console.log(
+        `Listening on ${bind}\n
+        http://localhost:${addr.port}\n
+        http://${os.hostname}:${addr.port}
+        `
+    );
 }
 
 /**
