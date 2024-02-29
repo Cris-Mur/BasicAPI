@@ -1,6 +1,14 @@
 const normalize = require('./normalize');
-const env = require('./get_port_in_environment');
+const getPortInEnvironment = require('./get_port_in_environment');
 
-const port = normalize(env());
+/**
+ * function to get port of application
+ * @returns {Number}
+ */
+function getPort() {
+    return normalize(
+        getPortInEnvironment()
+    );
+}
 
-module.exports = port;
+module.exports = getPort();
