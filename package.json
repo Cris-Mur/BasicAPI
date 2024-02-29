@@ -1,6 +1,6 @@
 {
   "name": "basic_api",
-  "version": "0.1.0",
+  "version": "0.1.6",
   "description": "WEB API",
   "main": "./src/bin/init",
   "author": "Cristian Murcia, Cris-Mur",
@@ -26,7 +26,7 @@
     }
   },
   "scripts": {
-    "start":"./src/bin/init",
+    "start": "./src/bin/init",
     "dev": "npx nodemon ./src/bin/init",
     "debug": "VERBOSE=true COLORED=true ./bin/init 1>/var/tmp/node_express_api.log 2>/var/tmp/node_express_api.error.log",
     "test": "node --test",
@@ -38,6 +38,7 @@
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "swagger-jsdoc": "^6.2.8",
+    "swagger-themes": "^1.4.2",
     "swagger-ui-express": "^5.0.0"
   }
 }
