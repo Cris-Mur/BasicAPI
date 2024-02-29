@@ -25,6 +25,10 @@ module.exports = {
         {
             "url": `http://localhost:${6661}/`,
             "description": "Development server"
+        },
+        {
+            "url": `https://basicapi-dev-aktc.4.us-1.fl0.io`,
+            "description": "fl0 deploy server"
         }
     ]
 }
