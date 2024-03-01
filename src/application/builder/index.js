@@ -102,9 +102,11 @@ function setupSwagger(application) {
     const theme = new SwaggerTheme();
     const options = {
         explorer: true,
+        // https://www.npmjs.com/package/swagger-themes?activeTab=readme#themes
         customCss: theme.getBuffer(process.env?.SWAGGER_THEME ?? 'classic')
     };
     const swaggerPath = process.env?.SWAGGER_PATH ?? '/api';
+    console.debug('[Swagger mount]',swaggerPath);
     application.use(
         swaggerPath,
         swaggerUi.serve,
@@ -115,14 +117,14 @@ function setupSwagger(application) {
     );
     /**
      * @swagger
-     *  /openapi:
+     *  /swagger/openapi:
      *      get:
      *          description: get openapi json
      *          responses:
      *              200:
      *                  description: Returns a mysterious string.
      */
-    application.get("/openapi", (req, res) => {
+    application.get("/swagger/openapi", (req, res) => {
         res.status(200).json(swaggerJsdoc(spec));
     })
 }
@@ -157,8 +159,6 @@ function setupErrorHanding(application) {
     application.use(homebrew.middlewares.errorHandler);
 }
 
-
-
 /**
  * @function setup
  * @description Builder of all settings to make express app
@@ -167,13 +167,13 @@ function setupErrorHanding(application) {
  * @returns {Object} The modified Express application with middleware extensions.
  */
 function setup(application) {
-    setupPosibleExpressMiddlewares(application);
     setupExpressLocals(application);
     setupExpressPoweredby(application);
     setupFavicon(application);
     setupSwagger(application);
     setupInspector(application);
     setupRouter(application);
+    setupPosibleExpressMiddlewares(application);
     setupErrorHanding(application);
     return application;
 }

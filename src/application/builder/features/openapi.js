@@ -1,7 +1,10 @@
 /**
  * To more information about open API Spec
  * https://spec.openapis.org/oas/latest.html
+ * https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.1.0.md
  */
+
+const network = require('../../network');
 
 module.exports = {
     openapi: '3.1.0',
@@ -23,8 +26,13 @@ module.exports = {
     },
     "servers": [
         {
-            "url": `http://localhost:${6661}/`,
-            "description": "Development server"
+            "url": `http://localhost:{port}/`,
+            "description": "Development server",
+            "variables": {
+                "port": {
+                    "default": network.utils.port
+                },
+            },
         },
         {
             "url": `https://basicapi-dev-aktc.4.us-1.fl0.io`,
