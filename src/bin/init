@@ -17,7 +17,7 @@ console.log(`
       ░                        ░                                  
 `);
 
-require('./utils/logger');
+require('logger');
 const application = require('../application');
 console.time("Startup")
 console.debug("StartUp Application");
