@@ -20,6 +20,8 @@ The builder module, have the responsibility to build a express application, push
 
 ## [network](./network/)
 
+The Network module, takes a node:http library and exports specific features that are required.
+
 ## [utils](./utils/)
 
 

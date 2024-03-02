@@ -15,8 +15,9 @@
 function handleLocalVar(key) {
     const result = {};
     const rex = /locals_/i;
-    let split_name = '', raw_value = process.env[key];
+    let split_name = ''
     if (rex.test(key)) {
+        let raw_value = process.env[key];
         split_name = key.replace(rex, '');
         raw_value = raw_value.replace(rex, '');
         result[split_name] = raw_value;
