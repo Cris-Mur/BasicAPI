@@ -3,7 +3,7 @@
 [![DeepSource](https://app.deepsource.com/gh/Cris-Mur/BasicAPI.svg/?label=active+issues&show_trend=true&token=zS-SGTUGprpijwyk0MQ_TA_G)](https://app.deepsource.com/gh/Cris-Mur/BasicAPI/)
 
 ---
-"Basic API" is a fully managed implementation of ExpressJS that makes NodeJS Application into a  Web Server, ready to kickstart development in other projects. Please refer to the [environment example](./env.example) before running this application. For development information, [go here](./src/).
+"Basic API" is a fully managed implementation of ExpressJS that makes NodeJS Application into a Useful Web Server, now this application are ready to kick start development in other projects. Please refer to the [environment example](./env.example) before running this application. For development information, [go here](./src/).
 
 For information on how to [contribute](./CONTRIBUTE), please don't hesitate to submit a pull request with your proposed changes in a separate branch if you see any opportunities to enhance this application.
 
@@ -28,110 +28,131 @@ Primarily, this app can be configured using an environment file to adjust settin
 
 ```Env
 ### NODE SPACE
-NODE_ENV="production" # "development"
-#############################################################
-### NETWORK SETTINGS
-#SERVERLESS=true
-RESILIENT_PORT=true
-PORT=2700
-PORT_DEV=2701
+# NODE_ENV="production" # "development"
 #############################################################
 ### LOGGER OPTIONS
-#VERBOSE=true
-#COLORED=true
+# LOGGER=true
+# VERBOSE=true
+# COLORED=true
+#############################################################
+##################### HOMEBREW FEATURES #####################
+#############################################################
+### Inspector
+# INSPECTOR=true
+#############################################################
+### Error 404 & 5XX Handlers
+# ERRORS_HANDLERS=true
+### NETWORK SETTINGS
+# SERVERLESS=true
+# RESILIENT_PORT=true
+# PORT=2700
+# PORT_DEV=2701
 #############################################################
 ##################### EXPRESS FEATURES ######################
-BUILD_IN_FEATURES=true
-DISSABLE_POWERED_BY=true
-### JSON PARSER OPTIONS
-JSON=true
-JSON_INFLATE=true
-JSON_LIMIT=100kb
-JSON_STRICT=true
-JSON_TYPE=application/json
+#BUILD_IN_FEATURES=true
+# DISSABLE_POWERED_BY=true
 #############################################################
-### RAW PARSER OPTIONS
-RAW=true
+### JSON PARSER OPTIONS
+# JSON=true
 .
 .
 .
 ```
 
-My purpose is to create a 'Shell' code base for other projects. I don't want to reinvent the wheel. This app helps me develop software more easily and securely.
+My purpose is create a 'Shell', one code base for other projects. I don't want to reinvent the wheel. This app helps me develop software more easily and securely.
 
 ```bash
-npm run start
+$ npm run start
 
-> basic_api@0.1.0 start
-> ./src/bin/init
+> basic_api@0.1.31 start  
+> ./src/bin/init  
+  
+  
+▄▄▄▄    ▄▄▄        ██████  ██▓ ▄████▄      ▄▄▄       ██▓███   ██▓  
+▓█████▄ ▒████▄    ▒██    ▒ ▓██▒▒██▀ ▀█     ▒████▄    ▓██░  ██▒▓██▒  
+▒██▒ ▄██▒██  ▀█▄  ░ ▓██▄   ▒██▒▒▓█    ▄    ▒██  ▀█▄  ▓██░ ██▓▒▒██▒  
+▒██░█▀  ░██▄▄▄▄██   ▒   ██▒░██░▒▓▓▄ ▄██▒   ░██▄▄▄▄██ ▒██▄█▓▒ ▒░██░  
+░▓█  ▀█▓ ▓█   ▓██▒▒██████▒▒░██░▒ ▓███▀ ░    ▓█   ▓██▒▒██▒ ░  ░░██░  
+░▒▓███▀▒ ▒▒   ▓▒█░▒ ▒▓▒ ▒ ░░▓  ░ ░▒ ▒  ░    ▒▒   ▓▒█░▒▓▒░ ░  ░░▓     
+▒░▒   ░   ▒   ▒▒ ░░ ░▒  ░ ░ ▒ ░  ░  ▒        ▒   ▒▒ ░░▒ ░      ▒ ░  
+░    ░   ░   ▒   ░  ░  ░   ▒ ░░             ░   ▒   ░░        ▒ ░  
+░            ░  ░      ░   ░  ░ ░               ░  ░          ░     
+     ░                        ░                                     
+  
+[ white ][ development ][ 2024-03-02T00:08:24.735Z ][   log   ]    
+Startup: 62.125ms  
+[ white ][ development ][ 2024-03-02T00:08:24.738Z ][   log   ]    
+Application process id: 11803  
+[ white ][ development ][ 2024-03-02T00:08:24.738Z ][   log   ]    
+Listening on port 33047  
+  
+       http://localhost:33047  
+  
+       http://white:33047
 
-[ white ][ production  ][ 2024-02-06T18:38:45.505Z ][   log   ] 
- Startup: 6.972ms
-[ white ][ production  ][ 2024-02-06T18:38:45.510Z ][   log   ] 
- Application process id: 16509
-[ white ][ production  ][ 2024-02-06T18:38:45.510Z ][   log   ] 
- Listening on port 2700 http://localhost:2700
+
+-----------
 
 
+$ npm run dev
 
-npm run dev
-
-> basic_api@0.1.0 dev
-> npx nodemon ./src/bin/init
-
-[nodemon] 3.0.3
-[nodemon] to restart at any time, enter `rs`
-[nodemon] watching path(s): *.*
-[nodemon] watching extensions: js,mjs,cjs,json
-[nodemon] starting `node ./src/bin/init`
-[ white ][ development ][ 2024-02-06T18:42:02.256Z ][  debug  ] 
- [ JSON OPTIONS ] {"inflate":true,"limit":"100kb","strict":true,"type":"application/json","reviver":null}
-[ white ][ development ][ 2024-02-06T18:42:02.260Z ][  debug  ] 
- [ RAW OPTIONS ] {"inflate":true,"limit":"100kb","type":"application/octet-stream"}
-[ white ][ development ][ 2024-02-06T18:42:02.261Z ][  debug  ] 
- [ STATIC OPTIONS ] {"dotfiles":"ignore","etag":true,"extensions":[],"fallthrough":true,"immutable":false,"index":"index.html","lastModified":true,"maxAge":0,"redirect":true}
-[ white ][ development ][ 2024-02-06T18:42:02.262Z ][  debug  ] 
- [ TEXT OPTIONS ] {"defaultCharset":"utf-8","inflate":true,"limit":"100kb","type":"text/plain"}
-[ white ][ development ][ 2024-02-06T18:42:02.263Z ][  debug  ] 
- [ URLENCODED OPTIONS ] {"extended":true,"inflate":true,"limit":"100kb","parameterLimit":100,"type":"application/x-www-form-urlencoded"}
-[ white ][ development ][ 2024-02-06T18:42:02.275Z ][  debug  ] 
- StartUp Application
-[ white ][ development ][ 2024-02-06T18:42:02.277Z ][  debug  ] 
- [result middlewares] {
-  _json: [Function: jsonParser],
-  _raw: [Function: rawParser],
-  _static: [Function: serveStatic],
-  _text: [Function: textParser],
-  _urlencoded: [Function: urlencodedParser],
-  _cors: [Function: corsMiddleware]
-}
-[ white ][ development ][ 2024-02-06T18:42:02.278Z ][  debug  ] 
- [settings] _json [Function: jsonParser]
-[ white ][ development ][ 2024-02-06T18:42:02.279Z ][  debug  ] 
- [settings] _raw [Function: rawParser]
-[ white ][ development ][ 2024-02-06T18:42:02.280Z ][  debug  ] 
- [settings] _static [Function: serveStatic]
-[ white ][ development ][ 2024-02-06T18:42:02.281Z ][  debug  ] 
- [_static middleware path] /cdn/
-[ white ][ development ][ 2024-02-06T18:42:02.281Z ][  debug  ] 
- [settings] _text [Function: textParser]
-[ white ][ development ][ 2024-02-06T18:42:02.281Z ][  debug  ] 
- [settings] _urlencoded [Function: urlencodedParser]
-[ white ][ development ][ 2024-02-06T18:42:02.282Z ][  debug  ] 
- [settings] _cors [Function: corsMiddleware]
-[ white ][ development ][ 2024-02-06T18:42:02.284Z ][  debug  ] 
- [Application instance]
-[ white ][ development ][ 2024-02-06T18:42:02.284Z ][  debug  ] 
- [End of StartUp application ready]
-[ white ][ development ][ 2024-02-06T18:42:02.284Z ][   log   ] 
- Startup: 9.022ms
-[ white ][ development ][ 2024-02-06T18:42:02.286Z ][   log   ] 
- Application process id: 17285
-[ white ][ development ][ 2024-02-06T18:42:02.286Z ][   log   ] 
- Listening on port 2701 http://localhost:2701
-
-npm run test
-## Not implemented now.
+> basic_api@0.1.31 dev  
+> npx nodemon ./src/bin/init  
+  
+[nodemon] 3.1.0  
+[nodemon] to restart at any time, enter `rs`  
+[nodemon] watching path(s): *.*  
+[nodemon] watching extensions: js,mjs,cjs,json  
+[nodemon] starting `node ./src/bin/init`  
+  
+▄▄▄▄    ▄▄▄        ██████  ██▓ ▄████▄      ▄▄▄       ██▓███   ██▓  
+▓█████▄ ▒████▄    ▒██    ▒ ▓██▒▒██▀ ▀█     ▒████▄    ▓██░  ██▒▓██▒  
+▒██▒ ▄██▒██  ▀█▄  ░ ▓██▄   ▒██▒▒▓█    ▄    ▒██  ▀█▄  ▓██░ ██▓▒▒██▒  
+▒██░█▀  ░██▄▄▄▄██   ▒   ██▒░██░▒▓▓▄ ▄██▒   ░██▄▄▄▄██ ▒██▄█▓▒ ▒░██░  
+░▓█  ▀█▓ ▓█   ▓██▒▒██████▒▒░██░▒ ▓███▀ ░    ▓█   ▓██▒▒██▒ ░  ░░██░  
+░▒▓███▀▒ ▒▒   ▓▒█░▒ ▒▓▒ ▒ ░░▓  ░ ░▒ ▒  ░    ▒▒   ▓▒█░▒▓▒░ ░  ░░▓     
+▒░▒   ░   ▒   ▒▒ ░░ ░▒  ░ ░ ▒ ░  ░  ▒        ▒   ▒▒ ░░▒ ░      ▒ ░  
+░    ░   ░   ▒   ░  ░  ░   ▒ ░░             ░   ▒   ░░        ▒ ░  
+░            ░  ░      ░   ░  ░ ░               ░  ░          ░     
+     ░                        ░                                     
+  
+[ white ][ development ][ 2024-03-02T00:10:10.299Z ][  debug  ]    
+[ JSON OPTIONS ] {"inflate":false,"limit":"100kb","strict":false,"type":"application/json","reviver":null}  
+[ white ][ development ][ 2024-03-02T00:10:10.414Z ][  debug  ]    
+StartUp Application  
+[ white ][ development ][ 2024-03-02T00:10:10.415Z ][  debug  ]    
+[locals vars] {}  
+[ white ][ development ][ 2024-03-02T00:10:10.417Z ][  debug  ]    
+[Swagger mount] /api  
+[ white ][ development ][ 2024-03-02T00:10:10.462Z ][  debug  ]    
+[middlewares to load] {  
+ _json: [Function: jsonParser],  
+ _raw: undefined,  
+ _static: [Function: serveStatic],  
+ _text: undefined,  
+ _urlencoded: undefined,  
+ _cors: undefined  
+}  
+[ white ][ development ][ 2024-03-02T00:10:10.463Z ][  debug  ]    
+[loading middleware] _json [Function: jsonParser]  
+[ white ][ development ][ 2024-03-02T00:10:10.464Z ][  debug  ]    
+[loading middleware] _static [Function: serveStatic]  
+[ white ][ development ][ 2024-03-02T00:10:10.464Z ][  debug  ]    
+[_static middleware path] /  
+[ white ][ development ][ 2024-03-02T00:10:10.467Z ][  debug  ]    
+[one instance of application ready]  
+[ white ][ development ][ 2024-03-02T00:10:10.467Z ][  debug  ]    
+[End of StartUp application ready]  
+[ white ][ development ][ 2024-03-02T00:10:10.468Z ][   log   ]    
+Startup: 53.054ms  
+[ white ][ development ][ 2024-03-02T00:10:10.469Z ][   log   ]    
+Application process id: 11962  
+[ white ][ development ][ 2024-03-02T00:10:10.469Z ][   log   ]    
+Listening on port 6661  
+  
+       http://localhost:6661  
+  
+       http://white:6661
 ```
 
 ---
