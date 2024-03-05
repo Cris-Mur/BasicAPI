@@ -44,27 +44,24 @@ function splitLocals(locals) {
     return local_;
 }
 
-/**
- * The object that stores local variables.
- * @type {LocalsObject}
- */
-let LocalsObject = {
-    ...splitLocals(process.env.LOCALS) // variables named with "locals" key word
-};
-// Populate locals object with environment variables
-Object.keys(process.env).forEach((env_var) => {
-    /**
-     * Filter environment variables for local variables and update the LocalsObject.
-     */
-    if (/locals/i.test(env_var)) {
-        const aux = handleLocalVar(env_var);
-        LocalsObject = {...aux, ...LocalsObject};
+function getLocalsInEnvironment() {
+    let envLocals = Object.
+        keys(process.env).
+        filter((key) => { 
+            return /locals_/i.test(key)
+        });
+    return envLocals
+}
+
+function handleVars() {
+    const keysInEnvironment = getLocalsInEnvironment();
+    const localsVar = splitLocals(process.env.LOCALS);
+    let result = {};
+    for (const variable of keysInEnvironment) {
+        const local = handleLocalVar(variable)
+        result = {...local, ...result};
     }
-});
-/**
- * Exports the locals object containing all local variables.
- * @type {LocalsObject}
- */
-module.exports = {
-    locals: LocalsObject
-};
+    return {...localsVar, ...result};
+}
+
+module.exports = handleVars();
