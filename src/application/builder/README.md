@@ -1,5 +1,133 @@
 # Builder Module
+This Module is a implementation of Builder pattern that allows us manage the construction process.
 
+Here we construct "the Express application", one instance of express function.
+
+In this case the implementation of the builder pattern are based on this diagram
+
+```mermaid
+classDiagram
+    class Director {
+        - builder: UniversalBuilder
+        + construct(builder): void
+        + make(): void
+    }
+
+    class UniversalBuilder {
+        + reset(): void
+        + stepBasic(): void
+        + getResult(): UniversalApplication
+    }
+
+    class BuilderApplication {
+        + stepBuildinFeatures(): void
+        + step...(): void
+        + getResult(): ExpressApp
+    }
+
+    class ExpressApp {
+        - partA: string
+        - partB: string
+    }
+
+    class Client {
+        + main(): void
+    }
+
+    class Factory {
+        + createProduct(): UniversalApplication
+    }
+
+    class BasicAPIFactory {
+        + createProduct(): ExpressApp
+    }
+
+    Client --> Director : Uses
+    Director --> UniversalBuilder : Uses
+    UniversalBuilder <|-- BuilderApplication : Implements
+    BuilderApplication <-- BasicAPIFactory : Uses
+    BuilderApplication <-- ExpressApp : Uses
+    BasicAPIFactory --> ExpressApp : Creates
+    ExpressApp --|> UniversalApplication : Implements
+    Factory --> UniversalApplication : Creates
+    Factory <|-- BasicAPIFactory : Implements
+
+
+```
+
+We use a two creational Design patters, builder and factory, be cause (Single-responsibility principle), the factory allows us create a clean Express Application for example. the builder allows us to custom assemble of this Application.
+
+## [Factory](./Factory/)
+First we need Create, in this case we implements a Factory pattern, this pattern only creates a specified product.
+
+```JavaScript
+const { BasicAPIFactory } = require('./Factory');
+
+const factory = new BasicAPIFactory();
+const product = factory.createProduct();
+console.log(product);
+```
+```Bash
+ExpressApplication {  
+ app: <ref *1> [Function: app] {  
+   _events: [Object: null prototype] { mount: [Function: onmount] },  
+   _eventsCount: 1,  
+   _maxListeners: undefined,
+   .
+   .
+   .
+    },  
+ features: [],  
+ locals: {}  
+}
+```
+One thing cool in factory pattern are the clean implementation, approx in 3 lines of code you receive a one result of the pattern.
+
+
+
+```mermaid
+classDiagram
+
+class UniversalApplication {
+    + app undefined
+}
+
+class BasicApiApplication {
+    + getApplication()
+}
+
+class ExpressApplication {
+    + app Express.js
+}
+
+class UniversalFactory {
+    + createProduct() new UniversalApplication
+}
+
+class BasicApiFactory {
+    + createProduct(): new BasicApiApplication
+}
+
+class ExpressFactory {
+    + createProduct(): new ExpressApplication
+}
+
+UniversalApplication <|-- BasicApiApplication : Implements
+BasicApiFactory --> BasicApiApplication : Uses
+
+ExpressFactory --> ExpressApplication : Uses
+UniversalApplication <|-- ExpressApplication : Implements
+UniversalFactory --> UniversalApplication : Uses
+
+
+UniversalFactory <|-- BasicApiFactory : Implements
+UniversalFactory <|-- ExpressFactory : Implements
+
+```
+
+## Builder
+
+The Builder Patter are a little bit more complex than Factory, because in this patter we have more classes or implementations, 
 
 ```JavaScript
 /**

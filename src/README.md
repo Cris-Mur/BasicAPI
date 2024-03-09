@@ -1,43 +1,55 @@
-# High managed behance of Application
+# The Application source code
 
 [ExpressJS](https://expressjs.com) is "Fast, unopinionated, minimalist web framework for [Node.js](https://nodejs.org/en/)"
 in a few words, is a tool that handles http request that income into a NodeJS machine.
 
-We propose an structure, and toolkit developed specifically for this project.
+We propose an architecture that isolate and manage Express function.
 
-The main idea is manage big part of behavior of the application, using express in the middle without other libraries, and using the environment, that's a common interface in cloud, containers and on premise servers.
+The main idea is develop endpoints in a solid Express interface, that brings me manage big part of behavior of the express, using the environment to setup the Express build in features. 
 
 ```bash
-.  
-├── public  
-│   └── Static  
-└── src  
-   ├── application  
-   ├── bin  
-   └── services  
-  
-7 directories
+.
+├── .env
+├── public/
+└── src/
+   ├── application/
+   ├── bin/
+   └── services/
+      └── router.js
 ```
 
-Two main folders and three source folders.
+in many cases the implementation in other frameworks are biggest, with many nested folders, and MVC (Model, View, Controller) pattern forced.
 
-The public folder are a space to serve a static files, useful for little deployments, or on premise auto managed content delivery.
-
-For the Source architecture, explore!
+---
+## Folder like module
+I use the folders inside "src" folder like node modules, the importation and exportation of the units, is simple.
 #### [Application](./application/)
+The Application module is the abstraction that build Express and Network server
 #### [bin](./bin)
+Bin Module, contains a routines that runs Application.
 #### [Services](./services)
+The Services, contains a router module, this is a module that are configured into the Express application.
+
+
 ---
 ## Conventions
 
-All code are written in CommonJS for the convenience of modular architecture, and I believe that all good code can easily transition to ECMASCRIPT. When NodeJS improves ESLANG features in the future, I will consider changing the modules to ECMAMODULES.
+All code are written in CommonJS for the convenience of modular architecture, and I believe that all good code can easily transition to ECMASCRIPT.
+
+When NodeJS improves ESLANG features in the future, I will consider changing the modules to ECMAMODULES.
 
 All code, functions, modules, and scripts will adhere to the following code structure.
 
 for Example:
 
 ```JavaScript
-const import_module = require('...');
+/**
+ * @<type of file>
+ * @license GPL
+ * a human resume of the software unit
+ * @author Jhon Doe
+ */
+const importedModule = require('...');
 
 /**
  * @Async nameOfFunction
@@ -53,9 +65,11 @@ async function nameOfFunction (name_of_param) {
     try {
         // code of function.
     } catch (error_) {
-        console.error('[Error on function]', error_);
+        console.warning('[Error on function]');
     }
 }
+
+module.exports = nameOfFunction;
 ```
 
 I think that types are important but TS, in my opinion is more than only hard

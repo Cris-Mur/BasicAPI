@@ -1,26 +1,36 @@
-# Basic Express Server
+# BasicAPI
 
 [![DeepSource](https://app.deepsource.com/gh/Cris-Mur/BasicAPI.svg/?label=active+issues&show_trend=true&token=zS-SGTUGprpijwyk0MQ_TA_G)](https://app.deepsource.com/gh/Cris-Mur/BasicAPI/)
 
 ---
-"Basic API" is a fully managed implementation of ExpressJS that makes NodeJS Application into a Useful Web Server, now this application are ready to kick start development in other projects. Please refer to the [environment example](./env.example) before running this application. For development information, [go here](./src/).
+"Basic API" is a opinioned implementation of ExpressJS in NodeJS, we wanted a Application that be a Web Server ready to become in another projects.
 
-For information on how to [contribute](./CONTRIBUTE), please don't hesitate to submit a pull request with your proposed changes in a separate branch if you see any opportunities to enhance this application.
+For information on how to [contribute](./CONTRIBUTE), if you see any opportunities to enhance this project, please don't hesitate to submit a issue with your proposed changes.
+
+Please refer to the [environment example](./env.example) before running this application.
+
+For developer information, [go here](./src/).
 
 ---
-## Installation
+## Quick Start
 
-### Requirements
+### Requirements and Installation
 
-This app was designed for an X86 machine, preferably using a GNU/Linux OS machine. Additionally, it is a NodeJS application. Please ensure that you have the latest LTS or (v20.11.0) of NodeJS and the latest NPM or (v10.4.0) installed on your machine.
+This app was designed for an X86 machine, recommended use a GNU/Linux machine.
+
+Additionally, this is a NodeJS application. Please ensure that you have installed Nodejs in the latest version of LTS (Long Term Support), in other case you can use the version 20.11
+
+In same way for the Package Manager, like NPM in version 10.4.0 or version LTS
 
 ```bash
+# First Clone the repo
+git clone https://github.com/cris-mur/basicapi.git
 cd BasicAPI
-# Install all dependencies usign npm
+# then Install Project dependencies, in this case with npm
 npm i
-# Settup Env file
+# Copy Environment example in environment file
 cat ./env.example > .env
-# use npm to run app
+# use npm to start the application
 npm run start
 ```
 ### Environment
@@ -59,7 +69,10 @@ Primarily, this app can be configured using an environment file to adjust settin
 .
 ```
 
-My purpose is create a 'Shell', one code base for other projects. I don't want to reinvent the wheel. This app helps me develop software more easily and securely.
+in case that you start application without Environment file, the application will use a clean Express implementation.
+
+---
+## Run and develop
 
 ```bash
 $ npm run start
@@ -156,7 +169,7 @@ Listening on port 6661
 ```
 
 ---
-
+---
 <div align="center">
 <p>Author <a src=https:github.com/cris-mur>Cristian Murcia</a></p>
 <img src="https://avatars.githubusercontent.com/u/28773000" alt="Avatar de GitHub" style="border-radius: 15%;" width="100" height="75"/>
