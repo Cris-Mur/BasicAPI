@@ -1,10 +1,7 @@
 # Builder Module
-This Module is a implementation of Builder pattern that allows us manage the construction process.
+This Module is a implementation of how build the application, one of the main features about this application is, read some environment vars to define what are the features it will have.
 
-Here we construct "the Express application", one instance of express function.
-
-In this case the implementation of the builder pattern are based on this diagram
-
+This is the diagram that define this module.
 ```mermaid
 classDiagram
     class Director {
@@ -26,8 +23,6 @@ classDiagram
     }
 
     class ExpressApp {
-        - partA: string
-        - partB: string
     }
 
     class Client {
@@ -55,10 +50,60 @@ classDiagram
 
 ```
 
-We use a two creational Design patters, builder and factory, be cause (Single-responsibility principle), the factory allows us create a clean Express Application for example. the builder allows us to custom assemble of this Application.
+If you see a two Creational Patterns you are in the correct, in this case we take this structure, be cause the process to Instance a Clean Express application function (Pleace see how Express works) is better if they are isolated parts.  
 
 ## [Factory](./Factory/)
-First we need Create, in this case we implements a Factory pattern, this pattern only creates a specified product.
+The Factory Pattern is a Creational Design Pattern, this structure only have the responsibility, call a new instance of one entity.
+
+To start you require two Concepts: Product and Factory.
+
+```mermaid
+classDiagram
+
+class Product {
+	+ oneAttribute
+}
+
+class Factory {
+	- createProduct(): new Product
+}
+
+Factory --> Product : Uses
+```
+
+For this case, we are use the Factory to make some structures that we want to encapsulate e.g Express
+
+```mermaid
+classDiagram
+
+class BasicApiFactory {
+    + createProduct(): new BasicApiApplication
+}
+
+class BasicApiApplication {
+    - express : undefined
+    - network : undefined
+    - nodeEnv : string
+}
+
+class ExpressApplication {
+    - app : Express function
+    - features : Array
+    - locals : Object
+    + getFeatures() : this.features
+    + getLocals() : this.locals
+    + pushGeneralFeature(feature) : void
+    + pushPathFeature(feature, path) : void
+    + overrideLocals(locals) : void
+}
+
+class ExpressFactory {
+    + createProduct(): new ExpressApplication
+}
+
+BasicApiFactory --> BasicApiApplication : Uses
+ExpressFactory --> ExpressApplication : Uses
+```
 
 ```JavaScript
 const { BasicAPIFactory } = require('./Factory');
@@ -82,49 +127,6 @@ ExpressApplication {
 }
 ```
 One thing cool in factory pattern are the clean implementation, approx in 3 lines of code you receive a one result of the pattern.
-
-
-
-```mermaid
-classDiagram
-
-class UniversalApplication {
-    + app undefined
-}
-
-class BasicApiApplication {
-    + getApplication()
-}
-
-class ExpressApplication {
-    + app Express.js
-}
-
-class UniversalFactory {
-    + createProduct() new UniversalApplication
-}
-
-class BasicApiFactory {
-    + createProduct(): new BasicApiApplication
-}
-
-class ExpressFactory {
-    + createProduct(): new ExpressApplication
-}
-
-UniversalApplication <|-- BasicApiApplication : Implements
-BasicApiFactory --> BasicApiApplication : Uses
-
-ExpressFactory --> ExpressApplication : Uses
-UniversalApplication <|-- ExpressApplication : Implements
-UniversalFactory --> UniversalApplication : Uses
-
-
-UniversalFactory <|-- BasicApiFactory : Implements
-UniversalFactory <|-- ExpressFactory : Implements
-
-```
-
 ## Builder
 
 The Builder Patter are a little bit more complex than Factory, because in this patter we have more classes or implementations, 

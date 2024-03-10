@@ -1,21 +1,5 @@
 # [Application](./index.js)
-
-"The Application" is an abstraction of a Nodejs Machine with Express and HTTP work together. In this case we needs handle creation and construction of the Application.
-
-```mermaid
----
-title: Application
----
-classDiagram
-    class Application
-    Application : +Express instance 
-    Application : +Node_Http.server instance
-    
-```
-
-Express in itself has many features like Request parsers, in the past for example, you needed install body-parser to handle request and send JSON response, now Express support these features that in the past needed another libraries, and has become a very stable project.
-
-First we need understand that NodeJS, is a Runtime Engine, that runs into "The Event Loop", this is the life cycle of one execution of the program.
+We need understand NodeJS, and his Runtime Engine, that makes that "The Event Loop" exist.
 
 ```Text
           The Event Loop
@@ -37,10 +21,23 @@ First we need understand that NodeJS, is a Runtime Engine, that runs into "The E
 │  ┌─────────────┴─────────────┐
 └──┤      close callbacks      │
    └───────────────────────────┘
+
+The cycle of one execution of the program.
 ```
 
-Using a specific port that's receive a Internet Packages, Express listen all request that income into the machine, these request are parsed step by step into "Express Middleware queue", these queue are be conform by functions called "Middlewares" that takes three parameters, request, response, and next.
 
+"The Application" is an abstraction of a Nodejs Machine with Express and HTTP working together. 
+
+```mermaid
+---
+title: Application
+---
+classDiagram
+    class Application
+    Application : +Express instance 
+    Application : +Node_Http.server instance
+    
+```
 ---
 ### Usage
 To use this Application you need this code lines, the result are a Application that are built taking the settings into environment, all instances of the application are like others application but are a situation that has a easy solution.
@@ -69,9 +66,13 @@ ExpressApplication {
 
 ---
 
-## [builder](./builder)
-The builder module, have the responsibility to build and export a Class that build Express Application, pushing all required middlewares and policies into express.
+## [Builder](./builder)
 
+Express by itself has many features build in like request parsers that in the past you needed install apart of express, for example, body-parser to handle request and send serialized response, now Express support these features that in the past needed another dependencies installations
+
+Express to handle request, propose a concept called Middlewares, a step chain that one by one go resolving the request or falling in error handler.
+
+Now, The builder folder, contains, the logic to create a new application, we implements a factory pattern to create a clean instances, additionally we use a builder pattern to apply all features that will be require.
 ## [utils](./utils/)
 
 
