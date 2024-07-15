@@ -1,41 +1,50 @@
 /**
  * @module logger
- * Module to customize build-in console functions.
+ * Module to customize build-in console functions improoving loging features.
  * @license MIT
  * @author Cris-Mur
  */
-const { boolean } = require('./utils/parse');
+const boolean = require('#Utils/boolean');
 const tag = require('./tag');
 const util = require('node:util');
 
+const raw_log = console.log;
 /**
- * Overrides the default `console.log`.
+ * @function logger
+ * @description - Overrides the default `console.log` with custom format.
  * @param {...any} args - Arguments to be logged.
  */
-const raw_log = console.log;
-console.log = function logger(...args) {
+function logger(...args) {
     const level = "log";
     const prefix = tag(level);
     raw_log(prefix + applyFormat(...args));
 }
+console.log = logger;
 
+// ---
+
+const raw_error = console.error;
 /**
- * Overrides the default `console.error`.
+ * @function logger_error
+ * @description - Overrides the default `console.error`.
  * @param {...any} args - Arguments to be logged as errors.
  */
-const raw_error = console.error;
-console.error = function logger_error(...args) {
+function logger_error(...args) {
     const level = "error";
     const prefix = tag(level);
     raw_error(prefix + applyFormat(...args));
 }
+console.error = logger_error;
 
+// --
+
+const raw_debug = console.debug;
 /**
- * Overrides the default `console.debug`.
+ * @function logger_debug
+ * @description - Overrides the default `console.debug`.
  * @param {...any} args - Arguments to be logged as errors.
  */
-const raw_debug = console.debug;
-console.debug = function logger_debug(...args) {
+function logger_debug(...args) {
     if (!boolean(process.env.VERBOSE))
         return;
     const level = "debug";
@@ -43,12 +52,17 @@ console.debug = function logger_debug(...args) {
     raw_debug(prefix + applyFormat(...args));
 }
 
+console.debug = logger_debug;
+
+// ---
+
+const raw_warn = console.warn;
 /**
- * Overrides the default `console.warn`.
+ * @function logger_warn
+ * @description - Overrides the default `console.warn`.
  * @param {...any} args - Arguments to be logged as errors.
  */
-const raw_warn = console.warn;
-console.warn = function logger_warn(...args) {
+function logger_warn(...args) {
     if (!boolean(process.env.VERBOSE))
         return;
     const level = "warning";
@@ -56,8 +70,13 @@ console.warn = function logger_warn(...args) {
     raw_warn(prefix + applyFormat(...args));
 }
 
+console.warn = logger_warn;
+
+// ---
+
 /**
- * @function applyFormat - Function to manage format of input using core fn.
+ * @function applyFormat
+ * @description - Function to handle format of input using core fn.
  * @param  {...any} args - Input of console
  * @returns {util.formatWithOptions}
  */
@@ -70,6 +89,6 @@ function applyFormat(...args) {
 
 /**
  * Exports the customized console with environment-aware logging and error handling.
- * @type {Object}
+ * @namespace console
  */
 module.exports = console;

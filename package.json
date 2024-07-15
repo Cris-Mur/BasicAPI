@@ -18,29 +18,25 @@
     "HTTP",
     "API"
   ],
-  "nodemonConfig": {
-    "env": {
-      "NODE_ENV": "development",
-      "VERBOSE": "true",
-      "COLORED": "true"
-    }
-  },
   "scripts": {
     "start": "./src/bin/init",
-    "startInspector": "node --inspect ./src/bin/init",
-    "dev": "npx nodemon ./src/bin/init",
+    "dev": "NODE_ENV=development VERBOSE=true COLORED=true node --watch --inspect ./src/bin/init",
     "debug": "VERBOSE=true COLORED=true ./bin/init 1>/var/tmp/node_express_api.log 2>/var/tmp/node_express_api.error.log",
     "test": "node --test",
     "serverless": "SERVERLESS=true node ./src/bin/serverless.js",
     "server": "./src/bin/./init 1>/var/log/node_express_api.log 2>/var/log/node_express_api.error.log &"
   },
-  "workspaces": ["./src/bin/utils/logger"],
   "dependencies": {
-    "cors": "^2.8.5",
-    "dotenv": "^16.3.1",
-    "express": "^4.18.2",
-    "swagger-jsdoc": "^6.2.8",
-    "swagger-themes": "^1.4.2",
-    "swagger-ui-express": "^5.0.0"
+    "cors": "2.8.5",
+    "express": "4.19.2",
+    "swagger-jsdoc": "6.2.8",
+    "swagger-themes": "1.4.3",
+    "swagger-ui-express": "5.0.1"
+  },
+  "imports": {
+    "#Utils/logger": "./src/utils/logger/index.js",
+    "#Utils/boolean": "./src/utils/parsers/boolean/index.js",
+    "#Utils/csv": "./src/utils/parsers/csv/index.js",
+    "#Utils/performance": "./src/utils/performance/index.js"
   }
 }

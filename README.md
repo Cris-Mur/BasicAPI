@@ -3,7 +3,7 @@
 [![DeepSource](https://app.deepsource.com/gh/Cris-Mur/BasicAPI.svg/?label=active+issues&show_trend=true&token=zS-SGTUGprpijwyk0MQ_TA_G)](https://app.deepsource.com/gh/Cris-Mur/BasicAPI/)
 
 ---
-"Basic API" is a opinioned implementation of ExpressJS in NodeJS, we wanted a Application that be a Web Server ready to become in another projects.
+"Basic API" is a opinioned implementation of ExpressJS in NodeJS, where we wanted a Application that be a Web Server ready to become in another projects.
 
 For information on how to [contribute](./CONTRIBUTE), if you see any opportunities to enhance this project, please don't hesitate to submit a issue with your proposed changes.
 

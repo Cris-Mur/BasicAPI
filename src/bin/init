@@ -3,6 +3,8 @@
 /**
  * startup script.
  * @Script
+ * @license MIT
+ * @author Cris-Mur
  */
 console.log(`
 ▄▄▄▄    ▄▄▄        ██████  ██▓ ▄████▄      ▄▄▄       ██▓███   ██▓
@@ -17,7 +19,7 @@ console.log(`
       ░                        ░                                  
 `);
 
-require('logger');
+require('#Utils/logger');
 const application = require('../application');
 console.time("Startup")
 console.debug("StartUp Application");

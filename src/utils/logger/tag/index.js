@@ -1,5 +1,12 @@
+/**
+ * @module logger.tag
+ * Module to customize tag in console
+ * @license MIT
+ * @author Cris-Mur
+ */
+
 const os = require('node:os');
-const { boolean } = require('../utils/parse');
+const boolean = require('#Utils/boolean');
 
 // Available terminal Colors
 /**
