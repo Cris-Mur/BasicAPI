@@ -10,17 +10,19 @@ console.log(`
       ░     ░  ░   ░           ░     ░  ░   ░         ░  ░   ░  ░      ░        ░  
                               ░                                                    
 `)
-const application = require('../application');
+
+const basicAPI = require('#Application');
 console.time("Startup")
 console.debug("StartUp Application");
 
 /// #############################################################
 
-const mainApplication = new application();
+
 
 /// #############################################################
 
 console.debug('[End of StartUp application ready]')
 console.timeEnd("Startup")
 
-module.exports = mainApplication.express;
+module.exports = basicAPI.getApplication();
+

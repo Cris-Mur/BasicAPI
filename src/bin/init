@@ -20,18 +20,19 @@ console.log(`
 `);
 
 require('#Utils/logger');
-const application = require('../application');
+const basicAPI = require('#Application');
 console.time("Startup")
 console.debug("StartUp Application");
 
 /// #############################################################
 
-const mainApplication = new application();
+basicAPI.getApplication();
 
 /// #############################################################
 
 console.debug(`[End of StartUp application ready]`)
 console.timeEnd("Startup")
 if (process.env.SERVERLESS) {
-    console.error('you enable serverless feature but you start the server')
+    console.error('you enable serverless feature but you start the server');
+    process.exit();
 }

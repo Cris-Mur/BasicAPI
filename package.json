@@ -37,6 +37,7 @@
     "#Utils/logger": "./src/utils/logger/index.js",
     "#Utils/boolean": "./src/utils/parsers/boolean/index.js",
     "#Utils/csv": "./src/utils/parsers/csv/index.js",
-    "#Utils/performance": "./src/utils/performance/index.js"
+    "#Utils/performance": "./src/utils/performance/index.js",
+    "#Application": "./src/application/index.js"
   }
 }
