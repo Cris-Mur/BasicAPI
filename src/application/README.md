@@ -1,5 +1,7 @@
 # [Application](./index.js)
-We need understand NodeJS, and his Runtime Engine, that makes that "The Event Loop" exist.
+The Application is a Entity that lives into Event Loop of Nodejs runtime.
+
+First we needs understand NodeJS, and his Runtime Engine, that makes that "The Event Loop" exist.
 
 ```Text
           The Event Loop
@@ -26,7 +28,7 @@ The cycle of one execution of the program.
 ```
 
 
-"The Application" is an abstraction of a Nodejs Machine with Express and HTTP working together. 
+Then, "The Application" is an abstraction of a Nodejs Machine with Express and HTTP working together. 
 
 ```mermaid
 ---
