@@ -9,22 +9,22 @@ Application Source FSTree
 ```bash
 .
 ├── .env
-├── public/
-└── src/
+├── public  
+│   └── Static  
+└── src
    ├── application/
    ├── bin/
-   └── services/
-      └── router.js
+   ├── services/
+   │   └── router.js  
+   └── utils
 ```
 ---
 ## Folder like module
 I prefer use the folders inside "src" folder like modules, the importation and exportation of the units are like water.
 #### [Application](./application/)
-The folder called "application" contains "The application source", this folder has all related code about express and HTTP.
 #### [bin](./bin)
-Init routines.
 #### [Services](./services)
-Business code, and main router
+#### [Utils](./utils)
 
 ---
 ## Conventions
@@ -76,6 +76,3 @@ JSDocs is a good helper with ESLint, also allows keep all documented code.
 ---
 
 ## [Home](../)
-### [Bin](./bin/)
-### [Application](./application/)
-

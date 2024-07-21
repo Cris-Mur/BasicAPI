@@ -18,9 +18,9 @@ For developer information, [go here](./src/).
 
 This app was designed for an X86 machine, recommended use a GNU/Linux machine.
 
-Additionally, this is a NodeJS application. Please ensure that you have installed Nodejs in the latest version of LTS (Long Term Support), in other case you can use the version 20.11
+Additionally, this is a NodeJS application. Please ensure that you have installed Nodejs in the latest of LTS (Long Term Support) version, in other case you can use a major version of 21.7.3
 
-In same way for the Package Manager, like NPM in version 10.4.0 or version LTS
+In the same way for the Package Manager, like NPM in version 10.5.0 or version LTS
 
 ```bash
 # First Clone the repo

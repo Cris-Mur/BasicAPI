@@ -1,175 +1,42 @@
-# Builder Module
-Module to build express instance, this diagram describes this module.
+# Build Function
+Este modulo exporta una función que construye una instancia de express, hacemos uso del patron de diseño Builder, para estructurar la arquitectura del modulo.
+
+```mermaid
+---
+title: Flujo de build
+---
+flowchart LR
+first[director] --> creates[new ExpressDirector] --> do[director.make]
+```
+Lo bueno de este patron es que robustece el proceso de construcción de una unidad de software, separando las responsabilidades de los procesos de construcción.
+
+ya que para este caso concreto solo se requiere de un director, obviamos el instanciamiento de un director abstracto, que se construya con un builder especifico, directamente ya instanciamos a ese director, y ejecutamos la lógica de construcción.
+
 ```mermaid
 classDiagram
     direction RL
-    class MainFution {
-        + main(): void
-    }
 
     class Director {
-        - builder: UniversalBuilder
-        + construct(builder): void
-        + make(): BasicApiApp
+        -builder ~builder~
+        + make(): undefined
+        + changeBuilder(newBuilder): -builder
     }
 
-    class BuilderApplication {
-        + stepBuildinFeatures(): void
-        + step...(): void
-        + getResult(): ExpressApp
+    class ExpressDirector {
+        builder ~ExpressBuilder~
+        + make(): express
     }
-
-    class BasicApiApp {
-        ExpressApplication
-        HttpServer
-    }
-
-    class BasicAPIFactory {
-        + createProduct(): BasicApiApp
-    }
-
-    MainFution --> Director : Uses
-    Director --> BuilderApplication: Uses
-    BuilderApplication <-- BasicAPIFactory : Uses
-    BuilderApplication <-- BasicApiApp : Uses
-    BasicAPIFactory --> BasicApiApp : Creates
-    BasicApiApp --> Director : Uses
+    ExpressDirector --|> Director
 ```
-
-If you see a two Creational Patterns you are in the point, in this case we take this structure, because the process to Instance a Clean Express application function (Pleace see how Express works) is better if they are isolated parts.  
-
 ---
 
-## [Factory](./Factory/)
-The Factory Pattern is a Creational Design Pattern, this structure only have the responsibility, call a new instance of one entity.
+## Función Make
 
-To start you require two Concepts: Product and Factory.
-
-```mermaid
-classDiagram
-
-class Product {
-	+ oneAttribute
-}
-
-class Factory {
-	- createProduct(): new Product
-}
-
-Factory --> Product : Instance
-```
-
-For this case, we are use the Factory to make some structures that we want to encapsulate e.g Express
-
-```mermaid
-classDiagram
-
-class BasicApiFactory {
-    + createProduct(): new BasicApiApplication
-}
-
-class BasicApiApplication {
-    - Express : undefined~ExpressApplication~
-    - Server : undefined~HttpNerworkApplication~
-}
-
-class ExpressApplication {
-    - app : Express~function~
-    - features : Array~middleware~
-    - locals : Object
-    + getFeatures() : this.features
-    + getLocals() : this.locals
-    + pushGeneralFeature(feature~middleware~) : void
-    + pushPathFeature(feature, path~string~) : void
-    + overrideLocals(locals~Object~) : void
-}
-
-class ExpressFactory {
-    + createProduct(): new ExpressApplication
-}
-
-class HttpNerworkApplication {
-    - server : HTTP.Server Instance
-}
-
-class HttpNetworkFactory {
-    + createProduct(): new ExpressApplication
-}
-
-BasicApiFactory --> BasicApiApplication : Instance
-HttpNetworkFactory --> HttpNerworkApplication : Instance
-ExpressFactory --> ExpressApplication : Instance
-```
-
-```JavaScript
-const { BasicAPIFactory } = require('./Factory');
-
-const factory = new BasicAPIFactory();
-const product = factory.createProduct();
-console.log(product);
-```
-```Bash
-ExpressApplication {  
- app: <ref *1> [Function: app] {  
-   _events: [Object: null prototype] { mount: [Function: onmount] },  
-   _eventsCount: 1,  
-   _maxListeners: undefined,
-   .
-   .
-   .
-    },  
- features: [],  
- locals: {}  
-}
-```
-One thing cool in this pattern, are the clean implementation, We implement approx in 3 lines of code and you receive the result.
-
----
+La funcion make del [ExpressDirector](./Director/Express/index.js) tiene la responsabilidad de ejecutar paso a paso los metodos de construccion del [ExpressBuilder](./builders/Express/index.js), segun el tipo de construccion que se quiera de express.
 
 ## Builder
 
-The Builder Patter are a little bit more complex than Factory, because in this patter we have more classes or intefaces.
-
-```mermaid
-classDiagram
-class Director {
-    <<interface>>
-    - builder: undefined~Builder~
-    + make() Application
-}
-class ExpressBuilder {
-    - Product: new ExpressFactory.createProduct()
-    + stepBuildinFeatures() void
-    + getResult() this.Product
-}
-class NetworkBuilder {
-    - product: new HttpNetworkFactory.createProduct()
-    + stepSetupPort() void
-    + getResult() this.Product
-}
-
-class ApplicationBuilder {
-    - Product: new BasicApiFactory.createProduct()
-    + stepBuildExpress() void
-    + stepBuildNetwork() void
-    + getResult() this.Product
-}
-
-Director --> ExpressBuilder : use
-Director --> NetworkBuilder : use
-Director --> ApplicationBuilder : use
-```
-
-```JavaScript
-const { ApplicationDirector } = require('./Director');
-
-const director = new ApplicationDirector(builder)
-
-const app = director.make();
-
-module.exports = app;
-```
-
+El constructor de express contiene la logica de construccion de express asi como la implementacion de las caracteristicas que seran inyectadas a express, haciendo uso de una entidad que controla a express de forma global.
 
 ## [Build in Features](./features)
 
