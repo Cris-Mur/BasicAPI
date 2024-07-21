@@ -1,12 +1,11 @@
 class Builder {
-    controller = undefined;
+    static #result;
     static reset() {
-        this.product = {};
+        this.#result = {};
     }
 
     static getResult() {
-        console.debug("default Builder", this.product);
-        return this.product;
+        return this.#result;
     }
 }
 

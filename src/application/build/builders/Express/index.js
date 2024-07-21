@@ -21,10 +21,10 @@ const path = require('node:path');
  * @description - Class with all methods to build a Express Application
  */
 class ExpressBuilder extends Builder {
-
+    #result;
     reset() {
         console.debug(`[ExpressBuilder][Reset][Clean Instance]`);
-        this.controller = new ExpressController();// {app: Express, features: [], locals: {}}
+        this.#result = new ExpressController();// {app: Express, features: [], locals: {}}
     }
 
     stepBasic() {
@@ -33,7 +33,7 @@ class ExpressBuilder extends Builder {
     }
 
     stepBuildinFeatures() {
-        const application = this.controller;
+        const application = this.#result;
         if (!boolean(process.env.BUILD_IN_FEATURES))
             return;
 
@@ -55,12 +55,12 @@ class ExpressBuilder extends Builder {
                     const defaultPath = '/';
                     const customPath = process.env?.STATIC_PATH ?? defaultPath;
                     console.debug("[_static middleware path]", customPath);
-                    application.pushPathFeature(build_in._static, customPath);
+                    application.addRoutedFeature(customPath, build_in._static);
                 }
                 setupStaticFeature(application);
                 continue;
             }
-            application.pushGeneralFeature(middlewares[setting]);
+            application.addGlobalFeature(middlewares[setting]);
         }
     }
 
@@ -69,105 +69,85 @@ class ExpressBuilder extends Builder {
         // Express you know that's machine.
         if (!boolean(process.env.DISSABLE_POWERED_BY))
             return;
-        function disablePoweredby(application) {
-            application.disable('x-powered-by');
-        }
-        disablePoweredby(this.controller.app);
-        this.controller.features.push(disablePoweredby)
+        const property = 'x-powered-by';
+        this.#result.disableProperty(property);
+        this.#result.pushInFeatures(this.stepDisablePoweredby);
     }
 
     stepSetFavicon() {
-        /**
-         * Function that set favicon route
-         * @param {Express instance} application
-         */
-        function setupFavicon(application) {
-            application.get('/favicon.ico', (req, res) => {
-                const favicon = '/public/favicon.ico';
-                res.sendFile(path.join(process.cwd(), favicon));
-            })
-        }
-        const application = this.controller.app;
-        setupFavicon(application);
-        this.controller.features.push(setupFavicon);
+        const favicon = '/public/favicon.ico';
+        this.#result.setFavicon(favicon);
     }
 
     stepSwagger() {
+        if (!boolean(process.env.SWAGGER))
+            return;
+        const spec = {
+            definition: swaggerDocument,
+            apis: ['./src/**/*.js'], // files containing annotations as openapi
+        };
+        const theme = new SwaggerTheme();
+        const options = {
+            explorer: true,
+            // https://www.npmjs.com/package/swagger-themes?activeTab=readme#themes
+            customCss: theme.getBuffer(process.env?.SWAGGER_THEME ?? 'classic')
+        };
+        const swaggerPath = process.env?.SWAGGER_PATH ?? '/api';
+        console.debug('[Swagger mountpoint in API PATH]', swaggerPath);
+        const swagger = [swaggerUi.serve,
+        swaggerUi.setup(
+            swaggerJsdoc(spec),
+            options
+        )];
+
+        this.#result.addRoutedFeature(swaggerPath, swagger);
         /**
-         * Function that build swagger settings and set swagger in express
-         * @param {Express instance} application
+         * @swagger
+         *  /swagger/openapi:
+         *      get:
+         *          description: get openapi json
+         *          responses:
+         *              200:
+         *                  description: Returns a mysterious string.
          */
-        function setupSwagger(application) {
-            if (!boolean(process.env.SWAGGER))
-                return;
-            const spec = {
-                definition: swaggerDocument,
-                apis: ['./src/**/*.js'], // files containing annotations as openapi
-            };
-            const theme = new SwaggerTheme();
-            const options = {
-                explorer: true,
-                // https://www.npmjs.com/package/swagger-themes?activeTab=readme#themes
-                customCss: theme.getBuffer(process.env?.SWAGGER_THEME ?? 'classic')
-            };
-            const swaggerPath = process.env?.SWAGGER_PATH ?? '/api';
-            console.debug('[Swagger mountpoint in API PATH]', swaggerPath);
-            application.use(
-                swaggerPath,
-                swaggerUi.serve,
-                swaggerUi.setup(
-                    swaggerJsdoc(spec),
-                    options
-                )
-            );
-            /**
-             * @swagger
-             *  /swagger/openapi:
-             *      get:
-             *          description: get openapi json
-             *          responses:
-             *              200:
-             *                  description: Returns a mysterious string.
-             */
-            application.get("/swagger/openapi", (req, res) => {
-                res.status(200).json(swaggerJsdoc(spec));
-            })
-        }
-        const application = this.controller.app;
-        setupSwagger(application);
-        this.controller.features.push(setupSwagger);
+        this.#result.addRoutedFeature("/swagger/openapi", (req, res) => {
+            res.status(200).json(swaggerJsdoc(spec));
+        })
     }
 
     stepSetInspector() {
         if (!boolean(process.env.INSPECTOR))
             return;
-        this.controller.pushGeneralFeature(homebrew.middlewares.inspector);
+        this.#result.addGlobalFeature(homebrew.middlewares.inspector);
     }
 
     stepSetErrorHandler() {
         if (!boolean(process.env.ERRORS_HANDLERS))
             return;
-        this.controller.pushGeneralFeature(homebrew.middlewares.cannotGet);
-        this.controller.pushGeneralFeature(homebrew.middlewares.errorHandler);
+        this.#result.addGlobalFeature(homebrew.middlewares.cannotGet);
+        this.#result.addGlobalFeature(homebrew.middlewares.errorHandler);
     }
 
     stepSetRouter() {
-        this.controller.pushPathFeature(router);
+        this.#result.addRoutedFeature("/", router);
     }
 
     stepSetLocals() {
         if (!boolean(process.env.LOCAL_VARS))
             return;
-        this.controller.overrideLocals(locals);
+        for (let key in locals) {
+            const value = locals[key];
+            this.#result.setApplicationLocalVar(key, value);
+        }
     }
 
     stepSetNetwork() {
         if (boolean(process.env.SERVERLESS))
             return;
-        const application = this.controller.getApplication();
+        const application = this.#result.getApplication();
 
         // Normalize the port and set it on the application
-        this.controller.setPort(network.utils.port);
+        this.#result.settupApplicationNetworkPort(network.utils.port);
 
         // Create and start the server
         const server = network._http.create_server(application);
@@ -179,12 +159,14 @@ class ExpressBuilder extends Builder {
         this.server = server;
     }
 
-    getProduct() {
+    getResult() {
         console.debug(
-            "[Express Features]", this.controller.features,
-            '[Express Locals]', this.controller.locals
+            "[Express Features]", this.#result.getFeatures(),
+            '[Express Locals]', this.#result.getLocals()
         );
-        return this.controller.getApplication();
+        const result = this.#result;
+        this.reset();
+        return result
     }
 }
 
