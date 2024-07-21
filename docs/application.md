@@ -173,56 +173,10 @@ make(typeofProduct) {
     return this.#builder.getProduct();
 }
 ```
-## Class Builder | <None>
-
-La clase Builder es una abtraccion del patron Builder, esta entidad define los pasos de construccion de un producto.
-
-```mermaid
----
-title: Builder Classes
----
-classDiagram
-    Direction LR
-    class Builder {
-        -result ~Product~
-        +buildStepA()
-        +getProduct(): -result
-    }
-
-    class ExpressBuilder {
-        stepDisablePoweredby()
-        stepSetFavicon()
-        stepBuildinFeatures()
-        stepSwagger()
-        stepSetInspector()
-        stepSetRouter()
-        stepSetErrorHandler()
-        stepSetLocals()
-        stepSetNetwork()
-    }
-
-    ExpressBuilder --|> Builder
-```
-
 ---
 
-```mermaid
----
-title: Express Controller Class
----
-classDiagram
-    Direction LR
-    
-    class ExpressController {
-        +app ~express~
-        +features ~Array~
-        locals ~Object~
-        getFeatures(): ~features~
-        getLocals(): ~locals~
-        getApplication(): ~app~
-        pushGeneralFeature(feature)
-        pushPathFeature(feature, path = "/")
-        setPort(port)
-        overrideLocals(newLocals)
-    }
-```
+## Licencia
+Este proyecto está licenciado bajo la licencia MIT.
+
+## Autor
+Cris-mur
