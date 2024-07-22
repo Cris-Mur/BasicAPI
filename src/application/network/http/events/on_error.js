@@ -15,7 +15,7 @@ function onError(error) {
         throw error;
     }
 
-    const port = PortController.getPort()
+    let port = PortController.getPort()
     const bind = typeof port === 'string'
         ? `Pipe ${port}`
         : `Port ${port}`;
