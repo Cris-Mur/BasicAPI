@@ -1,12 +1,18 @@
 class Director {
+    static #builder = undefined;
+    
     /**
      * make function
-     * @param {String} typeofProduct
      * @returns 
      */
-    static make(typeofProduct) {
+    static make() {
         return;
     };
+
+    static changeBuilder(newBuilder) {
+        this.#builder = newBuilder;
+        return this.#builder;
+    }
 }
 
 module.exports = Director;
