@@ -38,6 +38,7 @@
     "#Utils/boolean": "./src/utils/parsers/boolean/index.js",
     "#Utils/csv": "./src/utils/parsers/csv/index.js",
     "#Utils/performance": "./src/utils/performance/index.js",
+    "#Network": "./src/application/network/index.js",
     "#Application": "./src/application/index.js"
   }
 }

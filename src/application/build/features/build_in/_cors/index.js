@@ -1,6 +1,6 @@
 const cors = require("cors");
 const boolean = require('#Utils/boolean');
-const { port } = require('../../network/utils');
+const  port  = require('#Network').port.getPort();
 
 /**
  * @function serverToServerPolicy - evaluate origin in request without origin 

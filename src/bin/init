@@ -26,7 +26,7 @@ console.debug("StartUp Application");
 
 /// #############################################################
 
-basicAPI.getApplication();
+console.debug("[BasicAPI]", basicAPI);
 
 /// #############################################################
 

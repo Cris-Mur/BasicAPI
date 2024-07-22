@@ -3,14 +3,14 @@
  * @module HttpUtilities
  */
 
-const _http = require('./_http');
-const utils = require('./utils');
+const http = require('./http');
+const port = require('./port');
 
 /**
  * Exports an object with HTTP-related utility modules.
  * @type {Object}
  */
 module.exports = { 
-    _http,
-    utils
+    http,
+    port
 };

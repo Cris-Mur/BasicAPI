@@ -11,14 +11,17 @@ const os = require('node:os');
 function onListening() {
     const addr = this.address();
     const bind = typeof addr === 'string'
-        ? `pipe ${addr}`
-        : `port ${addr.port}`;
+        ? `pipe ${addr}` //true
+        : `port ${addr.port}`; // false
     console.log(`Application process id: ${process.pid}`);
-    console.log(`
+    console.log(
+        `
 Listening on ${bind}\n
 http://localhost:${addr.port}\n
 http://${os.hostname}:${addr.port}
-`);}
+`
+    );
+}
 
 /**
  * Exports the function for handling server listening events.

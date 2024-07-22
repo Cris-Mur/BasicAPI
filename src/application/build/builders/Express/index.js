@@ -6,9 +6,7 @@ const boolean = require('#Utils/boolean');
 const build_in = require("../../features/build_in");
 const locals = require("../../features/_locals");
 const homebrew = require('../../features/homebrew');
-const network = require('../../features/network');
 const router = require('../../../../services/router');
-
 const swaggerDocument = require('../../features/openapi')
 const { SwaggerTheme } = require('swagger-themes');
 const swaggerUi = require('swagger-ui-express');
@@ -29,27 +27,6 @@ class ExpressBuilder extends Builder {
     cleanExpress() {
         this.reset();
         this.stepSetNetwork();
-    }
-
-    stepSetNetwork() {
-        // If works as serverless the network procol
-        // is managed in a another place
-        if (boolean(process.env.SERVERLESS))
-            return;
-
-        const application = this.#result.getApplication();
-
-        // Normalize the port and set it on the application
-        this.#result.settupApplicationNetworkPort(network.utils.port);
-
-        // Create and start the server
-        const server = network._http.create_server(application);
-        server.listen(network.utils.port);
-
-        // Handle server errors and listening events
-        server.on('error', network._http.onError);
-        server.on('listening', network._http.onListening);
-        this.server = server;
     }
 
     stepBuildinFeatures() {
@@ -105,14 +82,14 @@ class ExpressBuilder extends Builder {
 
         const swaggerPath = process.env?.SWAGGER_PATH ?? '/api';
         console.debug('[Swagger mountpoint in API PATH]', swaggerPath);
-        
+
         const spec = {
             definition: swaggerDocument,
             apis: ['./src/**/*.js'], // files containing annotations as openapi
         };
-        
+
         const theme = new SwaggerTheme();
-        
+
         const options = {
             explorer: true,
             // https://www.npmjs.com/package/swagger-themes?activeTab=readme#themes
@@ -171,9 +148,9 @@ class ExpressBuilder extends Builder {
 
     getResult() {
         console.debug(
-            "[ExpressBuilder][GET RESULT][Express Features]\n", 
+            "[ExpressBuilder][GET RESULT][Express Features]\n",
             this.#result.getFeatures(),
-            '[ExpressBuilder][GET RESULT][Express Locals]\n', 
+            '[ExpressBuilder][GET RESULT][Express Locals]\n',
             this.#result.getLocals()
         );
         const result = this.#result;

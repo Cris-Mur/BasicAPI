@@ -6,31 +6,47 @@
  */
 
 process.loadEnvFile();
+const network = require('./network');
 const builder = require('./build');
 
 /**
- * @class Application
- * This Class encapsulate Express & Http sever implementation.
+ * @class BasicAPI
+ * @description This Class encapsulate Express & Http sever implementation.
  */
 class BasicAPI {
+    #application = undefined;
     constructor() {
-        this.init();
+        this.initApplication();
+        this.initNetwork();
+    }
+    
+    initNetwork () {
+        const server = network.http;
+        server.initTCPInterface(network.port.getPort());
+        server.setRequestListener(this.#application.getApplication());
+        console.debug(
+            '[BasicAPI][#### Network PORT ####]\n', 
+            network.port.getPort()
+        );
     }
 
     /**
      * @function - to build a new application instance
      */
-    init() {
-        this.application = builder();
+    initApplication () {
+        this.#application = builder();
         console.debug(`[this instance ${this.getApplication()} was mounted]`);
     }
 
+    /**
+     * @function getApplication
+     * @returns <ExpressController> | <express>
+     */
     getApplication() {
-        return this.application;
+        return this.#application;
     }
 }
 /**
- * Exports the configured Express application instance.
- * @type {@class<BasicAPI>}
+ * @exports {@class<BasicAPI>}
  */
 module.exports = new BasicAPI;

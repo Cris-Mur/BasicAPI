@@ -3,8 +3,8 @@
  * @module ServerErrorHandling
  */
 
-let { port } = require('../../utils');
-const boolean = require('../../../../../../utils/parsers/boolean');
+let PortController  = require('../../port');
+const boolean = require('#Utils/boolean');
 
 /**
  * Handles server error events and provides error-specific messages.
@@ -15,6 +15,7 @@ function onError(error) {
         throw error;
     }
 
+    const port = PortController.getPort()
     const bind = typeof port === 'string'
         ? `Pipe ${port}`
         : `Port ${port}`;
