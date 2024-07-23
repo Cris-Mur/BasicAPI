@@ -4,9 +4,7 @@
  * https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.1.0.md
  */
 
-const network = require('#Network');
-
-const port = network.port.getPort();
+const  port  = require('#Network').port.getPort();
 
 module.exports = {
     openapi: '3.1.0',
@@ -32,11 +30,6 @@ module.exports = {
             "description": "Development server",
             "variables": {
                 "port": {
-                    "enum": [
-                        "80",
-                        "8080",
-                        port,
-                    ],
                     "default": port
                 },
             },
@@ -46,4 +39,4 @@ module.exports = {
             "description": "fl0 deploy server"
         }
     ]
-}
+};

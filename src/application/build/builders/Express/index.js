@@ -1,3 +1,4 @@
+const requireUncached = require('#Utils/requireUnCached');
 const ExpressController = require('./express_controller');
 
 const Builder = require('../builder');
@@ -7,7 +8,7 @@ const build_in = require("../../features/build_in");
 const locals = require("../../features/_locals");
 const homebrew = require('../../features/homebrew');
 const router = require('../../../../services/router');
-const swaggerDocument = require('../../features/openapi')
+
 const { SwaggerTheme } = require('swagger-themes');
 const swaggerUi = require('swagger-ui-express');
 const swaggerJsdoc = require('swagger-jsdoc');
@@ -80,22 +81,21 @@ class ExpressBuilder extends Builder {
         if (!boolean(process.env.SWAGGER))
             return;
 
-        const swaggerPath = process.env?.SWAGGER_PATH ?? '/api';
-        console.debug('[Swagger mountpoint in API PATH]', swaggerPath);
-
+        let swaggerDocument = requireUncached('../../features/openapi', __dirname);
+        
         const spec = {
             definition: swaggerDocument,
             apis: ['./src/**/*.js'], // files containing annotations as openapi
         };
 
         const theme = new SwaggerTheme();
-
+        
         const options = {
             explorer: true,
             // https://www.npmjs.com/package/swagger-themes?activeTab=readme#themes
             customCss: theme.getBuffer(process.env?.SWAGGER_THEME ?? 'classic')
         };
-
+        
         const swagger = [
             swaggerUi.serve,
             swaggerUi.setup(
@@ -103,7 +103,9 @@ class ExpressBuilder extends Builder {
                 options
             )
         ];
-
+        
+        const swaggerPath = process.env?.SWAGGER_PATH ?? '/api';
+        console.debug('[Swagger mountpoint in API PATH]', swaggerPath);
         this.#result.addRoutedFeature(swaggerPath, swagger);
         /**
          * @swagger
