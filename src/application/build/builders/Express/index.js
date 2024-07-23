@@ -25,11 +25,6 @@ class ExpressBuilder extends Builder {
         // {app: Express, features: [], locals: {}}
     }
 
-    cleanExpress() {
-        this.reset();
-        this.stepSetNetwork();
-    }
-
     stepBuildinFeatures() {
         const application = this.#result;
         if (!boolean(process.env.BUILD_IN_FEATURES))
