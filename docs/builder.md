@@ -37,28 +37,123 @@ Devuelve el resultado actual.
 - **Retorno**: `object` - El resultado actual.
 
 ---
+# Class ExpressBuilder
 
 ```mermaid
 ---
 title: ExpressBuilder Class
 ---
 classDiagram
-    Direction LR
-
-    class ExpressBuilder {
-        stepDisablePoweredby()
-        stepSetFavicon()
-        stepBuildinFeatures()
-        stepSwagger()
-        stepSetInspector()
-        stepSetRouter()
-        stepSetErrorHandler()
-        stepSetLocals()
-        stepSetNetwork()
+    class Builder {
+        <<abstract>>
     }
 
-    ExpressBuilder --|> Builder
+    class ExpressController {
+        // properties and methods of ExpressController
+    }
+
+    class ExpressBuilder {
+        -#result
+        +reset()
+        +stepBuildinFeatures()
+        +stepDisablePoweredby()
+        +stepSetFavicon()
+        +stepSwagger()
+        +stepSetInspector()
+        +stepSetErrorHandler()
+        +stepSetRouter()
+        +stepSetLocals()
+        +getResult() ExpressController
+    }
+
+    ExpressBuilder --> Builder : inherits
+    ExpressBuilder --> ExpressController : uses
 ```
+
+
+## Descripción
+
+La clase `ExpressBuilder` proporciona todos los métodos necesarios para construir una aplicación Express. Hereda de la clase `Builder` y permite configurar diversas características de la aplicación Express mediante pasos específicos.
+
+## Clase ExpressBuilder
+
+### Propiedades
+
+- **#result**: Almacena la instancia de `ExpressController`.
+
+### Métodos
+
+#### reset
+
+```javascript
+reset()
+```
+Restablece el resultado a una nueva instancia de `ExpressController`.
+
+#### stepBuildinFeatures
+
+```javascript
+stepBuildinFeatures()
+```
+Añade características integradas a la aplicación si están habilitadas por las variables de entorno.
+
+#### stepDisablePoweredby
+
+```javascript
+stepDisablePoweredby()
+```
+Desactiva el encabezado 'x-powered-by' por motivos de seguridad si está habilitado por las variables de entorno.
+
+#### stepSetFavicon
+
+```javascript
+stepSetFavicon()
+```
+Configura el favicon para la aplicación.
+
+#### stepSwagger
+
+```javascript
+stepSwagger()
+```
+Configura la documentación Swagger para la aplicación si está habilitada por las variables de entorno.
+
+#### stepSetInspector
+
+```javascript
+stepSetInspector()
+```
+Configura el middleware de inspector si está habilitado por las variables de entorno.
+
+#### stepSetErrorHandler
+
+```javascript
+stepSetErrorHandler()
+```
+Configura los manejadores de errores si están habilitados por las variables de entorno.
+
+#### stepSetRouter
+
+```javascript
+stepSetRouter()
+```
+Configura el enrutador principal para la aplicación.
+
+#### stepSetLocals
+
+```javascript
+stepSetLocals()
+```
+Configura variables locales para la aplicación si están habilitadas por las variables de entorno.
+
+#### getResult
+
+```javascript
+getResult()
+```
+Devuelve el resultado actual y restablece el constructor.
+
+- **Retorno**: `ExpressController` - El resultado actual.
 
 ---
 
@@ -299,4 +394,4 @@ Configura el puerto de red para la aplicación.
 Este proyecto está licenciado bajo la licencia MIT.
 
 ## Autor
-Cris-mur
+[@Cris-mur](https://github.com/cris-mur)
