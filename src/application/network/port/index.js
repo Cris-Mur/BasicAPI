@@ -1,16 +1,21 @@
 class PortController {
     #port;
-
     constructor() {
-        this.#port = this.normalizePort(this.loadPortOfEnv());
-        process.env.PORT = this.#port;
+        this.loadPort();
     }
 
     getPort() {
         return this.#port;
     }
 
-    loadPortOfEnv() {
+    setPort(port) {
+        port = this.normalizePort(port);
+        this.#port = port;
+        process.env.PORT = port;
+        return port;
+    }
+
+    getPortOfEnv() {
         switch (process.env.NODE_ENV) {
             case 'production':
                 return process.env.PORT ?? 0;
@@ -36,6 +41,11 @@ class PortController {
 
         // Invalid port
         return false;
+    }
+
+    loadPort() {
+        const port = this.getPortOfEnv();
+        return this.setPort(port);
     }
 }
 

@@ -5,6 +5,8 @@
  * @autor Cris-mur
  */
 const http = require("node:http");
+const { onError } = require('./events/on_error')
+const { onListening } = require('./events/on_listening')
 
 /**
  * @class HttpController
@@ -19,9 +21,14 @@ class HttpController {
      * @description - 
      */
     constructor() {
-        this.#events = {};
+        this.initServer()
+    }
+    
+    initServer() {
         this.#server = this.createHTTPServer();
         this.interface = this.#server.address();
+        this.#events = {};
+        this.setBaseEvents();
     }
 
     getRegisteredEvents() {
@@ -53,6 +60,16 @@ class HttpController {
         else
             this.#events[eventName] = [eventHandler];
     }
+
+    setBaseEvents() {
+        this.setEvent("error", onError);
+        this.setEvent("listening", onListening);
+    }
+
+    restartServer() {
+        this.#server.closeAllConnections();
+        this.initServer();
+    }
 }
 
-module.exports = HttpController;
+module.exports = new HttpController();
