@@ -11,7 +11,8 @@ function applicationErrors(error_, res) {
     }
 
     const applicationErrors_ = {
-        serverToServerPolicy: 503
+        serverToServerPolicy: 503,
+        WhitelistCORSPolicy: 500
     }
 
     res.status(

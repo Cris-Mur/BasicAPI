@@ -7,16 +7,25 @@ const  port  = require('#Network').port.getPort();
  * header policy return true if origin are undefined or fallse if origin 
  * exist or policy are dissabled.
 */
-function serverToServerPolicy(origin) {
+function originPolicy(origin) {
     const whitelist = [
         `http://127.0.0.1:${port}`,
         `http://localhost:${port}`
     ];
     // Server to Server Policy
-    // origin = undefined
+    // origin is only sent by the browser
+    // if the request have a diferent origin
+    // origin is undefined cause by SAME ORIGIN or request by another server
+    console.warn('[ORIGIN in Request]', origin);
+    // true  & true : srvs and sameOrigin pass
+    // true  & false: pass to whitelist policy
+    // false & true : srvs or sameOrigin are blocked
+    // false & false: pass to whitelist policy
     if (boolean(process.env.SRVTOSRV) && origin === undefined) {
         return true;
     }
+    // truthly : Whitelist policy
+    // false   : Origin Header are Required
     if (origin) {
         if (!whitelist.includes(origin)) {
             console.debug(
@@ -25,6 +34,7 @@ function serverToServerPolicy(origin) {
                 boolean(process.env.SRVTOSRV)
             )
             const CORS_Error = new Error('Not allowed by CORS');
+            CORS_Error.applicationTypeError = "WhitelistCORSPolicy"
             throw CORS_Error;
         }
         return true;
@@ -52,16 +62,16 @@ function factoryCors() {
     if (!boolean(process.env.CORS))
         return undefined;
 
-    const options = {
-        origin(origin, callback) {
+    const corsOptions = {
+        origin: function (origin, callback) {
             try {
-                return callback(null, serverToServerPolicy(origin));
+                return callback(null, originPolicy(origin));
             } catch (error_) {
                 console.warn("[CORS Policy]", error_.applicationTypeError);
                 return callback(error_);
             }
         }
     }
-    return cors(options);
+    return cors(corsOptions);
 }
 module.exports = factoryCors();
