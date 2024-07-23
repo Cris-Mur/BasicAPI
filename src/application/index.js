@@ -20,12 +20,7 @@ class BasicAPI {
     }
 
     initNetwork() {
-        const server = network.http;
-        server.initTCPInterface(network.port.getPort());
-        console.debug(
-            '[BasicAPI][#### Network PORT ####]\n',
-            network.port.getPort()
-        );
+        network.http.initTCPInterface(network.port.getPort());
     }
 
     /**
