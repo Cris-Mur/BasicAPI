@@ -17,15 +17,13 @@ class BasicAPI {
     #application = undefined;
     constructor() {
         this.initApplication();
-        this.initNetwork();
     }
-    
-    initNetwork () {
+
+    initNetwork() {
         const server = network.http;
         server.initTCPInterface(network.port.getPort());
-        server.setRequestListener(this.#application.getApplication());
         console.debug(
-            '[BasicAPI][#### Network PORT ####]\n', 
+            '[BasicAPI][#### Network PORT ####]\n',
             network.port.getPort()
         );
     }
@@ -33,8 +31,12 @@ class BasicAPI {
     /**
      * @function - to build a new application instance
      */
-    initApplication () {
+    initApplication() {
+        this.initNetwork();
         this.#application = builder();
+        network.http.
+            setRequestListener(this.#application.getApplication());
+
         console.debug(`[this instance ${this.getApplication()} was mounted]`);
     }
 
