@@ -9,8 +9,8 @@ try {
     process.loadEnvFile();
 } catch (error) {
     try {
-        console.warn('[####][WARNING][####][RUN APPLICATION WITH ENVIRONMENT EXAMPLE]');
         process.loadEnvFile('./env.example');
+        console.warn('[####][WARNING][####][RUN APPLICATION WITH ENVIRONMENT EXAMPLE]');
     } catch (error) {
         console.warn('[####][WARNING][####][RUN APPLICATION WITHOUT ENVIRONMENT FILE]');
     }
