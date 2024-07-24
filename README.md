@@ -3,29 +3,27 @@
 [![DeepSource](https://app.deepsource.com/gh/Cris-Mur/BasicAPI.svg/?label=active+issues&show_trend=true&token=zS-SGTUGprpijwyk0MQ_TA_G)](https://app.deepsource.com/gh/Cris-Mur/BasicAPI/)
 
 ---
-"Basic API" is a opinionated implementation of Express JS in Node JS, where we wanted a Application that be a Web Server ready to become in another projects.
+"Basic API" is an opinionated implementation of a Web API Application, now we implement Express.JS in Node.JS, where we wants an application that could become in a template of another projects.
 
-For information on how to [contribute](./CONTRIBUTE), if you see any opportunities to enhance this project, please don't hesitate to submit a issue with your proposed changes.
+If you see any opportunities to enhance this project, please don't hesitate to submit a issue with your proposed changes. For information on how to [contribute](./CONTRIBUTE).
 
 Please refer to the [environment example](./env.example) before running this application.
 
-For developer information, [go here](./src/).
+For developer information, [go here](./docs/).
+You can navigate [src folder](./src/), and check the readme files inside.
 
 ---
 ## Quick Start
 
 ### Requirements and Installation
 
-This app was designed for an X86 machine, recommended use a GNU/Linux machine.
-
-Additionally, this is a NodeJS application. Please ensure that you have installed Nodejs in the latest of LTS (Long Term Support) version, in other case you can use a major version of 21.7.3
-
-In the same way for the Package Manager, like NPM in version 10.5.0 or version LTS
+- This Application was thought to run in a gnu/linux machine.
+- Develop using [Node.JS](https://nodejs.org/) in current version, we recommend install using this version or latest LTS version (Long Term Support) and latest of [package manager](https://github.com/npm/cli/releases/latest) version.
 
 ```bash
 # First Clone the repo
 git clone https://github.com/cris-mur/basicapi.git
-cd BasicAPI
+cd basicapi
 # then Install Project dependencies, in this case with npm
 npm i
 # Copy Environment example in environment file
@@ -34,7 +32,10 @@ cat ./env.example > .env
 npm run start
 ```
 ### Environment
-Primarily, this app can be configured using an environment file to adjust settings such as the behavior of the logger or server settings. For example, the JSON parser can be configured using environment variables.
+
+Mainly we wanted that this application can be configured using the environment variables, cause we feel set some var using a file is more comfortable than modifying the source code to able or disable features.
+
+To setup the application behavior for example, change which request parser the application can use, change his settings, or set another features, we recommend use the example file to start.
 
 ```Env
 ### NODE SPACE
@@ -69,11 +70,12 @@ Primarily, this app can be configured using an environment file to adjust settin
 .
 ```
 
-in case that you start application without Environment file, the application will use a clean Express implementation.
+in case that you start application without Environment file, the application will use the example file to startup. (and it fails, the applications will runs in default mode)
 
 ---
 ## Run and develop
 
+- Please check [package.json](./package.json) file to more information.
 ```bash
 $ npm run start
 
@@ -169,8 +171,10 @@ Listening on port 6661
 ```
 
 ---
----
+
+made with love by - 
+
 <div align="center">
-<p>Author <a src=https:github.com/cris-mur>Cristian Murcia</a></p>
-<img src="https://avatars.githubusercontent.com/u/28773000" alt="Avatar de GitHub" style="border-radius: 15%;" width="100" height="75"/>
+<p><a src=https:github.com/cris-mur>Cristian Murcia</a></p>
+<img src="https://avatars.githubusercontent.com/u/28773000" alt="Avatar de GitHub" style="border-radius: 20%;" width="100" height="75"/>
 </div>

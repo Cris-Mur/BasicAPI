@@ -1,30 +1,5 @@
 # BasicAPI [Application](../src/application/) Module Documentation
-La aplicacion es una entidad que se construye en el momento del arranque de NodeJS y queda a la espera de eventos http en el event loop de NodeJS.
 
-```Text
-          The Event Loop
-   ┌───────────────────────────┐
-┌─>│           timers          │
-│  └─────────────┬─────────────┘
-│  ┌─────────────┴─────────────┐
-│  │     pending callbacks     │
-│  └─────────────┬─────────────┘
-│  ┌─────────────┴─────────────┐
-│  │       idle, prepare       │
-│  └─────────────┬─────────────┘      ┌─────────────────┐
-│  ┌─────────────┴─────────────┐      │     incoming:   │
-│  │           poll            │<─────┤ The Application │
-│  └─────────────┬─────────────┘      └─────────────────┘
-│  ┌─────────────┴─────────────┐
-│  │           check           │
-│  └─────────────┬─────────────┘
-│  ┌─────────────┴─────────────┐
-└──┤      close callbacks      │
-   └───────────────────────────┘
-
-The cycle of one execution of the NodeJS.
-```
-Entonces definimos BasicAPI como esta entidad que en su interior construye una instancia de express.
 
 ```mermaid
 ---
