@@ -20,7 +20,14 @@ console.log(`
 `);
 
 require('#Utils/logger');
+const boolean = require('#Utils/boolean');
 const basicAPI = require('#Application');
+
+if (boolean(process.env.SERVERLESS)) {
+    console.error('you enable serverless feature but you start the server');
+    process.exit();
+}
+
 console.time("Startup")
 console.debug("StartUp Application");
 
@@ -32,7 +39,3 @@ console.debug("[BasicAPI]", basicAPI);
 
 console.debug(`[End of StartUp application ready]`)
 console.timeEnd("Startup")
-if (process.env.SERVERLESS) {
-    console.error('you enable serverless feature but you start the server');
-    process.exit();
-}
