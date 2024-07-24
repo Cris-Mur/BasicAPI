@@ -1,14 +1,6 @@
-/**
- * To more information about open API Spec
- * https://spec.openapis.org/oas/latest.html
- * https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.1.0.md
- */
-
-const  port  = require('#Network').port.getPort();
-
-module.exports = {
-    openapi: '3.1.0',
-    info: {
+{
+    "openapi": "3.1.0",
+    "info": {
         "title": "Basic API Reference",
         "summary": "A API specification.",
         "description": "This is a sample server.",
@@ -26,17 +18,20 @@ module.exports = {
     },
     "servers": [
         {
-            "url": `http://localhost:{port}/`,
-            "description": "Development server",
-            "variables": {
-                "port": {
-                    "default": port
-                },
-            },
-        },
-        {
-            "url": `https://basicapi-dev-aktc.4.us-1.fl0.io`,
+            "url": "https://basicapi-dev-aktc.4.us-1.fl0.io",
             "description": "fl0 deploy server"
         }
-    ]
-};
+    ],
+    "paths": {
+    "/errors/test-error-message": {
+      "get": {
+        "description": "this endpoints test how applications fails",
+        "responses": {
+          "200": {
+            "description": "Returns a mysterious string."
+          }
+        }
+      }
+    }
+  }
+}

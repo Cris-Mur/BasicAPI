@@ -102,7 +102,7 @@ class ExpressBuilder extends Builder {
     stepSwagger() {
         if (!boolean(process.env.SWAGGER)) return;
 
-        let swaggerDocument = requireUncached('./api_specification/openapi.js', __dirname);
+        let swaggerDocument = requireUncached('./api_specification/spec_controller.js', __dirname);
 
         const spec = {
             definition: swaggerDocument,
