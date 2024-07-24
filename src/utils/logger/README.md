@@ -43,7 +43,3 @@ The environment is important to use this library, the application loads a enviro
 This module adds a template String before console output content like a sign to useful logs manager.
 
 ---
-
-### [Home](../../../README.md)
-#### [Bin](../../README.md)
-##### [Application](../../../application/README.md)

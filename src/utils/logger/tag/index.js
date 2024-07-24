@@ -1,6 +1,6 @@
 /**
  * @module logger.tag
- * Module to customize tag in console
+ * @description - Module to customize tag in console.
  * @license MIT
  * @author Cris-Mur
  */
@@ -27,13 +27,12 @@ const BLUE_BG = '\x1b[104m';
 const BLACK_TEXT = '\x1b[30m';
 const RESET = '\x1b[0m';
 
-
 // ## Getter functions
 
 /**
  * @function getNodeEnvironment
- * @description This function retunrn a node environment setted in NODE_ENV
- * @returns {String} environment.
+ * @description This function returns the node environment set in NODE_ENV.
+ * @returns {String} Environment.
  */
 function getNodeEnvironment() {
     return process.env.NODE_ENV ?? "development";
@@ -41,7 +40,7 @@ function getNodeEnvironment() {
 
 /**
  * @function getEnvTag
- * this function returns a string tag of environment
+ * @description This function returns a string tag of the environment.
  * @returns {String} `[ ${env} ]`
  */
 function getEnvTag() {
@@ -49,32 +48,36 @@ function getEnvTag() {
 }
 
 /**
- * get Machine hostname
- * @returns {String}
+ * @function getHost
+ * @description Get the machine hostname.
+ * @returns {String} Hostname.
  */
 function getHost() {
-    return os.hostname;
+    return os.hostname();
 }
 
 /**
- * get formated hostname tag
- * @returns {String}
+ * @function getHostTag
+ * @description Get the formatted hostname tag.
+ * @returns {String} Formatted hostname tag.
  */
 function getHostTag() {
     return `[ ${centerString(getHost(), getHost().length)} ]`;
 }
 
 /**
- * Get Date in isoformat
- * @returns {String}
+ * @function getDate
+ * @description Get the date in ISO format.
+ * @returns {String} Date in ISO format.
  */
 function getDate() {
     return new Date().toISOString();
 }
 
 /**
- * Get formated date tag
- * @returns {String}
+ * @function getDateTag
+ * @description Get the formatted date tag.
+ * @returns {String} Formatted date tag.
  */
 function getDateTag() {
     const date = getDate();
@@ -82,29 +85,28 @@ function getDateTag() {
 }
 
 /**
- * Get formated level tag
- * @param {String} level 
- * @returns {String}
+ * @function getLevelTag
+ * @description Get the formatted level tag.
+ * @param {String} level - Log level.
+ * @returns {String} Formatted level tag.
  */
 function getLevelTag(level) {
-    if (!level)
-        return '';
+    if (!level) return '';
     const level_tag = level;
     const levelPadding = 9;
-    let tag = centerString(level, levelPadding)
-    tag = `[${colorizeLevel(level_tag, tag)}] `
+    let tag = centerString(level, levelPadding);
+    tag = `[${colorizeLevel(level_tag, tag)}] `;
     return tag;
 }
 
 /**
- * @function newTag - generates a pretty tag to prints in console
- * @param {String} level 
- * @returns {String}
+ * @function getTag
+ * @description Generates a pretty tag to print in console.
+ * @param {String} level - Log level.
+ * @returns {String} Generated tag.
  */
 function getTag(level) {
-    //logger enable?
-    if (!boolean(process.env.LOGGER))
-        return '';
+    if (!boolean(process.env.LOGGER)) return '';
     return ''.concat(
         getHostTag(),
         getEnvTag(),
@@ -114,19 +116,17 @@ function getTag(level) {
     );
 }
 
-
 // ## Format functions
 
 /**
- * this function centered a string in a space.
- * @param {String} inputString 
- * @param {Number} totalSpaces 
- * @returns {String} centered spaced string
+ * @function centerString
+ * @description This function centers a string in a space.
+ * @param {String} inputString - The string to center.
+ * @param {Number} totalSpaces - The total spaces to center within.
+ * @returns {String} Centered spaced string.
  */
 function centerString(inputString, totalSpaces) {
-
-    if (!inputString)
-        return '';
+    if (!inputString) return '';
 
     if (totalSpaces < inputString.length) {
         inputString = `${inputString.substring(0, totalSpaces - 3)}...`;
@@ -140,14 +140,15 @@ function centerString(inputString, totalSpaces) {
 }
 
 /**
- * @function levelColor - This function adds color into string using level tag.
- * @param {String} level 
- * @param {String} input 
- * @returns 
+ * @function colorizeLevel
+ * @description This function adds color to a string using the level tag.
+ * @param {String} level - Log level.
+ * @param {String} input - The string to colorize.
+ * @returns {String} Colorized string.
  */
 function colorizeLevel(level, input) {
     if (!boolean(process.env.COLORED) || !level) {
-        return input
+        return input;
     }
     const color = {
         log: {
@@ -166,7 +167,7 @@ function colorizeLevel(level, input) {
             start: `${GREEN_BG}${BLACK_TEXT}`,
             end: `${RESET}`
         }
-    }
+    };
 
     return color[level].start + input + color[level].end;
 }

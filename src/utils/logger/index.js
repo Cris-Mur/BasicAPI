@@ -1,8 +1,8 @@
 /**
  * @module logger
- * Module to customize build-in console functions improoving loging features.
+ * @description - Module to customize built-in console functions improving logging features.
  * @license MIT
- * @author Cris-Mur
+ * @autor Cris-Mur
  */
 const boolean = require('#Utils/boolean');
 const tag = require('./tag');
@@ -21,8 +21,6 @@ function logger(...args) {
 }
 console.log = logger;
 
-// ---
-
 const raw_error = console.error;
 /**
  * @function logger_error
@@ -36,13 +34,11 @@ function logger_error(...args) {
 }
 console.error = logger_error;
 
-// --
-
 const raw_debug = console.debug;
 /**
  * @function logger_debug
  * @description - Overrides the default `console.debug`.
- * @param {...any} args - Arguments to be logged as errors.
+ * @param {...any} args - Arguments to be logged as debug messages.
  */
 function logger_debug(...args) {
     if (!boolean(process.env.VERBOSE))
@@ -51,16 +47,13 @@ function logger_debug(...args) {
     const prefix = tag(level);
     raw_debug(prefix + applyFormat(...args));
 }
-
 console.debug = logger_debug;
-
-// ---
 
 const raw_warn = console.warn;
 /**
  * @function logger_warn
  * @description - Overrides the default `console.warn`.
- * @param {...any} args - Arguments to be logged as errors.
+ * @param {...any} args - Arguments to be logged as warnings.
  */
 function logger_warn(...args) {
     if (!boolean(process.env.VERBOSE))
@@ -69,16 +62,13 @@ function logger_warn(...args) {
     const prefix = tag(level);
     raw_warn(prefix + applyFormat(...args));
 }
-
 console.warn = logger_warn;
-
-// ---
 
 /**
  * @function applyFormat
- * @description - Function to handle format of input using core fn.
+ * @description - Function to handle format of input using core function.
  * @param  {...any} args - Input of console
- * @returns {util.formatWithOptions}
+ * @returns {string} Formatted string with options.
  */
 function applyFormat(...args) {
     const formatOptions = {
