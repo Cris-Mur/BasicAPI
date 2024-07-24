@@ -5,7 +5,17 @@
  * @author Cris-Mur
  */
 
-process.loadEnvFile();
+try {
+    process.loadEnvFile();
+} catch (error) {
+    try {
+        console.warn('[####][WARNING][####][RUN APPLICATION WITH ENVIRONMENT EXAMPLE]');
+        process.loadEnvFile('./env.example');
+    } catch (error) {
+        console.warn('[####][WARNING][####][RUN APPLICATION WITHOUT ENVIRONMENT FILE]');
+    }
+}
+
 const network = require('./network');
 const builder = require('./build');
 
