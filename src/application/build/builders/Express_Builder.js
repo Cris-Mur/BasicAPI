@@ -7,15 +7,16 @@
  */
 
 const requireUncached = require('#Utils/requireUnCached');
-const ExpressController = require('./express_controller');
-
-const Builder = require('../builder');
-
 const boolean = require('#Utils/boolean');
-const build_in = require("../../features/build_in");
-const locals = require("../../features/_locals");
-const homebrew = require('../../features/homebrew');
-const router = require('../../../../services/router');
+const Builder = require('./Builder');
+const EngineExpress = require('./Engines').ExpressEngine;
+const ExpressController = EngineExpress.ExpressController;
+
+const buildIn = EngineExpress.features.buildIn;
+const locals = EngineExpress.features.buildIn.properties.locals;
+const homebrew = EngineExpress.features.homebrew;
+
+const router = require('../../../services/router');
 
 const { SwaggerTheme } = require('swagger-themes');
 const swaggerUi = require('swagger-ui-express');
@@ -40,34 +41,38 @@ class ExpressBuilder extends Builder {
     }
 
     /**
-     * @method stepBuildinFeatures
+     * @method stepBuildinMiddlewares
      * @description - Adds built-in features to the application if enabled by environment variables.
      */
     stepBuildinFeatures() {
         if (!boolean(process.env.BUILD_IN_FEATURES)) return;
 
-        const middlewares = build_in;
-        for (const setting in middlewares) {
-            if (!middlewares[setting]) continue;
-            console.debug('[loading middleware]', setting, middlewares[setting]);
-            if (setting === "_static") {
-                /**
-                 * @function setupStaticFeature
-                 * @description - Function that runs policy to start static srv feature.
-                 * @param {ExpressController} expressController - The Express application instance.
-                 */
-                function setupStaticFeature(expressController) {
-                    if (!build_in._static) return;
-                    const defaultPath = '/';
-                    const customPath = process.env?.STATIC_PATH ?? defaultPath;
-                    console.debug("[_static middleware path]", customPath);
-                    expressController.addRoutedFeature(customPath, build_in._static);
-                }
-                setupStaticFeature(this.#result);
-                continue;
-            }
-            this.#result.addGlobalFeature(middlewares[setting]);
+        this.stepStaticServer();
+        this.stepSetCors();
+        this.stepParsers();
+    }
+
+    stepParsers() {
+        const parsers = buildIn.middlewares.parsers;
+
+        for (const parser in parsers) {
+            if (!parsers[parser]) continue;
+            console.warn('[####][BUILD IN PARSERS][#####]', parser);
+            this.#result.addGlobalFeature(parsers[parser]);
         }
+    }
+    stepStaticServer() {
+        if (!buildIn.middlewares.staticServer) return;
+        const defaultPath = '/';
+        const customPath = process.env?.STATIC_PATH ?? defaultPath;
+        console.debug("[static server middleware path]", customPath);
+        this.#result.addRoutedFeature(customPath, buildIn.middlewares.staticServer);
+    }
+
+    stepSetCors() {
+        if(!buildIn.middlewares.cors) return;
+
+        this.#result.addGlobalFeature(buildIn.middlewares.cors);
     }
 
     /**
@@ -97,7 +102,7 @@ class ExpressBuilder extends Builder {
     stepSwagger() {
         if (!boolean(process.env.SWAGGER)) return;
 
-        let swaggerDocument = requireUncached('../../features/openapi', __dirname);
+        let swaggerDocument = requireUncached('./api_specification/openapi.js', __dirname);
 
         const spec = {
             definition: swaggerDocument,

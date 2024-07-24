@@ -8,12 +8,12 @@
  * @author @Cris-Mur
  */
 
-const Builder = require('./builder');
-const ExpressBuilder = require('./Express');
+const Builder = require('./Builder');
+const ExpressBuilder = require('./Express_Builder');
 
 /**
  * @type {Object}
- * @property {Builder} Builder - The generic builder module.
+ * @property {Class<Builder>} Builder - The generic builder module.
  * @property {ExpressBuilder} ExpressBuilder - The Express application builder module.
  */
 module.exports = {
