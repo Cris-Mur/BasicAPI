@@ -16,7 +16,7 @@ const buildIn = EngineExpress.features.buildIn;
 const locals = EngineExpress.features.buildIn.properties.locals;
 const homebrew = EngineExpress.features.homebrew;
 
-const router = require('../../../services/router');
+const router = require('#MainRouter');
 
 const { SwaggerTheme } = require('swagger-themes');
 const swaggerUi = require('swagger-ui-express');
@@ -112,7 +112,6 @@ class ExpressBuilder extends Builder {
         const theme = new SwaggerTheme();
 
         const options = {
-            explorer: true,
             // https://www.npmjs.com/package/swagger-themes?activeTab=readme#themes
             customCss: theme.getBuffer(process.env?.SWAGGER_THEME ?? 'classic')
         };

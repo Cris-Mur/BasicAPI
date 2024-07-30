@@ -40,6 +40,7 @@
     "#Utils/performance": "./src/utils/performance/index.js",
     "#Utils/requireUnCached": "./src/utils/require_uncached/index.js",
     "#Network": "./src/application/network/index.js",
+    "#MainRouter": "./src/services/router.js",
     "#Application": "./src/application/index.js"
   }
 }
