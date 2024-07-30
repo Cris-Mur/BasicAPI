@@ -1,17 +1,16 @@
 const Director = require('../director');
-const { ExpressBuilder } = require('../../builders');
 
 class ExpressDirector extends Director {
     #builder = undefined;
-    constructor(builder) {
-        super();
+
+    setBuilder(builder) {
+        console.debug("[ExpressDirector][setBuilder][####]", builder);
         this.#builder = builder;
-        console.debug("[ExpressDirector][Constructor][Init new instance of ExpressDirector]");
     }
 
     make() {
+        console.debug("[ExpressDirector][make][Making a complex product]");
         this.#builder.reset();
-        console.debug('[ExpressDirector][make][Making a complex product]');
         this.#builder.stepDisablePoweredby();
         this.#builder.stepSetFavicon();
         this.#builder.stepBuildinFeatures();
@@ -24,4 +23,4 @@ class ExpressDirector extends Director {
     }
 }
 
-module.exports = new ExpressDirector(new ExpressBuilder());
+module.exports = ExpressDirector;

@@ -6,13 +6,16 @@
 */
 
 const { ExpressDirector } = require('./Director');
+const { ExpressBuilder } = require('./builders');
 
 module.exports = function build() {
     try {
-        console.debug('[Build][Building a express Application]');
-        const director = ExpressDirector;
+        console.debug("[BUILD][Building Application]");
+        const director = new ExpressDirector();
+        director.setBuilder(new ExpressBuilder());
         return director.make();
     } catch (error) {
-        console.error(`[build][ExpressDirector][ # ERROR # ]`, error);
+        console.error("[build][ExpressDirector][ # ERROR # ]", error);
+        process.exit();
     }
 }

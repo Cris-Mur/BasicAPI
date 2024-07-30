@@ -9,8 +9,12 @@ class Director {
         return;
     };
 
-    static changeBuilder(newBuilder) {
-        this.#builder = newBuilder;
+    static setBuilder(builder) {
+        console.debug('[Director][SET][Builder]', builder.name);
+        this.#builder = builder;
+    }
+
+    static getBuilder() {
         return this.#builder;
     }
 }
