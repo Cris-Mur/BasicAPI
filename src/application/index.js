@@ -5,19 +5,7 @@
  * @author Cris-Mur
  */
 
-try {
-    process.loadEnvFile();
-} catch (error) {
-    try {
-        process.loadEnvFile('./env.example');
-        console.warn('[####][WARNING][####][RUN APPLICATION WITH ENVIRONMENT EXAMPLE]');
-    } catch (error) {
-        console.warn('[####][WARNING][####][RUN APPLICATION WITHOUT ENVIRONMENT FILE]');
-    }
-}
-
-const network = require('./network');
-const builder = require('./build');
+const requireUnCached = require('#Utils/requireUnCached');
 
 /**
  * @class BasicAPI
@@ -25,12 +13,33 @@ const builder = require('./build');
  */
 class BasicAPI {
     #application = undefined;
+    build;
+    #network;
     constructor() {
-        this.initApplication();
+        this.build = require('./build');
+        this.#network = require('./network');
+        this.startup();
+    }
+
+    loadEnvironment() {
+        try {
+            process.loadEnvFile();
+        } catch (error) {
+            try {
+                process.loadEnvFile('./env.example');
+                console.warn('[####][WARNING][####][RUN APPLICATION WITH ENVIRONMENT EXAMPLE]');
+            } catch (error) {
+                console.warn('[####][WARNING][####][RUN APPLICATION WITHOUT ENVIRONMENT FILE]');
+            }
+        }
+    }
+
+    loadLogger() {
+        require('#Utils/logger');
     }
 
     initNetwork() {
-        network.http.initTCPInterface(network.port.getPort());
+        this.#network.http.initTCPInterface(this.#network.port.getPort());
     }
 
     /**
@@ -38,11 +47,16 @@ class BasicAPI {
      */
     initApplication() {
         this.initNetwork();
-        this.#application = builder();
-        network.http.
-            setRequestListener(this.#application.getApplication());
+        this.#application = this.build();
+        this.#network.http.
+            setRequestListener(
+                this.#application.getApplication()
+            );
 
-        console.debug(`[this instance ${this.getApplication()} was mounted]`);
+        console.debug("[BasicAPI][initApplication]",
+            this.#application.getApplication().name,
+            "[was mounted]"
+        );
     }
 
     /**
@@ -51,6 +65,16 @@ class BasicAPI {
      */
     getApplication() {
         return this.#application;
+    }
+
+    startup() {
+        this.loadEnvironment();
+        this.loadLogger();
+        this.initApplication();
+    }
+
+    reset() {
+        this.#network = requireUnCached('./network', __dirname);
     }
 }
 /**
