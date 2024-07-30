@@ -191,7 +191,9 @@ class ExpressBuilder extends Builder {
     getResult() {
         console.debug(
             "[ExpressBuilder][GET RESULT][Express Features]\n",
-            this.#result.getFeatures(),
+            this.#result.getFeatures());
+    
+        console.debug(
             '[ExpressBuilder][GET RESULT][Express Locals]\n',
             this.#result.getLocals()
         );
