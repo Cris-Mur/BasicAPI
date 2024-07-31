@@ -102,7 +102,7 @@ class ExpressBuilder extends Builder {
     stepSwagger() {
         if (!boolean(process.env.SWAGGER)) return;
 
-        let swaggerDocument = requireUncached('./api_specification/spec_controller.js', __dirname);
+        const swaggerDocument = requireUncached('./api_specification/spec_controller.js', __dirname);
 
         const spec = {
             definition: swaggerDocument,
@@ -176,7 +176,7 @@ class ExpressBuilder extends Builder {
      */
     stepSetLocals() {
         if (!boolean(process.env.LOCAL_VARS)) return;
-        for (let key in locals) {
+        for (const key in locals) {
             const value = locals[key];
             this.#result.setApplicationLocalVar(key, value);
         }

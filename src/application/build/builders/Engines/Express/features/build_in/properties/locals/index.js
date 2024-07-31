@@ -45,7 +45,7 @@ function splitLocals(locals) {
 }
 
 function getLocalsInEnvironment() {
-    let envLocals = Object.
+    const envLocals = Object.
         keys(process.env).
         filter((key) => { 
             return /locals_/i.test(key)
