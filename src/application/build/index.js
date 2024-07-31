@@ -16,6 +16,6 @@ module.exports = function build() {
         return director.make();
     } catch (error) {
         console.error("[build][ExpressDirector][ # ERROR # ]", error);
-        process.exit();
+        throw new Error('Error on Building process of Application');
     }
 }
