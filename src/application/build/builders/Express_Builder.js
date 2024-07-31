@@ -47,6 +47,10 @@ class ExpressBuilder extends Builder {
     stepBuildinFeatures() {
         if (!boolean(process.env.BUILD_IN_FEATURES)) return;
 
+        console.debug(
+            '[ExpressBuilder][stepBuildinFeatures][LOADING BUILD IN FEATURES]',
+            buildIn
+        );
         this.stepStaticServer();
         this.stepSetCors();
         this.stepParsers();
@@ -71,7 +75,7 @@ class ExpressBuilder extends Builder {
 
     stepSetCors() {
         if(!buildIn.middlewares.cors) return;
-
+        console.debug('[ExpressBuilder][stepSetCors]');
         this.#result.addGlobalFeature(buildIn.middlewares.cors);
     }
 
