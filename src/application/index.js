@@ -19,6 +19,8 @@ class BasicAPI {
     build;
     #network;
     constructor() {
+        this.loadLogger();
+        this.loadEnvironment();
         this.build = require('./build');
         this.#network = require('./network');
         this.startup();
@@ -89,8 +91,6 @@ class BasicAPI {
      * @description Loads environment, logger, and initializes the application.
      */
     startup() {
-        this.loadEnvironment();
-        this.loadLogger();
         this.initApplication();
     }
 
