@@ -60,13 +60,13 @@ class ExpressController {
      * @method pushInFeatures
      * @description - Adds a feature to the specified path.
      * @param {object} feature - The feature to add.
-     * @param {string} [path='/'] - The path to add the feature to.
+     * @param {string} [route='/'] - The path to add the feature to.
      */
-    pushInFeatures(feature, path = "/") {
-        if (path in this.#features) {
-            this.#features[path].push(feature);
+    pushInFeatures(feature, route = "/") {
+        if (route in this.#features) {
+            this.#features[route].push(feature);
         } else {
-            this.#features[path] = [feature];
+            this.#features[route] = [feature];
         }
     }
 
@@ -83,12 +83,12 @@ class ExpressController {
     /**
      * @method addRoutedFeature
      * @description - Adds a routed feature to the application.
-     * @param {string} path - The path to add the feature to.
+     * @param {string} route - The path to add the feature to.
      * @param {object} feature - The feature to add.
      */
-    addRoutedFeature(path, feature) {
-        this.#app.use(path, feature);
-        this.pushInFeatures(feature, path);
+    addRoutedFeature(route, feature) {
+        this.#app.use(route, feature);
+        this.pushInFeatures(feature, route);
     }
 
     /**

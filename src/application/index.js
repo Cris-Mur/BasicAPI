@@ -31,11 +31,11 @@ class BasicAPI {
     loadEnvironment() {
         try {
             process.loadEnvFile();
-        } catch (error) {
+        } catch (errorOnLoadEnv) {
             try {
                 process.loadEnvFile('./env.example');
                 console.warn('[####][WARNING][####][RUN APPLICATION WITH ENVIRONMENT EXAMPLE]');
-            } catch (error) {
+            } catch (errorOnLoadEnvExample) {
                 console.warn('[####][WARNING][####][RUN APPLICATION WITHOUT ENVIRONMENT FILE]');
             }
         }
