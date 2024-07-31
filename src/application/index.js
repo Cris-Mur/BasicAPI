@@ -9,7 +9,10 @@ const requireUnCached = require('#Utils/requireUnCached');
 
 /**
  * @class BasicAPI
- * @description This Class encapsulate Express & Http sever implementation.
+ * @description This Class encapsulates Express & HTTP server implementation.
+ * @property {ExpressController} #application - The application instance.
+ * @property {Function} build - Function to build the application.
+ * @property {Object} #network - Network configuration for the application.
  */
 class BasicAPI {
     #application = undefined;
@@ -21,6 +24,10 @@ class BasicAPI {
         this.startup();
     }
 
+    /**
+     * @function loadEnvironment
+     * @description Loads the environment variables from the .env file.
+     */
     loadEnvironment() {
         try {
             process.loadEnvFile();
@@ -34,16 +41,25 @@ class BasicAPI {
         }
     }
 
+    /**
+     * @function loadLogger
+     * @description Loads the custom logger.
+     */
     loadLogger() {
         require('#Utils/logger');
     }
 
+    /**
+     * @function initNetwork
+     * @description Initializes the network interface.
+     */
     initNetwork() {
         this.#network.http.initTCPInterface(this.#network.port.getPort());
     }
 
     /**
-     * @function - to build a new application instance
+     * @function initApplication
+     * @description Builds a new application instance and sets the request listener.
      */
     initApplication() {
         this.initNetwork();
@@ -61,22 +77,32 @@ class BasicAPI {
 
     /**
      * @function getApplication
-     * @returns <ExpressController> | <express>
+     * @description Returns the application instance.
+     * @returns {ExpressController | express} The application instance.
      */
     getApplication() {
         return this.#application;
     }
 
+    /**
+     * @function startup
+     * @description Loads environment, logger, and initializes the application.
+     */
     startup() {
         this.loadEnvironment();
         this.loadLogger();
         this.initApplication();
     }
 
+    /**
+     * @function reset
+     * @description Resets the network configuration by requiring it uncached.
+     */
     reset() {
         this.#network = requireUnCached('./network', __dirname);
     }
 }
+
 /**
  * @exports {@class<BasicAPI>}
  */
