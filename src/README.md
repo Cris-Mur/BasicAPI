@@ -50,17 +50,17 @@ const importedModule = require('...');
  * @Async|Function nameOfFunction
  * @description - Descriptive message about
  * function, how works in simple words.
- * @param name_of_param <type> - Description
+ * @param nameOfParam <type> - Description
  * @return <type>
  * Additional information JSDOCS Compatible
  */
-async function nameOfFunction (name_of_param) {
+async function nameOfFunction (nameOfParam) {
     // The functions should do only one thing and be as specific as possible.
     // Use Try/Catch if your function can be fail.
     // try to use isolated error handling.
     try {
         // code of function.
-    } catch (error_) {
+    } catch (errorOn) {
         console.warning('[Error on function]');
     }
 }
