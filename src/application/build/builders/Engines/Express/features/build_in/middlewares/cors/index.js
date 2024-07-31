@@ -63,7 +63,7 @@ function factoryCors() {
         return undefined;
 
     const corsOptions = {
-        origin: function (origin, callback) {
+        origin (origin, callback) {
             try {
                 return callback(null, originPolicy(origin));
             } catch (error_) {
