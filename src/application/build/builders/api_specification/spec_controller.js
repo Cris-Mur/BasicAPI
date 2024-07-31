@@ -13,7 +13,7 @@ const openapi = require('./OpenApi.json');
 
 openapi.servers = [
     {
-        "url": `http://localhost:{port}/`,
+        "url": "http://localhost:{port}/",
         "description": "Development server",
         "variables": {
             "port": {

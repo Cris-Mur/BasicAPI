@@ -36,7 +36,7 @@ class ExpressBuilder extends Builder {
      * @description - Resets the result to a new instance of ExpressController.
      */
     reset() {
-        console.debug(`[ExpressBuilder][Reset][Clean Instance]`);
+        console.debug('[ExpressBuilder][Reset][Clean Instance]');
         this.#result = new ExpressController();
     }
 
@@ -65,7 +65,7 @@ class ExpressBuilder extends Builder {
         if (!buildIn.middlewares.staticServer) return;
         const defaultPath = '/';
         const customPath = process.env?.STATIC_PATH ?? defaultPath;
-        console.debug("[static server middleware path]", customPath);
+        console.debug('[static server middleware path]', customPath);
         this.#result.addRoutedFeature(customPath, buildIn.middlewares.staticServer);
     }
 
@@ -137,7 +137,7 @@ class ExpressBuilder extends Builder {
          *        200:
          *          description: Returns a mysterious string.
          */
-        this.#result.addRoutedFeature("/swagger/openapi", (req, res) => {
+        this.#result.addRoutedFeature('/swagger/openapi', (req, res) => {
             res.status(200).json(swaggerJsdoc(spec));
         });
     }
@@ -167,7 +167,7 @@ class ExpressBuilder extends Builder {
      */
     stepSetRouter() {
         const mainRouter = router;
-        this.#result.addRoutedFeature("/", mainRouter);
+        this.#result.addRoutedFeature('/', mainRouter);
     }
 
     /**
@@ -189,7 +189,7 @@ class ExpressBuilder extends Builder {
      */
     getResult() {
         console.debug(
-            "[ExpressBuilder][GET RESULT][Express Features]\n",
+            '[ExpressBuilder][GET RESULT][Express Features]\n',
             this.#result.getFeatures());
     
         console.debug(
